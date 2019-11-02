@@ -1189,33 +1189,93 @@ class DBManager
     {
         let realm = try! Realm()
 
-        var playerDetailModel = PlayerDetailModel()
+        let playerDetailModel = PlayerDetailModel()
         
         let names = name.components(separatedBy: " ")
         
-        let firstName = names[0]
-        let lastName = names[1]
+        let firstName = names[0].contains("'") ? ConversionUtils.escapeApostrophe(names[0]) : names[0]
+        let lastName = names[1].contains("'") ? ConversionUtils.escapeApostrophe(names[1]) : names[1]
         
         let nhlPlayer = realm.objects(NHLPlayer.self).filter("firstName =='\(firstName)' AND lastName =='\(lastName)' AND season =='\(season)' AND seasonType =='\(seasonType)'")
         
-        if let player = nhlPlayer.first
+        if let player = nhlPlayer.last
         {
+            playerDetailModel.playerId = player.id
             playerDetailModel.firstName = player.firstName
             playerDetailModel.lastName = player.lastName
             playerDetailModel.position = player.position
             playerDetailModel.jerseyNumber = player.jerseyNumber
             playerDetailModel.height = player.height
             playerDetailModel.weight = player.weight
-            playerDetailModel.birthDate = player.birthDate
+            playerDetailModel.birthDate = TimeAndDateUtils.formattedYYYYMMDDDateStringToDDMMYYYY(dateString: player.birthDate)! 
             playerDetailModel.age = player.age
             playerDetailModel.birthCity = player.birthCity
             playerDetailModel.birthCountry = player.birthCountry
             playerDetailModel.imageUrl = player.imageURL
-            playerDetailModel.shoots = player.shoots
+            playerDetailModel.shoots = player.shoots != "" ? player.shoots : "N/A"
             playerDetailModel.teamAbbreviation = player.teamAbbreviation
         }
         
         return playerDetailModel
+    }
+    
+    // MARK: Retrieve NHL player statistics by id
+    func retrievePlayerStatistics(_ id: Int) -> PlayerStatisticsModel
+    {
+        let realm = try! Realm()
+
+        let playerStatisticsModel = PlayerStatisticsModel()
+        
+        let playerStatistics = realm.objects(PlayerStatistics.self).filter("id ==\(id) AND season =='\(season)' AND seasonType =='\(seasonType)'")
+        
+        if let playerStatistics = playerStatistics.first
+        {
+            playerStatisticsModel.id = UUID()
+            playerStatisticsModel.playerId = playerStatistics.id
+            playerStatisticsModel.gamesPlayed = playerStatistics.gamesPlayed
+            playerStatisticsModel.goals = playerStatistics.goals
+            playerStatisticsModel.assists = playerStatistics.assists
+            playerStatisticsModel.points = playerStatistics.points
+            playerStatisticsModel.hatTricks = playerStatistics.hatTricks
+            playerStatisticsModel.powerplayGoals = playerStatistics.powerplayGoals
+            playerStatisticsModel.powerplayAssists = playerStatistics.powerplayAssists
+            playerStatisticsModel.powerplayPoints = playerStatistics.powerplayPoints
+            playerStatisticsModel.shortHandedGoals = playerStatistics.shortHandedGoals
+            playerStatisticsModel.shortHandedAssists = playerStatistics.shortHandedAssists
+            playerStatisticsModel.shortHandedPoints = playerStatistics.shortHandedPoints
+            playerStatisticsModel.gameWinningGoals = playerStatistics.gameWinningGoals
+            playerStatisticsModel.gameTyingGoals = playerStatistics.gameTyingGoals
+            playerStatisticsModel.penalties = playerStatistics.penalties
+            playerStatisticsModel.penaltyMinutes = playerStatistics.penaltyMinutes
+             
+            //  Skater Data
+            playerStatisticsModel.plusMinus = playerStatistics.plusMinus
+            playerStatisticsModel.shots = playerStatistics.shots
+            playerStatisticsModel.shotPercentage = playerStatistics.shotPercentage
+            playerStatisticsModel.blockedShots = playerStatistics.blockedShots
+            playerStatisticsModel.hits = playerStatistics.hits
+            playerStatisticsModel.faceoffs = playerStatistics.faceoffs
+            playerStatisticsModel.faceoffWins = playerStatistics.faceoffWins
+            playerStatisticsModel.faceoffLosses = playerStatistics.faceoffLosses
+            playerStatisticsModel.faceoffPercent = playerStatistics.faceoffPercent
+             
+            //  Goaltending data
+            playerStatisticsModel.wins = playerStatistics.wins
+            playerStatisticsModel.losses = playerStatistics.losses
+            playerStatisticsModel.overtimeWins = playerStatistics.overtimeWins
+            playerStatisticsModel.overtimeLosses = playerStatistics.overtimeLosses
+            playerStatisticsModel.goalsAgainst = playerStatistics.goalsAgainst
+            playerStatisticsModel.shotsAgainst = playerStatistics.shotsAgainst
+            playerStatisticsModel.saves = playerStatistics.saves
+            playerStatisticsModel.goalsAgainstAverage = playerStatistics.goalsAgainstAverage
+            playerStatisticsModel.savePercentage = playerStatistics.savePercentage
+            playerStatisticsModel.shutouts = playerStatistics.shutouts
+            playerStatisticsModel.gamesStarted = playerStatistics.gamesStarted
+            playerStatisticsModel.creditForGame = playerStatistics.creditForGame
+            playerStatisticsModel.minutesPlayed = playerStatistics.minutesPlayed
+        }
+        
+        return playerStatisticsModel
     }
     
     // MARK: Retrieve scoring and goalie leaders

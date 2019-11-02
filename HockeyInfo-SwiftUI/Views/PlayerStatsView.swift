@@ -9,23 +9,28 @@ import SwiftUI
 
 struct PlayerStatsView : View
 {
-    @EnvironmentObject var settings: UserSettings
-    @ObservedObject var model = PlayerStatisticsViewModel()
+    var model: PlayerStatisticsModel
     
     var name: String
     
     var body: some View
     {
-        Text("Player stats for \(name)")
+        VStack
+        {
+            Text("Player stats for \(name)")
+            Text("Goals: \(model.goals)")
+            Text("Assists: \(model.assists)")
+            Text("Points: \(model.points)")
+        }
     }
 }
 
-#if DEBUG
-struct PlayerStatsView_Previews : PreviewProvider
-{
-    static var previews: some View
-    {
-        PlayerStatsView(name: "name").environmentObject(UserSettings())
-    }
-}
-#endif
+//#if DEBUG
+//struct PlayerStatsView_Previews : PreviewProvider
+//{
+//    static var previews: some View
+//    {
+//        PlayerStatsView(name: "name")
+//    }
+//}
+//#endif

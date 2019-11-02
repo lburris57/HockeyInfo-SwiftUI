@@ -7,6 +7,7 @@ target 'HockeyInfo-SwiftUI' do
 
   # Pods for HockeyInfo-SwiftUI
 
+pod 'SDWebImageSwiftUI'
 pod 'SwifterSwift'
 pod 'RealmSwift'
 pod 'JTAppleCalendar', '~> 7.0'

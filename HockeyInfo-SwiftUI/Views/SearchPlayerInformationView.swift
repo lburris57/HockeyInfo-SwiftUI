@@ -21,7 +21,7 @@ struct SearchPlayerInformationView : View
     {
         VStack
         {
-            Text("Player Search")
+            Text("Search Players")
             
             List
             {
@@ -29,7 +29,9 @@ struct SearchPlayerInformationView : View
                 {
                     ForEach(model.playerNames.filter{searchQuery.count > 20 ? true : "\($0)".contains(searchQuery)}, id: \.self)
                     {
-                        name in NavigationLink(destination: PlayerDetailView(name: name))
+                        name in
+                        
+                        NavigationLink(destination: PlayerDetailView(model: DBManager().retrievePlayerDetail(name)))
                         {
                             Text(name)
                         }

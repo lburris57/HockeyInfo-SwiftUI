@@ -164,6 +164,22 @@ class TimeAndDateUtils
         return formatter.date(from: dateString)
     }
     
+    static func formattedYYYYMMDDDateStringToDDMMYYYY(dateString: String) -> String?
+    {
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd"
+
+        if let date = inputFormatter.date(from: dateString)
+        {
+            let outputFormatter = DateFormatter()
+            outputFormatter.dateFormat = "MM/dd/yyyy"
+
+            return outputFormatter.string(from: date)
+        }
+
+        return nil
+    }
+    
     static func getCurrentSeason() -> String
     {
         let currentMonth = Int(Date().toFormat(Constants.MONTH_FORMAT))

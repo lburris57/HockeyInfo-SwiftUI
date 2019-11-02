@@ -54,4 +54,9 @@ class ConversionUtils
     {
         return value.isNaN ? 0.0 : Double(String(format: "%.0\(decimalPlaces)f", value))!
     }
+    
+    static func escapeApostrophe(_ text: String) -> String
+    {
+        return text.replacingOccurrences(of: "'", with: "\\'")
+    }
 }

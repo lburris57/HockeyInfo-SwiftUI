@@ -10,6 +10,7 @@ import Foundation
 class PlayerDetailModel
 {
     var id = UUID()
+    var playerId: Int = 0
     var firstName: String = Constants.EMPTY_STRING
     var lastName: String = Constants.EMPTY_STRING
     var position: String = Constants.EMPTY_STRING
