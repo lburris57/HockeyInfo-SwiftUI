@@ -141,6 +141,8 @@
 		76C17A9A236D95E50019FCAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76C17A99236D95E50019FCAF /* Assets.xcassets */; };
 		76C17A9D236D972D0019FCAF /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 76C17A9C236D972D0019FCAF /* Podfile */; };
 		76C17A9F236D9E1F0019FCAF /* PlayerLeaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C17A9E236D9E1F0019FCAF /* PlayerLeaderModel.swift */; };
+		76C17AA1236DCF580019FCAF /* PlayerDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C17AA0236DCF580019FCAF /* PlayerDetailViewModel.swift */; };
+		76C17AA3236DD03D0019FCAF /* PlayerDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C17AA2236DD03D0019FCAF /* PlayerDetailModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -303,6 +305,8 @@
 		76C17A9B236D95F60019FCAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76C17A9C236D972D0019FCAF /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile; path = ../HockeyInfoSwiftUI/Podfile; sourceTree = "<group>"; };
 		76C17A9E236D9E1F0019FCAF /* PlayerLeaderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerLeaderModel.swift; sourceTree = "<group>"; };
+		76C17AA0236DCF580019FCAF /* PlayerDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailViewModel.swift; sourceTree = "<group>"; };
+		76C17AA2236DD03D0019FCAF /* PlayerDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailModel.swift; sourceTree = "<group>"; };
 		EFAD923B82531450C61B9C1D /* Pods-HockeyInfo-SwiftUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HockeyInfo-SwiftUI.debug.xcconfig"; path = "Target Support Files/Pods-HockeyInfo-SwiftUI/Pods-HockeyInfo-SwiftUI.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -464,6 +468,8 @@
 				76C179A9236D94830019FCAF /* GameLogsViewModel.swift */,
 				76C179AA236D94830019FCAF /* PlayerStatisticsViewModel.swift */,
 				76C179AB236D94830019FCAF /* PlayerLeaderViewModel.swift */,
+				76C17AA0236DCF580019FCAF /* PlayerDetailViewModel.swift */,
+				76C17AA2236DD03D0019FCAF /* PlayerDetailModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -947,6 +953,8 @@
 				76C179F0236D951F0019FCAF /* GamesRemainingView.swift in Sources */,
 				76C17A76236D956C0019FCAF /* PlayerStatData.swift in Sources */,
 				76C17A6B236D956C0019FCAF /* PenaltyData.swift in Sources */,
+				76C17AA1236DCF580019FCAF /* PlayerDetailViewModel.swift in Sources */,
+				76C17AA3236DD03D0019FCAF /* PlayerDetailModel.swift in Sources */,
 				76C17A93236D956C0019FCAF /* MenuCategory.swift in Sources */,
 				76C17A89236D956C0019FCAF /* PeriodScoringData.swift in Sources */,
 				76C17A8D236D956C0019FCAF /* GameData.swift in Sources */,

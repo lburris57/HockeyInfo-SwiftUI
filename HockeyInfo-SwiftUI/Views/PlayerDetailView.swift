@@ -11,14 +11,16 @@ struct PlayerDetailView : View
 {
     @EnvironmentObject var settings: UserSettings
     
-    var image: Image
+    @State var model = PlayerDetailModel()
+    
+    var name: String
     
     var body: some View
     {
         VStack
         {
             //  Team image
-            image.resizable().frame(height: 225).minimumScaleFactor(0.25)
+            Image("\($model.teamAbbreviation)").resizable().frame(height: 225).minimumScaleFactor(0.25)
             
             //  Player Image
             Image("Ovechkin").resizable().scaledToFit()
@@ -27,38 +29,53 @@ struct PlayerDetailView : View
                 .shadow(radius: 15).offset(x: 0, y: -90).padding(.bottom, -90)
             
             //  Player Name
-            Text("Alexander Ovechkin")
+            Text("\($model.firstName)" + " " + "\($model.lastName)")
+                //Text("Alexander Ovechkin")
                 .font(.system(size:50))
                 .fontWeight(.bold)
                 .padding(.horizontal)
                 .minimumScaleFactor(0.50)
             
             //  Player Jersey Number and Position
-            Text("8 LW")
+            Text("\($model.jerseyNumber)" + " " + "\($model.position)")
+                //Text("8 LW")
                 .font(.system(size:30))
                 .fontWeight(.bold)
                 .padding(.horizontal)
-                .minimumScaleFactor(0.50)
+                .minimumScaleFactor(0.75)
+            
+            Spacer()
         
             //  Player Information
             VStack(alignment: .leading)
             {
-                Text("Birth Date: 09/17/1985").minimumScaleFactor(0.25)
-                Text("Age: 33")
-                Text("Birth City: Moscow")
-                Text("Birth Country: Russia")
-                Text("Height: 6' 3\"")
-                Text("Weight: 235")
+                Text("Birth Date: " + "\($model.birthDate)")
+                Text("Age: " + "\($model.age)")
+                Text("Birth City: " + "\($model.birthCity)")
+                Text("Birth Country: " + "\($model.birthCountry)")
+                Text("Height: " + "\($model.height)")
+                Text("Weight: " + "\($model.weight)")
                 Text("Status: Available")
-                Text("Shoots: Right")
+                Text("Shoots: " + "\($model.shoots)")
+                
+//                Text("Birth Date: 09/17/1985")
+//                Text("Age: 33")
+//                Text("Birth City: Moscow")
+//                Text("Birth Country: Russia")
+//                Text("Height: 6' 3\"")
+//                Text("Weight: 235")
+//                Text("Status: Available")
+//                Text("Shoots: Right")
             }
+            
+            Spacer()
             
             Button(action: {})
             {
                 Text("Display Player Statistics")
                     .padding(.bottom, 20.0)
             }
-        }
+        }.onAppear{self.model = DBManager().retrievePlayerDetail(self.name)}
     }
 }
 
@@ -69,7 +86,7 @@ struct PlayerDetailView_Previews : PreviewProvider
     {
         Group
         {
-            PlayerDetailView(image: Image("WSH")).previewDevice("iPhone 8+").environmentObject(UserSettings())
+            PlayerDetailView(name: "Alex Ovechkin").previewDevice("iPhone 8+").environmentObject(UserSettings())
         }
     }
 }

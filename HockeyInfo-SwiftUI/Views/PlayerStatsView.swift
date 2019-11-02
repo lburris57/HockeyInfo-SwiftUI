@@ -12,9 +12,11 @@ struct PlayerStatsView : View
     @EnvironmentObject var settings: UserSettings
     @ObservedObject var model = PlayerStatisticsViewModel()
     
+    var name: String
+    
     var body: some View
     {
-        Text("Last updated on \(model.playerStats.lastUpdatedOn)")
+        Text("Player stats for \(name)")
     }
 }
 
@@ -23,7 +25,7 @@ struct PlayerStatsView_Previews : PreviewProvider
 {
     static var previews: some View
     {
-        PlayerStatsView().environmentObject(UserSettings())
+        PlayerStatsView(name: "name").environmentObject(UserSettings())
     }
 }
 #endif

@@ -29,7 +29,10 @@ struct SearchPlayerInformationView : View
                 {
                     ForEach(model.playerNames.filter{searchQuery.count > 20 ? true : "\($0)".contains(searchQuery)}, id: \.self)
                     {
-                        name in Text(name)
+                        name in NavigationLink(destination: PlayerDetailView(name: name))
+                        {
+                            Text(name)
+                        }
                     }
                 }
             }

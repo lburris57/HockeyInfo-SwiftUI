@@ -1184,6 +1184,40 @@ class DBManager
         return gameLogResult[0].date
     }
     
+    // MARK: Retrieve NHL player by name
+    func retrievePlayerDetail(_ name: String) -> PlayerDetailModel
+    {
+        let realm = try! Realm()
+
+        var playerDetailModel = PlayerDetailModel()
+        
+        let names = name.components(separatedBy: " ")
+        
+        let firstName = names[0]
+        let lastName = names[1]
+        
+        let nhlPlayer = realm.objects(NHLPlayer.self).filter("firstName =='\(firstName)' AND lastName =='\(lastName)' AND season =='\(season)' AND seasonType =='\(seasonType)'")
+        
+        if let player = nhlPlayer.first
+        {
+            playerDetailModel.firstName = player.firstName
+            playerDetailModel.lastName = player.lastName
+            playerDetailModel.position = player.position
+            playerDetailModel.jerseyNumber = player.jerseyNumber
+            playerDetailModel.height = player.height
+            playerDetailModel.weight = player.weight
+            playerDetailModel.birthDate = player.birthDate
+            playerDetailModel.age = player.age
+            playerDetailModel.birthCity = player.birthCity
+            playerDetailModel.birthCountry = player.birthCountry
+            playerDetailModel.imageUrl = player.imageURL
+            playerDetailModel.shoots = player.shoots
+            playerDetailModel.teamAbbreviation = player.teamAbbreviation
+        }
+        
+        return playerDetailModel
+    }
+    
     // MARK: Retrieve scoring and goalie leaders
     func retrieveCategoryLeaders(_ category: String) -> [PlayerLeaderModel]
     {
@@ -1278,20 +1312,6 @@ class DBManager
     // MARK: Set initial table loaded values in UserDefaults
     func setInitialUserDefaultTableLoadedValues()
     {
-        /*
-         static let MENU_CATEGORY_TABLE = "menuCategoryTable"
-         static let GAME_LOG_TABLE = "gameLogTable"
-         static let PERIOD_SCORING_DATA_TABLE = "periodScoringDataTable"
-         static let PLAYER_TABLE = "playerTable"
-         static let PLAYER_INJURY_TABLE = "playerInjuryTable"
-         static let SCHEDULE_TABLE = "scheduleTable"
-         static let SCORING_SUMMARY_TABLE = "scoringSummaryTable"
-         static let TEAM_TABLE = "teamTable"
-         static let PLAYER_STATISTICS_TABLE = "playerStatisticsTable"
-         static let TEAM_STANDINGS_TABLE = "team_StandingsTable"
-         static let TEAM_STATISTICS_TABLE = "teamStatisticsTable"
-         */
-        
         userDefaults.set("N", forKey: Constants.MENU_CATEGORY_TABLE)
         userDefaults.set("N", forKey: Constants.GAME_LOG_TABLE)
         userDefaults.set("N", forKey: Constants.PERIOD_SCORING_DATA_TABLE)
