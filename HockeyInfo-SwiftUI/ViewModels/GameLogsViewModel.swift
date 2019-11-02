@@ -11,14 +11,7 @@ import SwiftUI
 
 final class GameLogsViewModel: ObservableObject
 {
-    var willChange = PassthroughSubject<GameLogsViewModel, Never>()
-    var gameLog = GameLog()
-    {
-        willSet
-        {
-            willChange.send(self)
-        }
-    }
+    @Published var gameLog = GameLog()
     
     init()
     {

@@ -11,21 +11,12 @@ import SwiftUI
 
 final class RosterPlayersViewModel: ObservableObject, Identifiable
 {
-    var willChange = PassthroughSubject<RosterPlayersViewModel, Never>()
-    
-    var playerNames = [String]()
-    {
-        willSet
-        {
-            willChange.send(self)
-        }
-    }
+    @Published var playerNames = [String]()
     
     var rosterPlayers = RosterPlayers()
     
     init()
     {
-        //print("Season setting URL is: \(Constants.SEASON_SETTING_URL)")
         fetchRosterPlayers()
     }
     

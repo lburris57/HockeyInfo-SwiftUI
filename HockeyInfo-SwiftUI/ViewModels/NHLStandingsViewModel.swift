@@ -11,8 +11,6 @@ import SwiftUI
 
 final class NHLStandingsViewModel: ObservableObject
 {
-    var willChange = PassthroughSubject<NHLStandingsViewModel, Never>()
-    
     var atlanticDivisionList = [TeamStandingsData]()
     var metroDivisionList = [TeamStandingsData]()
     var centralDivisionList = [TeamStandingsData]()
@@ -21,13 +19,7 @@ final class NHLStandingsViewModel: ObservableObject
     var westernConferenceList = [TeamStandingsData]()
     var leagueList = [TeamStandingsData]()
     
-    var standings: NHLStandings?
-    {
-        willSet
-        {
-            willChange.send(self)
-        }
-    }
+    @Published var standings: NHLStandings?
     
     init()
     {

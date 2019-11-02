@@ -11,14 +11,7 @@ import SwiftUI
 
 final class SeasonScheduleViewModel: ObservableObject
 {
-    var willChange = PassthroughSubject<SeasonScheduleViewModel, Never>()
-    var seasonSchedule = SeasonSchedule()
-    {
-        willSet
-        {
-            willChange.send(self)
-        }
-    }
+    @Published var seasonSchedule = SeasonSchedule()
     
     init()
     {

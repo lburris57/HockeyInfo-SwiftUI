@@ -11,14 +11,7 @@ import SwiftUI
 
 final class PlayerStatisticsViewModel: ObservableObject
 {
-    var willChange = PassthroughSubject<PlayerStatisticsViewModel, Never>()
-    var playerStats = PlayerStats()
-    {
-        willSet
-        {
-            willChange.send(self)
-        }
-    }
+    @Published var playerStats = PlayerStats()
     
     init()
     {

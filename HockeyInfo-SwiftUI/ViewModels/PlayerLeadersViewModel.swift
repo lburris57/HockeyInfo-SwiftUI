@@ -11,71 +11,14 @@ import SwiftUI
 
 final class PlayerLeadersViewModel: ObservableObject
 {
-    var willChange = PassthroughSubject<PlayerLeadersViewModel, Never>()
-    
-    var pointsLeaderList = [PlayerLeaderModel]()
-    {
-        willSet
-        {
-            willChange.send(self)
-        }
-    }
-    
-    var goalsLeaderList = [PlayerLeaderModel]()
-    {
-        willSet
-        {
-            willChange.send(self)
-        }
-    }
-    
-    var assistsLeaderList = [PlayerLeaderModel]()
-    {
-        willSet
-        {
-            willChange.send(self)
-        }
-    }
-    
-    var plusMinusLeaderList = [PlayerLeaderModel]()
-    {
-        willSet
-        {
-            willChange.send(self)
-        }
-    }
-    
-    var winsLeaderList = [PlayerLeaderModel]()
-    {
-        willSet
-        {
-            willChange.send(self)
-        }
-    }
-    
-    var shutoutsLeaderList = [PlayerLeaderModel]()
-    {
-        willSet
-        {
-            willChange.send(self)
-        }
-    }
-    
-    var goalsAgainstAverageLeaderList = [PlayerLeaderModel]()
-    {
-        willSet
-        {
-            willChange.send(self)
-        }
-    }
-    
-    var savePercentageLeaderList = [PlayerLeaderModel]()
-    {
-        willSet
-        {
-            willChange.send(self)
-        }
-    }
+    @Published var pointsLeaderList = [PlayerLeaderModel]()
+    @Published var goalsLeaderList = [PlayerLeaderModel]()
+    @Published var assistsLeaderList = [PlayerLeaderModel]()
+    @Published var plusMinusLeaderList = [PlayerLeaderModel]()
+    @Published var winsLeaderList = [PlayerLeaderModel]()
+    @Published var shutoutsLeaderList = [PlayerLeaderModel]()
+    @Published var goalsAgainstAverageLeaderList = [PlayerLeaderModel]()
+    @Published var savePercentageLeaderList = [PlayerLeaderModel]()
     
     init()
     {

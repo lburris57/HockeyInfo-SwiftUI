@@ -11,14 +11,7 @@ import SwiftUI
 
 final class PlayerInjuriesViewModel: ObservableObject
 {
-    var willChange = PassthroughSubject<PlayerInjuriesViewModel, Never>()
-    var playerInjuries = PlayerInjuries()
-    {
-        willSet
-        {
-            willChange.send(self)
-        }
-    }
+    @Published var playerInjuries = PlayerInjuries()
     
     init()
     {

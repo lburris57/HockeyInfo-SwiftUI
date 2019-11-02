@@ -367,25 +367,26 @@
 		76C17957236D931C0019FCAF /* HockeyInfo-SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				76C17958236D931C0019FCAF /* AppDelegate.swift */,
+				76C17988236D93D40019FCAF /* Constants.swift */,
+				76C1795A236D931C0019FCAF /* SceneDelegate.swift */,
 				76C17A99236D95E50019FCAF /* Assets.xcassets */,
-				76C17A0E236D956B0019FCAF /* Database Models */,
+				76C179B6236D95140019FCAF /* Managers */,
+				76C17A09236D95520019FCAF /* Error Enums */,
+				76C179F9236D95430019FCAF /* Alerts */,
+				76C179FC236D954A0019FCAF /* Enums */,
 				76C17A56236D956B0019FCAF /* Extensions */,
+				76C1798F236D94590019FCAF /* Helpers */,
+				76C17A0E236D956B0019FCAF /* Database Models */,
 				76C17A1C236D956B0019FCAF /* Models */,
 				76C17A1A236D956B0019FCAF /* Progress Bar */,
 				76C17A53236D956B0019FCAF /* Utils */,
-				76C17A09236D95520019FCAF /* Error Enums */,
-				76C179FC236D954A0019FCAF /* Enums */,
-				76C179F9236D95430019FCAF /* Alerts */,
 				76C179F6236D953A0019FCAF /* Venue */,
 				76C179BD236D951F0019FCAF /* Views */,
-				76C179B6236D95140019FCAF /* Managers */,
 				76C17996236D946A0019FCAF /* Row Views */,
-				76C1798F236D94590019FCAF /* Helpers */,
 				76C1798C236D93F40019FCAF /* PropertyWrappers */,
 				76C179A1236D94830019FCAF /* ViewModels */,
-				76C1795A236D931C0019FCAF /* SceneDelegate.swift */,
 				76C1795C236D931C0019FCAF /* ContentView.swift */,
-				76C17988236D93D40019FCAF /* Constants.swift */,
 				76C17A97236D959E0019FCAF /* LaunchScreen.storyboard */,
 				76C17966236D931E0019FCAF /* Info.plist */,
 				76C17A9B236D95F60019FCAF /* Assets.xcassets */,
@@ -453,7 +454,6 @@
 		76C179A1236D94830019FCAF /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				76C17958236D931C0019FCAF /* AppDelegate.swift */,
 				76C179A2236D94830019FCAF /* NHLStandingsViewModel.swift */,
 				76C179A3236D94830019FCAF /* PlayerLeadersViewModel.swift */,
 				76C179A4236D94830019FCAF /* PlayerInjuriesViewModel.swift */,
