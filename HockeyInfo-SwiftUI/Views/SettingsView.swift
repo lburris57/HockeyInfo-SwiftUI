@@ -14,19 +14,10 @@ struct SettingsView : View
     
     @EnvironmentObject var settings: UserSettings
     
-    @State var selectedSeason = 12
-    @State var selectedSeasonType = 0
-    @State var seasonType = ["Regular Season", "Playoffs"]
-    
-    @State private var showAlert = false
-    
-    func evaluateAlertStatus() -> Bool
-    {
-        showAlert = !TimeAndDateUtils.isValidSetting(seasons[selectedSeason], seasonType[selectedSeasonType])
-        print("Value of showAlert is \(showAlert)")
-        
-        return showAlert
-    }
+    @State private var selectedSeason = 12
+    @State private var selectedSeasonType = 0
+    @State private var seasonType = ["Regular Season", "Playoffs"]
+    @State private var isPlayoffs = false
 
     var body: some View
     {
@@ -34,53 +25,39 @@ struct SettingsView : View
         {
             Form
             {
-//                Section
-//                {
-//                    Picker(selection: $selectedSeason, label: Text("Season"))
-//                    {
-//                        ForEach(0 ..< seasons.count)
-//                        {
-//                            Text(self.seasons[$0]).tag($0)
-//                        }
-//                    }
-//                }
+                Section
+                {
+                    Picker(selection: $selectedSeason, label: Text("Season"))
+                    {
+                        ForEach(0 ..< seasons.count)
+                        {
+                            Text(self.seasons[$0]).tag($0)
+                        }
+                    }
+                }
                 
-//                Section(footer: showAlert == false ? Text("") : Text("\(alertText)"))
-//                {
-//                    Picker(selection: $selectedSeasonType)
-//                    {
-//                        ForEach(0 ..< seasonType.count)
-//                        {
-//                            Text(self.seasonType[$0]).tag($0)
-//                        }
-//                    }
-//                }
+                Section
+                {
+                    Toggle(isOn: $isPlayoffs)
+                    {
+                        Text("Playoffs")
+                    }
+                }
                 
                 Section
                 {
                     Button(action:
                     {
-                        if(!self.evaluateAlertStatus())
-                        {
-                            self.settings.season = self.seasons[self.selectedSeason]
-                            self.settings.playoffYear = self.playoffYears[self.selectedSeason]
-                            self.settings.seasonType = self.seasonType[self.selectedSeasonType]
-                        }
-                        else
-                        {
-                            self.showAlert = true
-                            //print("\(self.alertText)")
-                        }
+                        self.settings.season = self.seasons[self.selectedSeason]
+                        self.settings.playoffYear = self.playoffYears[self.selectedSeason]
+                        self.settings.seasonType = self.seasonType[self.selectedSeasonType]
                     })
                     {
                         Text("Save settings")
-                    }//.presentation($showAlert) {Alert(title: Text("Playoffs not valid for 2020"), message: Text("\(alertText)"))}
-                    //.alert(isPresented: $isAlert, content: {
-                                //alert
-                            //})
+                    }
                 }
-            }//.navigationBarTitle(Text("Settings"))
-        }
+            }
+        }.navigationBarTitle(Text("Settings"), displayMode: .inline)
     }
 }
 

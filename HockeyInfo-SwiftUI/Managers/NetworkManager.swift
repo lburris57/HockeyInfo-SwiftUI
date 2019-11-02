@@ -16,10 +16,12 @@ class NetworkManager
     
     let urlHelper = URLHelper()
     
+    let dataExchangeHelper = DataExchangeHelper()
+    
     // MARK: Retrieve methods
     
     //  Retrieve full season schedule for all 31 teams
-    func retrieveFullSeasonSchedule(completion: @escaping (SeasonSchedule) -> ())
+    func retrieveFullSeasonSchedule(completion: @escaping ([NHLSchedule]) -> ())
     {
         if(!databaseManager.fullScheduleRequiresLoad())
         {
@@ -45,11 +47,13 @@ class NetworkManager
             {
                 let seasonSchedule = try! JSONDecoder().decode(SeasonSchedule.self, from: data)
                 
-                self.databaseManager.saveFullSeasonScheduleGameData(seasonSchedule)
+                let scheduledGames = self.dataExchangeHelper.convertSeasonScheduleToNHLScheduleList(seasonSchedule)
+                
+                self.databaseManager.saveFullSeasonScheduleGameData(scheduledGames)
                 
                 DispatchQueue.main.async
                 {
-                    completion(seasonSchedule)
+                    completion(scheduledGames)
                 }
             }
         }.resume()

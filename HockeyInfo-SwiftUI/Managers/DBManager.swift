@@ -124,46 +124,14 @@ class DBManager
         print(Realm.Configuration.defaultConfiguration.fileURL!)
     }
     
-    func saveFullSeasonScheduleGameData(_ seasonSchedule: SeasonSchedule)
+    func saveFullSeasonScheduleGameData(_ scheduledGames: [NHLSchedule])
     {
         let startTime = Date().timeIntervalSince1970
-        
-        let scheduledGames = List<NHLSchedule>()
-        
-        let lastUpdatedOn = seasonSchedule.lastUpdatedOn
         
         let dispatchQueue = DispatchQueue(label: "FullSeasonScheduleQueue", qos: .background)
         
         dispatchQueue.async
         {
-            for scheduledGame in seasonSchedule.gameList
-            {
-                let nhlSchedule = NHLSchedule()
-                
-                let startTime = scheduledGame.scheduleInfo.startTime
-                
-                nhlSchedule.id = scheduledGame.scheduleInfo.id
-                nhlSchedule.dateCreated = TimeAndDateUtils.getCurrentDateAsString()
-                nhlSchedule.lastUpdatedOn = "\(TimeAndDateUtils.getDate(lastUpdatedOn)) at \(TimeAndDateUtils.getTime(lastUpdatedOn))"
-                nhlSchedule.date = TimeAndDateUtils.getDate(startTime)
-                nhlSchedule.time = TimeAndDateUtils.getTime(startTime)
-                nhlSchedule.homeTeam = scheduledGame.scheduleInfo.homeTeamInfo.abbreviation
-                nhlSchedule.awayTeam = scheduledGame.scheduleInfo.awayTeamInfo.abbreviation
-                nhlSchedule.homeScoreTotal = scheduledGame.scoreInfo.homeScoreTotal ?? 0
-                nhlSchedule.awayScoreTotal = scheduledGame.scoreInfo.awayScoreTotal ?? 0
-                nhlSchedule.homeShotsTotal = scheduledGame.scoreInfo.homeShotsTotal ?? 0
-                nhlSchedule.awayShotsTotal = scheduledGame.scoreInfo.awayShotsTotal ?? 0
-                nhlSchedule.playedStatus = scheduledGame.scheduleInfo.playedStatus
-                nhlSchedule.scheduleStatus = scheduledGame.scheduleInfo.scheduleStatus
-                nhlSchedule.numberOfPeriods = scheduledGame.scoreInfo.periodList?.count ?? 0
-                nhlSchedule.currentPeriod = scheduledGame.scoreInfo.currentPeriod ?? 0
-                nhlSchedule.currentTimeRemaining = scheduledGame.scoreInfo.currentPeriodSecondsRemaining ?? 0
-                nhlSchedule.season = self.season
-                nhlSchedule.seasonType = self.seasonType
-                
-                scheduledGames.append(nhlSchedule)
-            }
-            
             do
             {
                 let realm = try! Realm()

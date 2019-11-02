@@ -73,7 +73,7 @@ struct MainMenuView : View
                     }
                 }
             }
-        }//.navigationBarTitle(Text("Hockey Info"), displayMode: .inline)
+        }.navigationBarTitle(Text("Main Menu"), displayMode: .inline)
     }
 }
     

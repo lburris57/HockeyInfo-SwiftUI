@@ -20,13 +20,13 @@ struct GameLogView : View
     {
         VStack
         {
-//            Picker(selection: $selectedGameType)
-//            {
-//                ForEach(0 ..< gameTypes.count)
-//                {
-//                    Text(self.gameTypes[$0]).tag($0)
-//                }
-//            }
+            Picker(selection: $selectedGameType, label: Text(""))
+            {
+                ForEach(0 ..< gameTypes.count)
+                {
+                    Text(self.gameTypes[$0]).tag($0)
+                }
+            }.pickerStyle(SegmentedPickerStyle())
             
             Spacer()
             

@@ -18,12 +18,12 @@ struct VenueView : View
             HStack
             {
                 Image(venue.imageName).resizable().frame(width: 40, height: 25).aspectRatio(contentMode: .fit)
-                Text(venue.teamName).font(.headline).minimumScaleFactor(0.25)
+                Text(venue.teamName).font(.headline).minimumScaleFactor(0.75)
             }
             
             Image(venue.venueName).resizable().frame(height: 200).padding(.horizontal)
             Text(venue.venueName).font(.headline)
-            Text(venue.address).font(.subheadline).bold().minimumScaleFactor(0.25).padding(3)
+            Text(venue.address).font(.subheadline).bold().minimumScaleFactor(0.75).padding(3)
             Text("Seats \(venue.seating)").font(.subheadline).bold()
             
             MapView(venue: venue).padding(5)
