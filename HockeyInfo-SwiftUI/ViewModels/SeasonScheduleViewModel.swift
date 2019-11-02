@@ -11,7 +11,7 @@ import SwiftUI
 
 final class SeasonScheduleViewModel: ObservableObject
 {
-    @Published var seasonSchedule = SeasonSchedule()
+    @Published var nhlScheduleList = [NHLSchedule]()
     
     init()
     {
@@ -26,7 +26,7 @@ final class SeasonScheduleViewModel: ObservableObject
     {
         NetworkManager().retrieveFullSeasonSchedule
         {
-            self.seasonSchedule = $0
+            self.nhlScheduleList = $0
         }
     }
 }

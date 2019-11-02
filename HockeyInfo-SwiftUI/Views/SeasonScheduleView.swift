@@ -15,7 +15,7 @@ struct SeasonScheduleView : View
     
     var body: some View
     {
-       Text("Number of games in season schedule is: \(model.seasonSchedule.gameList.count)")   
+       Text("Number of games in season schedule is: \(model.nhlScheduleList.count)")
     }
 }
 
