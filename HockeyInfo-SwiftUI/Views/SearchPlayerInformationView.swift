@@ -31,7 +31,7 @@ struct SearchPlayerInformationView : View
                     {
                         name in
                         
-                        NavigationLink(destination: PlayerDetailView(model: DBManager().retrievePlayerDetail(name)))
+                        NavigationLink(destination: PlayerDetailView(playerDetail: DBManager().retrievePlayerDetail(name)))
                         {
                             Text(name)
                         }

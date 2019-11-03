@@ -24,4 +24,5 @@ class PlayerDetailModel
     var imageUrl: String = Constants.EMPTY_STRING
     var shoots: String = Constants.EMPTY_STRING
     var teamAbbreviation: String = Constants.EMPTY_STRING
+    var fullName: String = Constants.EMPTY_STRING
 }

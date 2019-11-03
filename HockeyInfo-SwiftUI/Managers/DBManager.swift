@@ -1203,6 +1203,7 @@ class DBManager
             playerDetailModel.playerId = player.id
             playerDetailModel.firstName = player.firstName
             playerDetailModel.lastName = player.lastName
+            playerDetailModel.fullName = player.firstName + " " + player.lastName
             playerDetailModel.position = player.position
             playerDetailModel.jerseyNumber = player.jerseyNumber
             playerDetailModel.height = player.height

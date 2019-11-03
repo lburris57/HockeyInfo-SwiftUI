@@ -10,26 +10,26 @@ import SDWebImageSwiftUI
 
 struct PlayerDetailView : View
 {
-    var model: PlayerDetailModel
+    var playerDetail: PlayerDetailModel
     
     var body: some View
     {
         VStack
         {
             //  Team image
-            Image("\(model.teamAbbreviation)").resizable().frame(height: 225).minimumScaleFactor(0.25)
+            Image("\(playerDetail.teamAbbreviation)").resizable().frame(height: 225).minimumScaleFactor(0.25)
             
             //  Player Image
-            if(model.imageUrl != "")
+            if(playerDetail.imageUrl != "")
             {
-                WebImage(url: URL(string: "\(model.imageUrl)"))
+                WebImage(url: URL(string: "\(playerDetail.imageUrl)"))
                     .onSuccess
                     {
                         image, cacheType in
                         // Success
                     }
                     .resizable()
-                    .indicator(.activity) // Activity Indicator
+                    .indicator(.activity)
                     .scaledToFit()
                     .clipShape(Circle()).background(Circle().foregroundColor(.white))
                     .overlay(Circle().stroke(Color.white, lineWidth: 4))
@@ -46,14 +46,14 @@ struct PlayerDetailView : View
             }
             
             //  Player Name
-            Text("\(model.firstName)" + " " + "\(model.lastName)")
+            Text("\(playerDetail.fullName)")
                 .font(.system(size:50))
                 .fontWeight(.bold)
                 .padding(.horizontal)
                 .minimumScaleFactor(0.50)
             
             //  Player Jersey Number and Position
-            Text("\(model.jerseyNumber)" + "   " + "\(model.position)")
+            Text("\(playerDetail.jerseyNumber)" + "   " + "\(playerDetail.position)")
                 .font(.system(size:30))
                 .fontWeight(.bold)
                 .padding(.horizontal)
@@ -64,18 +64,18 @@ struct PlayerDetailView : View
             //  Player Information
             VStack(alignment: .leading)
             {
-                Text("Birth Date: " + "\(model.birthDate)")
-                Text("Age: " + "\(model.age)")
-                Text("Birth City: " + "\(model.birthCity)")
-                Text("Birth Country: " + "\(model.birthCountry)")
-                Text("Height: " + "\(model.height)")
-                Text("Weight: " + "\(model.weight)")
+                Text("Birth Date: " + "\(playerDetail.birthDate)")
+                Text("Age: " + "\(playerDetail.age)")
+                Text("Birth City: " + "\(playerDetail.birthCity)")
+                Text("Birth Country: " + "\(playerDetail.birthCountry)")
+                Text("Height: " + "\(playerDetail.height)")
+                Text("Weight: " + "\(playerDetail.weight)")
                 Text("Status: Available")
-                Text("Shoots: " + "\(model.shoots)")
+                Text("Shoots: " + "\(playerDetail.shoots)")
                 
                 Spacer()
                 
-                NavigationLink(destination: PlayerStatsView(model: DBManager().retrievePlayerStatistics(model.playerId), name: "\(model.firstName)" + " " + "\(model.lastName)"))
+                NavigationLink(destination: PlayerStatsView(playerDetail: playerDetail, playerStatistics: DBManager().retrievePlayerStatistics(playerDetail.playerId)))
                 {
                     Text("Display Player Statistics").padding(.bottom, 20.0)
                 }
