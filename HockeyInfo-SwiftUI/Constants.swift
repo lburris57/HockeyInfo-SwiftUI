@@ -11,6 +11,10 @@ struct Constants
 {
     static let EMPTY_STRING = ""
     
+    //  Time constants
+    static let SECONDS_PER_DAY = 86400
+    static let DAYS_PER_MONTH = 30.333
+    
     //  TableNames
     static let MENU_CATEGORY_TABLE = "menuCategoryTable"
     static let GAME_LOG_TABLE = "gameLogTable"

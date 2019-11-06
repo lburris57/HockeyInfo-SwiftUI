@@ -261,4 +261,29 @@ class TimeAndDateUtils
         
         return true
     }
+    
+    static func calculateMinCalendarValues() -> (Double)
+    {
+        //  Find the number of days from October 1st to current date
+        let seasonStart = "October 1, 2018".asDate
+        
+        let daysSinceSeasonStart = seasonStart.daysBeforeNow
+        
+        //  Get the seconds since season start
+        let secondsSinceSeasonStart = daysSinceSeasonStart.day! * Constants.SECONDS_PER_DAY
+        
+        return (Double(secondsSinceSeasonStart))
+    }
+    
+    static func calculateMaxCalendarValues() -> (Double)
+    {
+        //  Find the number of days from current date to June 30
+        let seasonEnd = "June 30, 2019".asDate
+        
+        let daysTillSeasonEnds = seasonEnd.daysSinceNow
+        
+        let secondsTillSeasonEnds = daysTillSeasonEnds.day! * Constants.SECONDS_PER_DAY
+        
+        return (Double(secondsTillSeasonEnds))
+    }
 }

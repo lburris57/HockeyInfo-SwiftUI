@@ -9,13 +9,69 @@ import SwiftUI
 
 struct SeasonScheduleView : View
 {
-    @EnvironmentObject var settings: UserSettings
-    
     @ObservedObject var model = SeasonScheduleViewModel()
+    
+    @State var isPresented = true
+    
+    @ObservedObject var rkManager = RKManager(calendar: Calendar.current,
+                    minimumDate: Date().addingTimeInterval(-TimeAndDateUtils.calculateMinCalendarValues()),
+                    maximumDate: Date().addingTimeInterval(TimeAndDateUtils.calculateMaxCalendarValues()),
+                    mode: 0)
     
     var body: some View
     {
-       Text("Number of games in season schedule is: \(model.nhlScheduleList.count)")
+        VStack
+        {
+            Group
+            {
+                VStack
+                {
+                    RKViewController(isPresented: self.$isPresented, rkManager: rkManager)
+                }
+                
+                Divider()
+                
+                if(self.rkManager.selectedDate != nil)
+                {
+                    Text("Schedule for \(self.rkManager.selectedDate.getTextFromDate())")
+                }
+//                else
+//                {
+//                    Text("Schedule for \(Date().getTextFromDate())")
+//                }
+                
+                List
+                {
+                    if(rkManager.scheduledGameModelList.count == 0)
+                    {
+                        Text("No Games Scheduled").font(.subheadline).padding(.leading, 100)
+                    }
+                    else
+                    {
+                        ForEach(rkManager.scheduledGameModelList)
+                        {
+                            scheduledGameModel in
+                            
+                            VStack(alignment: .leading)
+                            {
+                                HStack
+                                {
+                                    Text(scheduledGameModel.startTime).font(.caption)
+                                    Text("|")
+                                    Text(scheduledGameModel.gameInfo).font(.caption)
+                                }
+                                
+                                HStack
+                                {
+                                    Text("|").padding(.leading, 63)
+                                    Text(scheduledGameModel.venue).font(.caption).padding(.leading, 1)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

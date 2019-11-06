@@ -1279,6 +1279,29 @@ class DBManager
         return playerStatisticsModel
     }
     
+    // MARK: Retrieve schedule information for date
+    func retrieveScheduledGamesForDate(_ selectedDate: String) -> [ScheduledGameModel]
+    {
+        let realm = try! Realm()
+        
+        var scheduledGameList = [ScheduledGameModel]()
+        
+        let nhlScheduleList = realm.objects(NHLSchedule.self).filter("date == '\(selectedDate)' AND season == '\(season)' AND seasonType == '\(seasonType)'")
+        
+        for nhlSchedule in nhlScheduleList
+        {
+            let scheduledGameModel = ScheduledGameModel()
+            
+            scheduledGameModel.startTime = nhlSchedule.time
+            scheduledGameModel.venue = TeamManager.getVenueByTeam(nhlSchedule.parentTeam.first?.abbreviation ?? "")
+            scheduledGameModel.gameInfo = TeamManager.getFullTeamName(nhlSchedule.awayTeam) + " @ " + TeamManager.getFullTeamName(nhlSchedule.homeTeam)
+            
+            scheduledGameList.append(scheduledGameModel)
+        }
+        
+        return scheduledGameList
+    }
+    
     // MARK: Retrieve scoring and goalie leaders
     func retrieveCategoryLeaders(_ category: String) -> [PlayerLeaderModel]
     {

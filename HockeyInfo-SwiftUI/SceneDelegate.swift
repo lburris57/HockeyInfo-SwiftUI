@@ -25,6 +25,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
             //databaseManager.setInitialUserDefaultTableLoadedAndLinkedValues()
         }
         
+        //TimeAndDateUtils.calculateMinMaxCalendarValues()
+        
         userDefaults.set(TimeAndDateUtils.isValidSetting(currentSeason, true), forKey: Constants.IS_PLAYOFF_SETTING_VALID)
         
         print("Value of IS_PLAYOFF_SETTING_VALID is \(userDefaults.bool(forKey: Constants.IS_PLAYOFF_SETTING_VALID))")

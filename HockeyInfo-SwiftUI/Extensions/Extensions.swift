@@ -68,6 +68,47 @@ extension Date
     }
 }
 
+extension Date
+{
+    static func - (lhs: Date, rhs: Date) -> TimeInterval
+    {
+        return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
+    }
+}
+
+extension Date
+{
+    // Returns a DateComponent value with number of days away from a specified date
+    var daysBeforeNow: DateComponents
+    {
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone.current
+        formatter.dateFormat = "MMMM dd, yyyy"
+        
+        return Calendar.current.dateComponents([.day], from: self, to: now)
+    }
+    
+    // Returns a DateComponent value with number of days away from a specified date
+    var daysSinceNow: DateComponents
+    {
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone.current
+        formatter.dateFormat = "MMMM dd, yyyy"
+        
+        return Calendar.current.dateComponents([.day], from: now, to: self)
+    }
+    
+    func getTextFromDate() -> String
+    {
+        let formatter = DateFormatter()
+        formatter.locale = .current
+        formatter.dateFormat = "EEEE, MMM dd, yyyy"
+        return formatter.string(from: self)
+    }
+}
+
 extension String
 {
     func fromBase64() -> String?
@@ -88,6 +129,15 @@ extension String
         }
         
         return data.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0))
+    }
+    
+    var asDate: Date
+    {
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "MMMM dd, yyyy"
+        
+        return formatter.date(from: self) ?? Date()
     }
 }
 
