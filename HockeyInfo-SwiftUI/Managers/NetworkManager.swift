@@ -270,6 +270,25 @@ class NetworkManager
         }.resume()
     }
     
+    func loadPlayerStats()
+    {
+        session.dataTask(with: createRequest(urlHelper.retrievePlayerStatsURL()))
+        {
+            data, response, err in
+            
+            if err != nil
+            {
+                fatalError(err!.localizedDescription)
+            }
+            else if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200
+            {
+                let playerStats = try! JSONDecoder().decode(PlayerStats.self, from: data)
+                
+                self.databaseManager.savePlayerStats(playerStats)
+            }
+        }.resume()
+    }
+    
     //  Return a request populated with the URL and authorization information
     private func createRequest(_ urlString: String) -> URLRequest
     {

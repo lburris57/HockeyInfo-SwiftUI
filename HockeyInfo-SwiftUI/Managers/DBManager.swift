@@ -206,6 +206,7 @@ class DBManager
             }
             self.linkPlayersToTeams()
             self.linkSchedulesToTeams()
+            self.linkStatisticsAndInjuriesToPlayers()
             
             self.userDefaults.set("Y", forKey: Constants.PLAYER_TABLE)
             
@@ -800,6 +801,54 @@ class DBManager
     }
     
     // MARK: Link methods
+    func linkStatisticsAndInjuriesToPlayers()
+    {
+        let realm = try! Realm()
+        
+        //  Get all the players
+        let playerResults = realm.objects(NHLPlayer.self).filter("season =='\(season)' AND seasonType =='\(seasonType)'")
+        
+        if(playerResults[0].playerStatisticsList.count > 0)
+        {
+            return
+        }
+        
+        //  Spin through the player and retrieve the statistics based on the player id
+        for player in playerResults
+        {
+            do
+            {
+                try realm.write
+                {
+                    //  Get all statistics for that particular player
+                    let statisticsResults = realm.objects(PlayerStatistics.self).filter("id ==\(player.id) AND season =='\(season)' AND seasonType =='\(seasonType)'")
+                    
+                    for statistics in statisticsResults
+                    {
+                        //  Set the statistics in the parent player
+                        player.playerStatisticsList.append(statistics)
+                    }
+                    
+                    //  Get all injuries for that particular player
+                    let injuryResults = realm.objects(NHLPlayerInjury.self).filter("id ==\(player.id) AND season =='\(season)' AND seasonType =='\(seasonType)'")
+                    
+                    for injury in injuryResults
+                    {
+                        //  Set the injuries in the parent player
+                        player.playerInjuries.append(injury)
+                    }
+                    
+                    //  Save the player to the database
+                    realm.add(player)
+                }
+            }
+            catch
+            {
+                print("Error linking statistics and injuries to players: \(error.localizedDescription)")
+            }
+        }
+    }
+    
     func linkPlayersToTeams()
     {
         let realm = try! Realm()
@@ -1227,6 +1276,8 @@ class DBManager
 
         let playerStatisticsModel = PlayerStatisticsModel()
         
+        print("id ==\(id) AND season =='\(season)' AND seasonType =='\(seasonType)'")
+        
         let playerStatistics = realm.objects(PlayerStatistics.self).filter("id ==\(id) AND season =='\(season)' AND seasonType =='\(seasonType)'")
         
         if let playerStatistics = playerStatistics.first
@@ -1293,7 +1344,7 @@ class DBManager
             let scheduledGameModel = ScheduledGameModel()
             
             scheduledGameModel.startTime = nhlSchedule.time
-            scheduledGameModel.venue = TeamManager.getVenueByTeam(nhlSchedule.parentTeam.first?.abbreviation ?? "")
+            scheduledGameModel.venue = TeamManager.getVenueNameByTeam(nhlSchedule.parentTeam.first?.abbreviation ?? "")
             scheduledGameModel.gameInfo = TeamManager.getFullTeamName(nhlSchedule.awayTeam) + " @ " + TeamManager.getFullTeamName(nhlSchedule.homeTeam)
             
             scheduledGameList.append(scheduledGameModel)

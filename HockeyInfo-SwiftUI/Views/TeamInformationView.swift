@@ -37,7 +37,7 @@ struct TeamInformationView : View
                 Image("icons8-gameLog")
                 Text("Game Log")
             }
-            VenueView(venue: Venue.allVenues()[29]).tabItem
+            VenueView(venue: TeamManager.getVenueByTeam(teamItem.teamIconName)).tabItem
             {
                 Image("icons8-hockey")
                 Text("Venue")

@@ -35,6 +35,8 @@ final class RosterPlayersViewModel: ObservableObject, Identifiable
             
             //  Remove any duplicate names
             self.playerNames = Set(playerNameArray.map { $0 }).sorted()
+            
+            NetworkManager().loadPlayerStats()
         }
     }
 }

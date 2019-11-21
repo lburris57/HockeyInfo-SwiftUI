@@ -20,13 +20,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions)
     {
-        if(databaseManager.fullScheduleRequiresLoad())
-        {
-            //databaseManager.setInitialUserDefaultTableLoadedAndLinkedValues()
-        }
-        
-        //TimeAndDateUtils.calculateMinMaxCalendarValues()
-        
         userDefaults.set(TimeAndDateUtils.isValidSetting(currentSeason, true), forKey: Constants.IS_PLAYOFF_SETTING_VALID)
         
         print("Value of IS_PLAYOFF_SETTING_VALID is \(userDefaults.bool(forKey: Constants.IS_PLAYOFF_SETTING_VALID))")

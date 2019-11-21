@@ -17,7 +17,7 @@ struct PlayerDetailView : View
         VStack
         {
             //  Team image
-            Image("\(playerDetail.teamAbbreviation)").resizable().frame(height: 225).minimumScaleFactor(0.25)
+            Image("\(playerDetail.teamAbbreviation)").resizable().frame(height: 200).minimumScaleFactor(0.25)
             
             //  Player Image
             if(playerDetail.imageUrl != "")
@@ -29,7 +29,7 @@ struct PlayerDetailView : View
                         // Success
                     }
                     .resizable()
-                    .indicator(.activity)
+                    .frame(width: 225, height: 225, alignment: .center)
                     .scaledToFit()
                     .clipShape(Circle()).background(Circle().foregroundColor(.white))
                     .overlay(Circle().stroke(Color.white, lineWidth: 4))
@@ -39,6 +39,7 @@ struct PlayerDetailView : View
             {
                 Image("photo-not-available")
                 .resizable()
+                .frame(width: 225, height: 225, alignment: .center)
                 .scaledToFit()
                 .clipShape(Circle()).background(Circle().foregroundColor(.white))
                 .overlay(Circle().stroke(Color.white, lineWidth: 4))

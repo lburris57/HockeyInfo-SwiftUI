@@ -17,6 +17,8 @@
 		769E00CD236FE25600500134 /* RKWeekdayHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E00C6236FE25600500134 /* RKWeekdayHeader.swift */; };
 		769E00CF236FF04800500134 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E00CE236FF04800500134 /* TestView.swift */; };
 		769E00D1237038F900500134 /* ScheduledGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E00D0237038F900500134 /* ScheduledGameModel.swift */; };
+		769E00D32373A2F800500134 /* ScoresRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E00D22373A2F800500134 /* ScoresRow.swift */; };
+		769E00D52373A41D00500134 /* ScoresViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E00D42373A41D00500134 /* ScoresViewModel.swift */; };
 		76C17959236D931C0019FCAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C17958236D931C0019FCAF /* AppDelegate.swift */; };
 		76C1795B236D931C0019FCAF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C1795A236D931C0019FCAF /* SceneDelegate.swift */; };
 		76C1795D236D931C0019FCAF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C1795C236D931C0019FCAF /* ContentView.swift */; };
@@ -183,6 +185,8 @@
 		769E00C6236FE25600500134 /* RKWeekdayHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RKWeekdayHeader.swift; sourceTree = "<group>"; };
 		769E00CE236FF04800500134 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		769E00D0237038F900500134 /* ScheduledGameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledGameModel.swift; sourceTree = "<group>"; };
+		769E00D22373A2F800500134 /* ScoresRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresRow.swift; sourceTree = "<group>"; };
+		769E00D42373A41D00500134 /* ScoresViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresViewModel.swift; sourceTree = "<group>"; };
 		76C17955236D931C0019FCAF /* HockeyInfo-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HockeyInfo-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		76C17958236D931C0019FCAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76C1795A236D931C0019FCAF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -483,6 +487,7 @@
 				76C17999236D946A0019FCAF /* LeaderRow.swift */,
 				76C1799A236D946A0019FCAF /* StandingsRow.swift */,
 				76C1799B236D946A0019FCAF /* MainMenuRow.swift */,
+				769E00D22373A2F800500134 /* ScoresRow.swift */,
 			);
 			path = "Row Views";
 			sourceTree = "<group>";
@@ -504,6 +509,7 @@
 				76C17AA2236DD03D0019FCAF /* PlayerDetailModel.swift */,
 				76C17AA4236E39940019FCAF /* PlayerStatisticsModel.swift */,
 				769E00D0237038F900500134 /* ScheduledGameModel.swift */,
+				769E00D42373A41D00500134 /* ScoresViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -958,6 +964,7 @@
 				76C17A69236D956C0019FCAF /* TeamData.swift in Sources */,
 				76C179F2236D951F0019FCAF /* PlayerDetailView.swift in Sources */,
 				76C17A8A236D956C0019FCAF /* ScoringPlay.swift in Sources */,
+				769E00D32373A2F800500134 /* ScoresRow.swift in Sources */,
 				76C17A7A236D956C0019FCAF /* PlayerInfo.swift in Sources */,
 				769E00C7236FE25600500134 /* RKCell.swift in Sources */,
 				76C17A83236D956C0019FCAF /* PowerplayData.swift in Sources */,
@@ -983,6 +990,7 @@
 				76C179E7236D951F0019FCAF /* SearchPlayerInformationView.swift in Sources */,
 				76C17A78236D956C0019FCAF /* CurrentTeamData.swift in Sources */,
 				76C1799D236D946A0019FCAF /* TeamRowView.swift in Sources */,
+				769E00D52373A41D00500134 /* ScoresViewModel.swift in Sources */,
 				76C17994236D94590019FCAF /* UserDefaultsHelper.swift in Sources */,
 				76C17A5C236D956C0019FCAF /* NHLPlayerInjury.swift in Sources */,
 				76C179E1236D951F0019FCAF /* ScoresView.swift in Sources */,

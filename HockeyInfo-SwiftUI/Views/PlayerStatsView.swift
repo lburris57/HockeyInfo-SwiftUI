@@ -31,7 +31,7 @@ struct PlayerStatsView : View
                         // Success
                     }
                     .resizable()
-                    .frame(width: 250, height: 250, alignment: .center)
+                    .frame(width: 225, height: 200, alignment: .center)
                     .scaledToFit()
                     .clipShape(Circle()).background(Circle().foregroundColor(.white))
                     .overlay(Circle().stroke(Color.white, lineWidth: 4))
@@ -41,6 +41,7 @@ struct PlayerStatsView : View
             {
                 Image("photo-not-available")
                 .resizable()
+                .frame(width: 225, height: 225, alignment: .center)
                 .scaledToFit()
                 .clipShape(Circle()).background(Circle().foregroundColor(.white))
                 .overlay(Circle().stroke(Color.white, lineWidth: 4))
@@ -153,7 +154,7 @@ struct PlayerStatsView : View
                     Text("Faceoff Percentage: \(ConversionUtils.formatToSpecifiedDecimalPlaces(playerStatistics.faceoffPercent, 2))%").padding(.trailing)
                 }
             
-            Spacer(minLength: 40)
+            Spacer(minLength: 60)
         }
     }
 }
