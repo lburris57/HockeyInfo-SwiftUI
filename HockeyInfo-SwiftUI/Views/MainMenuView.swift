@@ -72,8 +72,8 @@ struct MainMenuView : View
                         MainMenuRow(mainMenuItem: MainMenuItem(description: "Settings"))
                     }
                 }
-            }
-        }.navigationBarTitle(Text("Main Menu"), displayMode: .inline)
+            }.navigationBarTitle(Text("Main Menu"), displayMode: .inline)
+        }
     }
 }
     

@@ -20,6 +20,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions)
     {
+        if let userDefaultTableInformationModel20082009 = UserDefaultsHelper.retrieveSeasonDefaultData(for: "tableModel2008-2009")
+        {
+            print("Season for tableModel2008-2009 is \(userDefaultTableInformationModel20082009.season)")
+            print("Playoffs for tableModel2008-2009 is \(userDefaultTableInformationModel20082009.isPlayoffs)")
+        }
+        else
+        {
+            UserDefaultsHelper.loadSeasonDefaultData()
+        }
+        
         userDefaults.set(TimeAndDateUtils.isValidSetting(currentSeason, true), forKey: Constants.IS_PLAYOFF_SETTING_VALID)
         
         print("Value of IS_PLAYOFF_SETTING_VALID is \(userDefaults.bool(forKey: Constants.IS_PLAYOFF_SETTING_VALID))")

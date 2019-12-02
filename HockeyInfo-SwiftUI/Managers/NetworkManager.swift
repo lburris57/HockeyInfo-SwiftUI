@@ -143,13 +143,14 @@ class NetworkManager
             }
             else if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200
             {
-                let playerInjuries = try! JSONDecoder().decode(PlayerInjuries.self, from: data)
-                
-                self.databaseManager.savePlayerInjuries(playerInjuries)
-                
-                DispatchQueue.main.async
+                if let playerInjuries = try? JSONDecoder().decode(PlayerInjuries.self, from: data)
                 {
-                    completion(playerInjuries)
+                    self.databaseManager.savePlayerInjuries(playerInjuries)
+                    
+                    DispatchQueue.main.async
+                    {
+                        completion(playerInjuries)
+                    }
                 }
             }
         }.resume()

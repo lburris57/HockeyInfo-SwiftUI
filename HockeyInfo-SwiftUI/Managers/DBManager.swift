@@ -1339,9 +1339,15 @@ class DBManager
         
         let nhlScheduleList = realm.objects(NHLSchedule.self).filter("date == '\(selectedDate)' AND season == '\(season)' AND seasonType == '\(seasonType)'")
         
+        print("Size of NHLScheduleList is: \(nhlScheduleList.count)")
+        
         for nhlSchedule in nhlScheduleList
         {
             let scheduledGameModel = ScheduledGameModel()
+            
+            print("Start time is: \(nhlSchedule.time)")
+            print("Venue is: \(TeamManager.getVenueNameByTeam(nhlSchedule.parentTeam.first?.abbreviation ?? ""))")
+            print("Game info is: \(TeamManager.getFullTeamName(nhlSchedule.awayTeam) + " @ " + TeamManager.getFullTeamName(nhlSchedule.homeTeam))")
             
             scheduledGameModel.startTime = nhlSchedule.time
             scheduledGameModel.venue = TeamManager.getVenueNameByTeam(nhlSchedule.parentTeam.first?.abbreviation ?? "")

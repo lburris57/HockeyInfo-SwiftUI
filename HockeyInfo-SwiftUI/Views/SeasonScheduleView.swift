@@ -35,10 +35,6 @@ struct SeasonScheduleView : View
                 {
                     Text("Schedule for \(self.rkManager.selectedDate.getTextFromDate())")
                 }
-//                else
-//                {
-//                    Text("Schedule for \(Date().getTextFromDate())")
-//                }
                 
                 List
                 {
@@ -63,13 +59,15 @@ struct SeasonScheduleView : View
                                 
                                 HStack
                                 {
-                                    Text("|").padding(.leading, 63)
+                                    Text("|").padding(.leading, 62)
                                     Text(scheduledGameModel.venue).font(.caption).padding(.leading, 1)
                                 }
                             }
                         }
                     }
                 }
+                
+                Spacer()
             }
         }
     }

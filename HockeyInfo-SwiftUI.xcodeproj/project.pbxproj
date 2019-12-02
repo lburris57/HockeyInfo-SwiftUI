@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		49F03B65F29FF5C12C7CA687 /* Pods_HockeyInfo_SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 652855A8413EAAD1DE73E9DA /* Pods_HockeyInfo_SwiftUI.framework */; };
+		7681F4DB23949A4800CE1465 /* UserDefaultTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7681F4DA23949A4800CE1465 /* UserDefaultTableModel.swift */; };
+		7681F4DD2394DA6F00CE1465 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7681F4DC2394DA6F00CE1465 /* DataManager.swift */; };
 		769E00C7236FE25600500134 /* RKCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E00C0236FE25500500134 /* RKCell.swift */; };
 		769E00C8236FE25600500134 /* RKManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E00C1236FE25500500134 /* RKManager.swift */; };
 		769E00C9236FE25600500134 /* RKColorSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E00C2236FE25600500134 /* RKColorSettings.swift */; };
@@ -176,6 +178,8 @@
 /* Begin PBXFileReference section */
 		21ADDDC78C591D1ADE9091C2 /* Pods-HockeyInfo-SwiftUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HockeyInfo-SwiftUI.release.xcconfig"; path = "Target Support Files/Pods-HockeyInfo-SwiftUI/Pods-HockeyInfo-SwiftUI.release.xcconfig"; sourceTree = "<group>"; };
 		652855A8413EAAD1DE73E9DA /* Pods_HockeyInfo_SwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HockeyInfo_SwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7681F4DA23949A4800CE1465 /* UserDefaultTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultTableModel.swift; sourceTree = "<group>"; };
+		7681F4DC2394DA6F00CE1465 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		769E00C0236FE25500500134 /* RKCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RKCell.swift; sourceTree = "<group>"; };
 		769E00C1236FE25500500134 /* RKManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RKManager.swift; sourceTree = "<group>"; };
 		769E00C2236FE25600500134 /* RKColorSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RKColorSettings.swift; sourceTree = "<group>"; };
@@ -367,6 +371,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		7681F4D9239499FB00CE1465 /* UserDefaultModels */ = {
+			isa = PBXGroup;
+			children = (
+				7681F4DA23949A4800CE1465 /* UserDefaultTableModel.swift */,
+			);
+			path = UserDefaultModels;
+			sourceTree = "<group>";
+		};
 		769E00BF236FE22600500134 /* RKCalendar */ = {
 			isa = PBXGroup;
 			children = (
@@ -406,6 +418,7 @@
 		76C17957236D931C0019FCAF /* HockeyInfo-SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				7681F4D9239499FB00CE1465 /* UserDefaultModels */,
 				769E00BF236FE22600500134 /* RKCalendar */,
 				76C17958236D931C0019FCAF /* AppDelegate.swift */,
 				76C17988236D93D40019FCAF /* Constants.swift */,
@@ -520,6 +533,7 @@
 				76C179B7236D95140019FCAF /* NetworkManager.swift */,
 				76C179B8236D95140019FCAF /* DBManager.swift */,
 				76C179B9236D95140019FCAF /* TeamManager.swift */,
+				7681F4DC2394DA6F00CE1465 /* DataManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -970,6 +984,7 @@
 				76C17A83236D956C0019FCAF /* PowerplayData.swift in Sources */,
 				76C179E3236D951F0019FCAF /* GameLogView.swift in Sources */,
 				76C179F3236D951F0019FCAF /* VenueView.swift in Sources */,
+				7681F4DB23949A4800CE1465 /* UserDefaultTableModel.swift in Sources */,
 				76C17995236D94590019FCAF /* DataExchangeHelper.swift in Sources */,
 				769E00CF236FF04800500134 /* TestView.swift in Sources */,
 				76C17A88236D956C0019FCAF /* TeamStandingsData.swift in Sources */,
@@ -989,6 +1004,7 @@
 				76C179F4236D951F0019FCAF /* StandingsTabView.swift in Sources */,
 				76C179E7236D951F0019FCAF /* SearchPlayerInformationView.swift in Sources */,
 				76C17A78236D956C0019FCAF /* CurrentTeamData.swift in Sources */,
+				7681F4DD2394DA6F00CE1465 /* DataManager.swift in Sources */,
 				76C1799D236D946A0019FCAF /* TeamRowView.swift in Sources */,
 				769E00D52373A41D00500134 /* ScoresViewModel.swift in Sources */,
 				76C17994236D94590019FCAF /* UserDefaultsHelper.swift in Sources */,
