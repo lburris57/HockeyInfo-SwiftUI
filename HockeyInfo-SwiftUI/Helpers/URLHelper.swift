@@ -9,9 +9,11 @@ import Foundation
 
 class URLHelper
 {
-    let season = Constants.USER_DEFAULTS.string(forKey: Constants.SEASON) ?? "2018-2019"
-    let seasonType = Constants.USER_DEFAULTS.string(forKey: Constants.SEASON_TYPE) ?? Constants.REGULAR_SEASON
-    let playoffYear = Constants.USER_DEFAULTS.string(forKey: Constants.PLAYOFF_YEAR) ?? UserSettings().playoffYear
+    static let userSettings = UserSettings()
+    
+    let season = userSettings.season
+    let seasonType = userSettings.seasonType
+    let playoffYear = userSettings.playoffYear
     let isPlayoffs = Constants.USER_DEFAULTS.bool(forKey: Constants.IS_PLAYOFFS)
     
     var seasonSettingURL: String

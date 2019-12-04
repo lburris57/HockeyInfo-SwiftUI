@@ -9,10 +9,15 @@ import Foundation
 
 class DataManager
 {
-    
+    let userDefaults = UserDefaults.standard
     
     func loadSeasonScheduleData() -> [NHLSchedule]
     {
+        let userSettings = UserSettings()
+        
+        print("User settings season in DataManager is: \(userSettings.season)")
+        print("User settings season type in DataManager is: \(userSettings.seasonType)")
+        
         return [NHLSchedule]()
     }
 }

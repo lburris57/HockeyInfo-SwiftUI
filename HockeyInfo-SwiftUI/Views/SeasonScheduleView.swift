@@ -9,18 +9,26 @@ import SwiftUI
 
 struct SeasonScheduleView : View
 {
+    @EnvironmentObject var settings: UserSettings
+    
     @ObservedObject var model = SeasonScheduleViewModel()
     
     @State var isPresented = true
     
     @ObservedObject var rkManager = RKManager(calendar: Calendar.current,
-                    minimumDate: Date().addingTimeInterval(-TimeAndDateUtils.calculateMinCalendarValues()),
-                    maximumDate: Date().addingTimeInterval(TimeAndDateUtils.calculateMaxCalendarValues()),
+                    minimumDate: Date().addingTimeInterval(-TimeAndDateUtils().calculateMinCalendarValues()),
+                    maximumDate: Date().addingTimeInterval(TimeAndDateUtils().calculateMaxCalendarValues()),
                     mode: 0)
+    
+    @State private var selectedDate = Date()
     
     var body: some View
     {
-        VStack
+//        let minDate = Date().addingTimeInterval(-TimeAndDateUtils().calculateMinCalendarValues())
+//        let maxDate = Date().addingTimeInterval(TimeAndDateUtils().calculateMaxCalendarValues())
+//        let range = minDate ... maxDate
+        
+        return VStack
         {
             Group
             {
@@ -29,7 +37,19 @@ struct SeasonScheduleView : View
                     RKViewController(isPresented: self.$isPresented, rkManager: rkManager)
                 }
                 
-                Divider()
+                
+                
+//                Divider()
+//
+//                Form
+//                    {
+//                        DatePicker("Please select a date:", selection: $selectedDate, in: range, displayedComponents: .date)
+//
+//                }
+                
+                //Divider()
+                
+                Spacer(minLength: 130)
                 
                 if(self.rkManager.selectedDate != nil)
                 {
@@ -69,7 +89,7 @@ struct SeasonScheduleView : View
                 
                 Spacer()
             }
-        }
+        }.navigationBarTitle(Text("\(settings.season) Season Schedule"))
     }
 }
 

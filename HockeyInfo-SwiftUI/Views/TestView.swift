@@ -12,8 +12,8 @@ struct TestView: View
     @State var isPresented = false  // not relevant for this example
     
     var rkManager1 = RKManager(calendar: Calendar.current,
-                    minimumDate: Date().addingTimeInterval(-TimeAndDateUtils.calculateMinCalendarValues()),
-                    maximumDate: Date().addingTimeInterval(TimeAndDateUtils.calculateMaxCalendarValues()),
+                    minimumDate: Date().addingTimeInterval(-TimeAndDateUtils().calculateMinCalendarValues()),
+                    maximumDate: Date().addingTimeInterval(TimeAndDateUtils().calculateMaxCalendarValues()),
                     mode: 0)
     
     var body: some View

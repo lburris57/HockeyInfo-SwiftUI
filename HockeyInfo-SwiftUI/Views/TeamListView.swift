@@ -24,7 +24,7 @@ struct TeamListView : View
                     TeamRowView(teamItem: teamItem)
                 }
             }
-        }.navigationBarTitle(Text("Team List"))
+        }.navigationBarTitle(Text("Team Information List"))
             .listStyle(GroupedListStyle())
     }
 }

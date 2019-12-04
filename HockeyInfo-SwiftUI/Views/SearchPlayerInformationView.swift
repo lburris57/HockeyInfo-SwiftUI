@@ -19,26 +19,30 @@ struct SearchPlayerInformationView : View
     
     var body: some View
     {
-        VStack
-        {
-            Text("Search Players")
-            
-            List
-            {
-                Section(header: SearchBar(text: self.$searchQuery))
+//        Form
+//        {
+//            Section(header: Text("Enter a player's last name to search"))
+//            {
+                VStack
                 {
-                    ForEach(model.playerNames.filter{searchQuery.count > 20 ? true : "\($0)".contains(searchQuery)}, id: \.self)
+                    List
                     {
-                        name in
-                        
-                        NavigationLink(destination: PlayerDetailView(playerDetail: DBManager().retrievePlayerDetail(name)))
+                        Section(header: SearchBar(text: self.$searchQuery))
                         {
-                            Text(name)
+                            ForEach(model.playerNames.filter{searchQuery.count > 20 ? true : "\($0)".contains(searchQuery)}, id: \.self)
+                            {
+                                name in
+                                
+                                NavigationLink(destination: PlayerDetailView(playerDetail: DBManager().retrievePlayerDetail(name)))
+                                {
+                                    Text(name)
+                                }
+                            }
                         }
                     }
-                }
-            }
-        }
+                }.navigationBarTitle(Text("Search Players"))
+//            }
+//        }
     }
 }
 

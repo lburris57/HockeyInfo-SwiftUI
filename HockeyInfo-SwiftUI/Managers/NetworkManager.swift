@@ -283,9 +283,9 @@ class NetworkManager
             }
             else if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200
             {
-                let playerStats = try! JSONDecoder().decode(PlayerStats.self, from: data)
+                let playerStats = try? JSONDecoder().decode(PlayerStats.self, from: data)
                 
-                self.databaseManager.savePlayerStats(playerStats)
+                self.databaseManager.savePlayerStats(playerStats ?? PlayerStats())
             }
         }.resume()
     }

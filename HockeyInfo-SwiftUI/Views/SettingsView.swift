@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SettingsView : View
 {
+    let currentSeason = TimeAndDateUtils.getCurrentSeason()
+    
     var seasons = ["2007-2008", "2008-2009", "2009-2010", "2010-2011", "2011-2012", "2012-2013", "2013-2014", "2014-2015", "2015-2016", "2016-2017", "2017-2018", "2018-2019", "2019-2020"]
     var playoffYears = ["2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"]
     
@@ -25,7 +27,7 @@ struct SettingsView : View
         {
             Form
             {
-                Section
+                Section(header: (Text("Please select a season:")))
                 {
                     Picker(selection: $selectedSeason, label: Text("Season"))
                     {
@@ -36,7 +38,7 @@ struct SettingsView : View
                     }
                 }
                 
-                Section
+                Section(header: Text("Please select whether to view playoff information:"))
                 {
                     Toggle(isOn: $isPlayoffs)
                     {
@@ -44,20 +46,23 @@ struct SettingsView : View
                     }
                 }
                 
-                Section
+                Section(header: Text("NOTE:  Invalid settings will not be saved."))
                 {
                     Button(action:
                     {
                         self.settings.season = self.seasons[self.selectedSeason]
                         self.settings.playoffYear = self.playoffYears[self.selectedSeason]
                         self.settings.seasonType = self.seasonType[self.selectedSeasonType]
+                        self.settings.isPlayoffs = self.isPlayoffs
                     })
                     {
                         Text("Save settings")
-                    }
+                    }.disabled(!TimeAndDateUtils.isValidSetting(self.seasons[self.selectedSeason], isPlayoffs))
                 }
-            }
-        }.navigationBarTitle(Text("Settings"), displayMode: .inline)
+            }.navigationBarTitle(Text("Season Settings"), displayMode: .inline)
+            
+            Spacer()
+        }
     }
 }
 

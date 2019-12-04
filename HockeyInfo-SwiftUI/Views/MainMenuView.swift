@@ -28,24 +28,6 @@ struct MainMenuView : View
                     }
                 }
                 
-                NavigationLink(destination: TeamListView())
-                {
-                    HStack
-                    {
-                        Image("teamInformationCategory").resizable().frame(width: 20, height: 20).aspectRatio(contentMode: .fit)
-                        MainMenuRow(mainMenuItem: MainMenuItem(description: "Team Information List"))
-                    }
-                }
-
-                NavigationLink(destination: SearchPlayerInformationView())
-                {
-                    HStack
-                    {
-                        Image("searchPlayersCategory").resizable().frame(width: 20, height: 20).aspectRatio(contentMode: .fit)
-                        MainMenuRow(mainMenuItem: MainMenuItem(description: "Search Players"))
-                    }
-                }
-
                 NavigationLink(destination: StandingsTabView())
                 {
                     HStack
@@ -64,12 +46,48 @@ struct MainMenuView : View
                     }
                 }
                 
+                NavigationLink(destination: TeamListView())
+                {
+                    HStack
+                    {
+                        Image("teamInformationCategory").resizable().frame(width: 20, height: 20).aspectRatio(contentMode: .fit)
+                        MainMenuRow(mainMenuItem: MainMenuItem(description: "Team Information List"))
+                    }
+                }
+
+                NavigationLink(destination: SearchPlayerInformationView())
+                {
+                    HStack
+                    {
+                        Image("searchPlayersCategory").resizable().frame(width: 20, height: 20).aspectRatio(contentMode: .fit)
+                        MainMenuRow(mainMenuItem: MainMenuItem(description: "Search Players"))
+                    }
+                }
+                
+//                NavigationLink(destination: PlayerLeadersView())
+//                {
+//                    HStack
+//                    {
+//                        Image("settingsCategory").resizable().frame(width: 20, height: 20).aspectRatio(contentMode: .fit)
+//                        MainMenuRow(mainMenuItem: MainMenuItem(description: "Player Leaders"))
+//                    }
+//                }
+                
+//                NavigationLink(destination: GoalieLeadersView())
+//                {
+//                    HStack
+//                    {
+//                        Image("settingsCategory").resizable().frame(width: 20, height: 20).aspectRatio(contentMode: .fit)
+//                        MainMenuRow(mainMenuItem: MainMenuItem(description: "Goalie Leaders"))
+//                    }
+//                }
+                
                 NavigationLink(destination: SettingsView())
                 {
                     HStack
                     {
                         Image("settingsCategory").resizable().frame(width: 20, height: 20).aspectRatio(contentMode: .fit)
-                        MainMenuRow(mainMenuItem: MainMenuItem(description: "Settings"))
+                        MainMenuRow(mainMenuItem: MainMenuItem(description: "Season Settings"))
                     }
                 }
             }.navigationBarTitle(Text("Main Menu"), displayMode: .inline)

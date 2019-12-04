@@ -10,6 +10,8 @@ import SwiftDate
 
 class TimeAndDateUtils
 {
+    let season = UserSettings().season
+    
     static func getDate(_ timestamp: String) -> String
     {
         let formatter = DateFormatter()
@@ -262,10 +264,12 @@ class TimeAndDateUtils
         return true
     }
     
-    static func calculateMinCalendarValues() -> (Double)
+    func calculateMinCalendarValues() -> (Double)
     {
+        let seasons = season.components(separatedBy: "-")
+        
         //  Find the number of days from October 1st to current date
-        let seasonStart = "October 1, 2018".asDate
+        let seasonStart = ("October 1, " + seasons[0]).asDate
         
         let daysSinceSeasonStart = seasonStart.daysBeforeNow
         
@@ -275,10 +279,12 @@ class TimeAndDateUtils
         return (Double(secondsSinceSeasonStart))
     }
     
-    static func calculateMaxCalendarValues() -> (Double)
+    func calculateMaxCalendarValues() -> (Double)
     {
+        let seasons = season.components(separatedBy: "-")
+        
         //  Find the number of days from current date to June 30
-        let seasonEnd = "June 30, 2019".asDate
+        let seasonEnd = ("June 30, " + seasons[1]).asDate
         
         let daysTillSeasonEnds = seasonEnd.daysSinceNow
         

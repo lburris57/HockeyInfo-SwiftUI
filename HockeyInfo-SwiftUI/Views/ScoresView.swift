@@ -13,7 +13,10 @@ struct ScoresView : View
     
     var body: some View
     {
-        Text("Scores View!")
+        VStack
+        {
+            Text("Scores View!")
+        }.navigationBarTitle(Text("Scores"), displayMode: .inline)
     }
 }
 

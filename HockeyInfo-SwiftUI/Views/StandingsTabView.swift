@@ -32,7 +32,7 @@ struct StandingsTabView : View
                 Image("text-align-right-7")
                 Text("League")
             }
-        }
+        }.navigationBarTitle(Text("\(settings.season) Standings"))
     }
 }
 

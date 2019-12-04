@@ -58,7 +58,7 @@ struct PlayerStatsView : View
                    .minimumScaleFactor(0.50)
                
                //  Player Jersey Number and Position
-               Text("\(playerDetail.jerseyNumber)" + "   " + "\(playerDetail.position)")
+                Text("\(playerDetail.jerseyNumber)   \(playerDetail.position)")
                    .font(.system(size:30))
                    .fontWeight(.bold)
                    .padding(.horizontal)

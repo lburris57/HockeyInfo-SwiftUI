@@ -14,12 +14,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
     
     let userDefaults = UserDefaults.standard
     
+    let userSettings = UserSettings()
+    
     let databaseManager = DBManager()
+    
+    let dataManager = DataManager()
     
     let currentSeason = TimeAndDateUtils.getCurrentSeason()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions)
     {
+        //let seasonSchedules = dataManager.loadSeasonScheduleData()
+        
+        print("User settings season is: \(userSettings.season)")
+        print("User settings season type is: \(userSettings.seasonType)")
+        
         if let userDefaultTableInformationModel20082009 = UserDefaultsHelper.retrieveSeasonDefaultData(for: "tableModel2008-2009")
         {
             print("Season for tableModel2008-2009 is \(userDefaultTableInformationModel20082009.season)")
@@ -33,6 +42,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
         userDefaults.set(TimeAndDateUtils.isValidSetting(currentSeason, true), forKey: Constants.IS_PLAYOFF_SETTING_VALID)
         
         print("Value of IS_PLAYOFF_SETTING_VALID is \(userDefaults.bool(forKey: Constants.IS_PLAYOFF_SETTING_VALID))")
+        print("Value of current season is \(currentSeason)")
         
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
