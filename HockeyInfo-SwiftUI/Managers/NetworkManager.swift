@@ -23,6 +23,8 @@ class NetworkManager
     //  Retrieve full season schedule for all 31 teams
     func retrieveFullSeasonSchedule(completion: @escaping ([NHLSchedule]) -> ())
     {
+        print("\n\nIn NetworkManager.retrieveFullSeasonSchedule method...\n\n")
+        
         if(!databaseManager.fullScheduleRequiresLoad())
         {
             print("Full season schedule has already been saved to the database...")
@@ -61,6 +63,8 @@ class NetworkManager
     
     func retrieveStandings(completion: @escaping (NHLStandings) -> ())
     {
+        print("\n\nIn NetworkManager.retrieveStandings method...\n\n")
+        
         session.dataTask(with: createRequest(urlHelper.retrieveStandingsURL()))
         {
             data, response, err in
@@ -85,6 +89,8 @@ class NetworkManager
     
     func retrieveRosters(completion: @escaping (RosterPlayers) -> ())
     {
+        print("\n\nIn NetworkManager.retrieveRosters method...\n\n")
+        
         session.dataTask(with: createRequest(urlHelper.retrieveRosterPlayersURL()))// https://api.mysportsfeeds.com/v2.1/pull/nhl/players.json?rosterstatus=assigned-to-roster&season=2018-2019-regular
         {
             data, response, err in
@@ -109,6 +115,8 @@ class NetworkManager
     
     func retrievePlayerStats(completion: @escaping (PlayerStats) -> ())
     {
+        print("\n\nIn NetworkManager.retrievePlayerStats method...\n\n")
+        
         session.dataTask(with: createRequest(urlHelper.retrievePlayerStatsURL()))
         {
             data, response, err in
@@ -133,6 +141,8 @@ class NetworkManager
     
     func retrievePlayerInjuries(completion: @escaping (PlayerInjuries) -> ())
     {
+        print("\n\nIn NetworkManager.retrievePlayerInjuries method...\n\n")
+        
         session.dataTask(with: createRequest(urlHelper.retrievePlayerInjuriesURL()))
         {
             data, response, err in
@@ -158,6 +168,8 @@ class NetworkManager
     
     func retrieveScoringSummary(forGameId gameId: Int, completion: @escaping (ScoringSummary) -> ())
     {
+        print("\n\nIn NetworkManager.retrieveScoringSummary method...\n\n")
+        
         session.dataTask(with: createRequest(urlHelper.retrieveScoringSummaryURL(gameId)))
         {
             data, response, err in
@@ -182,6 +194,8 @@ class NetworkManager
     
     func retrieveGameLog(completion: @escaping (GameLog) -> ())
     {
+        print("\n\nIn NetworkManager.retrieveGameLog method...\n\n")
+        
         session.dataTask(with: createRequest(urlHelper.retrieveGameLogsURL()))
         {
             data, response, err in
@@ -207,6 +221,8 @@ class NetworkManager
     //  Retrieve a list of the games since the last database update
     func retrieveLatestGameScheduleInfo(completion: @escaping ([ScheduledGame]) -> ())
     {
+        print("\n\nIn NetworkManager.retrieveLatestGameScheduleInfo method...\n\n")
+        
         print("Last date played value is \(databaseManager.getLatestDatePlayed())")
 
         guard let dateCreated = TimeAndDateUtils.getDate(fromString: databaseManager.getLatestDatePlayed(), dateFormat: Constants.LONG_DATE_FORMAT) else { return }
@@ -242,6 +258,8 @@ class NetworkManager
     
     func retrieveScheduleForDate(_ date :Date, completion: @escaping ([ScheduledGame]) -> ())
     {
+        print("\n\nIn NetworkManager.retrieveScheduleForDate method...\n\n")
+        
         let shortDateFormatter = DateFormatter()
         
         shortDateFormatter.dateFormat = Constants.SHORT_DATE_FORMAT
@@ -273,6 +291,8 @@ class NetworkManager
     
     func loadPlayerStats()
     {
+        print("\n\nIn NetworkManager.loadPlayerStats method...\n\n")
+        
         session.dataTask(with: createRequest(urlHelper.retrievePlayerStatsURL()))
         {
             data, response, err in

@@ -22,7 +22,7 @@ final class UserSettings: ObservableObject
     {
         self.seasonType = userDefaults.string(forKey: Constants.SEASON_TYPE) ?? Constants.REGULAR_SEASON
         self.playoffYear = userDefaults.string(forKey: Constants.PLAYOFF_YEAR) ?? TimeAndDateUtils.getCurrentPlayoffSeason()
-        self.season = userDefaults.string(forKey: Constants.SEASON) ?? "2018-2019"
+        self.season = userDefaults.string(forKey: Constants.SEASON) ?? "2019-2020"
         self.isPlayoffs = userDefaults.bool(forKey: Constants.IS_PLAYOFFS)
     }
 }

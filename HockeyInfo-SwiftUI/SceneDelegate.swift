@@ -26,17 +26,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
     {
         //let seasonSchedules = dataManager.loadSeasonScheduleData()
         
+        print("\n\nIn scene delegate......\n\n")
+        
         print("User settings season is: \(userSettings.season)")
         print("User settings season type is: \(userSettings.seasonType)")
         
-        if let userDefaultTableInformationModel20082009 = UserDefaultsHelper.retrieveSeasonDefaultData(for: "tableModel2008-2009")
+        if let userDefaultTableInformationModel20082009 = UserDefaultsHelper.retrieveUserDefaultsTableInformationData(for: "tableModel2008-2009")
         {
             print("Season for tableModel2008-2009 is \(userDefaultTableInformationModel20082009.season)")
             print("Playoffs for tableModel2008-2009 is \(userDefaultTableInformationModel20082009.isPlayoffs)")
         }
         else
         {
-            UserDefaultsHelper.loadSeasonDefaultData()
+            UserDefaultsHelper.loadUserDefaultsTableInformationData()
         }
         
         userDefaults.set(TimeAndDateUtils.isValidSetting(currentSeason, true), forKey: Constants.IS_PLAYOFF_SETTING_VALID)

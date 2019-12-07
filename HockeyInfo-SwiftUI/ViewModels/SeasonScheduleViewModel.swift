@@ -24,9 +24,16 @@ final class SeasonScheduleViewModel: ObservableObject
     
     private func fetchSeasonSchedule()
     {
-        NetworkManager().retrieveFullSeasonSchedule
+        if(DataManager().seasonScheduleTableHasBeenLoaded())
         {
-            self.nhlScheduleList = $0
+            self.nhlScheduleList = DBManager().retrieveFullSeasonSchedule()
+        }
+        else
+        {
+            NetworkManager().retrieveFullSeasonSchedule
+            {
+                self.nhlScheduleList = $0
+            }
         }
     }
 }

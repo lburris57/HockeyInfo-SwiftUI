@@ -49,7 +49,7 @@ struct SeasonScheduleView : View
                 
                 //Divider()
                 
-                Spacer(minLength: 130)
+                Spacer(minLength: 125)
                 
                 if(self.rkManager.selectedDate != nil)
                 {

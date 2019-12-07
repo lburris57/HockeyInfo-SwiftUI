@@ -11,7 +11,7 @@ struct UserDefaultsHelper
 {
     let userDefaults = UserDefaults.standard
     
-    static func loadSeasonDefaultData()
+    static func loadUserDefaultsTableInformationData()
     {
         let seasonKeys = ["tableModel2008-2009", "tableModel2009-2010", "tableModel2010-2011", "tableModel2011-2012", "tableModel2012-2013", "tableModel2013-2014", "tableModel2014-2015", "tableModel2015-2016", "tableModel2016-2017", "tableModel2017-2018", "tableModel2018-2019", "tableModel2019-2020", "tableModel2021-2022", "tableModel2022-2023", "tableModel2023-2024", "tableModel2024-2025", "tableModel2025-2026", "tableModel2026-2027", "tableModel2027-2028", "tableModel2028-2029", "tableModel2029-2030"]
         
@@ -45,7 +45,7 @@ struct UserDefaultsHelper
         }
     }
     
-    static func retrieveSeasonDefaultData(for season: String) -> UserDefaultTableInformationModel?
+    static func retrieveUserDefaultsTableInformationData(for season: String) -> UserDefaultTableInformationModel?
     {
         if let savedSeasonDefaultData = UserDefaults.standard.object(forKey: season) as? Data
         {

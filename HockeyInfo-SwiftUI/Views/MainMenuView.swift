@@ -15,7 +15,9 @@ struct MainMenuView : View
     
     var body: some View
     {
-        NavigationView
+        print("\n\nIn main menu view......\n\n")
+        
+        return NavigationView
         {
             List
             {

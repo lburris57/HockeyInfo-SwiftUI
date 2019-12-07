@@ -10,6 +10,7 @@
 		49F03B65F29FF5C12C7CA687 /* Pods_HockeyInfo_SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 652855A8413EAAD1DE73E9DA /* Pods_HockeyInfo_SwiftUI.framework */; };
 		7681F4DB23949A4800CE1465 /* UserDefaultTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7681F4DA23949A4800CE1465 /* UserDefaultTableModel.swift */; };
 		7681F4DD2394DA6F00CE1465 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7681F4DC2394DA6F00CE1465 /* DataManager.swift */; };
+		768ACDD623989A2E001520E5 /* TeamInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768ACDD523989A2E001520E5 /* TeamInformationViewModel.swift */; };
 		769E00C7236FE25600500134 /* RKCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E00C0236FE25500500134 /* RKCell.swift */; };
 		769E00C8236FE25600500134 /* RKManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E00C1236FE25500500134 /* RKManager.swift */; };
 		769E00C9236FE25600500134 /* RKColorSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E00C2236FE25600500134 /* RKColorSettings.swift */; };
@@ -180,6 +181,7 @@
 		652855A8413EAAD1DE73E9DA /* Pods_HockeyInfo_SwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HockeyInfo_SwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7681F4DA23949A4800CE1465 /* UserDefaultTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultTableModel.swift; sourceTree = "<group>"; };
 		7681F4DC2394DA6F00CE1465 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		768ACDD523989A2E001520E5 /* TeamInformationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamInformationViewModel.swift; sourceTree = "<group>"; };
 		769E00C0236FE25500500134 /* RKCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RKCell.swift; sourceTree = "<group>"; };
 		769E00C1236FE25500500134 /* RKManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RKManager.swift; sourceTree = "<group>"; };
 		769E00C2236FE25600500134 /* RKColorSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RKColorSettings.swift; sourceTree = "<group>"; };
@@ -523,6 +525,7 @@
 				76C17AA4236E39940019FCAF /* PlayerStatisticsModel.swift */,
 				769E00D0237038F900500134 /* ScheduledGameModel.swift */,
 				769E00D42373A41D00500134 /* ScoresViewModel.swift */,
+				768ACDD523989A2E001520E5 /* TeamInformationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1039,6 +1042,7 @@
 				769E00CB236FE25600500134 /* RKDate.swift in Sources */,
 				76C179E2236D951F0019FCAF /* GoalieLeadersView.swift in Sources */,
 				76C17A73236D956C0019FCAF /* GoaltendingData.swift in Sources */,
+				768ACDD623989A2E001520E5 /* TeamInformationViewModel.swift in Sources */,
 				76C17A59236D956C0019FCAF /* TeamStatistics.swift in Sources */,
 				76C179F1236D951F0019FCAF /* CompletedGamesView.swift in Sources */,
 				76C17A68236D956C0019FCAF /* ScoreInfo.swift in Sources */,
