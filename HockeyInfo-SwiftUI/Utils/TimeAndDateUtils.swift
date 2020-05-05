@@ -12,6 +12,9 @@ class TimeAndDateUtils
 {
     let season = UserSettings().season
     
+    static let allSeasonsArray = ["2007-2008","2008-2009","2009-2010","2010-2011","2011-2012","2012-2013","2013-2014","2014-2015","2015-2016","2016-2017","2017-2018","2018-2019","2019-2020","2020-2021",
+    "2021-2022","2022-2023","2023-2024","2024-2025","2025-2026","2026-2027","2027-2028","2028-2029","2029-2030","2030-2031","2031-2032","2032-2033","2033-2034","2034-2035","2035-2036"]
+    
     static func getDate(_ timestamp: String) -> String
     {
         let formatter = DateFormatter()
@@ -179,7 +182,7 @@ class TimeAndDateUtils
             return outputFormatter.string(from: date)
         }
 
-        return nil
+        return Constants.EMPTY_STRING
     }
     
     static func getCurrentSeason() -> String
@@ -210,6 +213,40 @@ class TimeAndDateUtils
         {
             return "2019"
         }
+    }
+    
+    static func getSeasonSettingsArray() -> [String]
+    {
+        var seasonSettingsArray = [String]()
+        
+        for season in allSeasonsArray
+        {
+            seasonSettingsArray.append(season)
+            
+            if season == self.getCurrentSeason()
+            {
+                break
+            }
+        }
+        
+        return seasonSettingsArray
+    }
+    
+    static func getPlayoffSeasonSettingsArray() -> [String]
+    {
+        var playoffSeasonSettingsArray = [String]()
+        
+        for season in allSeasonsArray
+        {
+            playoffSeasonSettingsArray.append(season.getSubstring(from: season, atIndex: 5))
+            
+            if season == self.getCurrentSeason()
+            {
+                break
+            }
+        }
+        
+        return playoffSeasonSettingsArray
     }
     
     static func isValidSetting(_ season: String, _ seasonType: String) -> Bool

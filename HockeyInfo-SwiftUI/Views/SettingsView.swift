@@ -11,8 +11,8 @@ struct SettingsView : View
 {
     let currentSeason = TimeAndDateUtils.getCurrentSeason()
     
-    var seasons = ["2007-2008", "2008-2009", "2009-2010", "2010-2011", "2011-2012", "2012-2013", "2013-2014", "2014-2015", "2015-2016", "2016-2017", "2017-2018", "2018-2019", "2019-2020"]
-    var playoffYears = ["2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"]
+    var seasons = TimeAndDateUtils.getSeasonSettingsArray()
+    var playoffYears = TimeAndDateUtils.getPlayoffSeasonSettingsArray()
     
     @EnvironmentObject var settings: UserSettings
     
@@ -29,13 +29,15 @@ struct SettingsView : View
             {
                 Section(header: (Text("Please select a season:")))
                 {
+                    
                     Picker(selection: $selectedSeason, label: Text("Season"))
                     {
                         ForEach(0 ..< seasons.count)
                         {
                             Text(self.seasons[$0]).tag($0)
                         }
-                    }
+                    }.pickerStyle(WheelPickerStyle())
+                    .labelsHidden()
                 }
                 
                 Section(header: Text("Please select whether to view playoff information:"))

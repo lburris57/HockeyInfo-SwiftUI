@@ -140,6 +140,13 @@ extension String
         
         return formatter.date(from: self) ?? Date()
     }
+    
+    func getSubstring(from value: String, atIndex offset: Int) -> String
+    {
+        let range = value.index(value.startIndex, offsetBy: offset)..<value.endIndex
+        
+        return String(value[range])
+    }
 }
 
 extension Int: Sequence

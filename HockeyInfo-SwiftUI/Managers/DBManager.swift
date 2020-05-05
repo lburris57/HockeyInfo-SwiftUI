@@ -181,6 +181,12 @@ class DBManager
         {
             for playerInfo in rosterPlayers.playerInfoList
             {
+                //  Filter out players with no team id or jersey number
+                if playerInfo.currentTeamInfo?.id == nil &&  playerInfo.player.jerseyNumber == nil
+                {
+                    continue
+                }
+                
                 let nhlPlayer = NHLPlayer()
                 
                 nhlPlayer.dateCreated = TimeAndDateUtils.getCurrentDateAsString()
@@ -459,6 +465,8 @@ class DBManager
                 {
                     playerDictionary[player.id] = player
                 }
+                
+                var count = 0
             
                 try! realm.write
                 {
@@ -467,6 +475,11 @@ class DBManager
                     
                     for playerInfo in playerInjuries.playerInfoList
                     {
+                        if playerInfo.currentInjuryInfo.description == Constants.EMPTY_STRING || playerInfo.currentInjuryInfo.playingProbability == Constants.EMPTY_STRING
+                        {
+                            continue
+                        }
+                        
                         let playerInjury = NHLPlayerInjury()
                         let playerId = playerInfo.id
                         let nhlPlayer = playerDictionary[playerId]
@@ -491,12 +504,17 @@ class DBManager
                         {
                             nhlPlayer?.playerInjuries.append(realmPlayerInjury)
                         }
+                        
+                        count += 1
                     }
                 }
                 
-                self.linkPlayerInjuriesToTeams()
+                if count > 0
+                {
+                    self.linkPlayerInjuriesToTeams()
+                }
                 
-                print("\n\nPlayer injuries were successfully saved to the database...\n\n")
+                print("\n\n\(count) player injuries were successfully saved to the database...\n\n")
                 
                 self.userDefaults.set("Y", forKey: Constants.PLAYER_INJURY_TABLE)
                 
@@ -885,13 +903,25 @@ class DBManager
         
         let realm = try! Realm()
         
+        let statisticsResultsList = realm.objects(PlayerStatistics.self).filter("season =='\(season)' AND seasonType =='\(seasonType)'")
+        
+        let injuryResultsList = realm.objects(NHLPlayerInjury.self).filter("season =='\(season)' AND seasonType =='\(seasonType)'")
+        
+        print("\n\nSize of statisticsResultsList in DBManager.linkStatisticsAndInjuriesToPlayers method is \(statisticsResultsList.count)...\n\n")
+        
+        print("\n\nSize of injuryResultsList in DBManager.linkStatisticsAndInjuriesToPlayers method is \(injuryResultsList.count)...\n\n")
+        
+        if(statisticsResultsList.count == 0)
+        {
+            print("\n\nStatistics and injuries were NOT linked to players because statistics list is empty...\n\n")
+            
+            return
+        }
+        
         //  Get all the players
         let playerResults = realm.objects(NHLPlayer.self).filter("season =='\(season)' AND seasonType =='\(seasonType)'")
         
-        if(playerResults[0].playerStatisticsList.count > 0)
-        {
-            return
-        }
+        print("\n\nSize of list of players to link in DBManager.linkStatisticsAndInjuriesToPlayers method is \(playerResults.count)...\n\n")
         
         //  Spin through the player and retrieve the statistics based on the player id
         for player in playerResults
@@ -1381,7 +1411,7 @@ class DBManager
             playerDetailModel.jerseyNumber = player.jerseyNumber
             playerDetailModel.height = player.height
             playerDetailModel.weight = player.weight
-            playerDetailModel.birthDate = TimeAndDateUtils.formattedYYYYMMDDDateStringToDDMMYYYY(dateString: player.birthDate)! 
+            playerDetailModel.birthDate = TimeAndDateUtils.formattedYYYYMMDDDateStringToDDMMYYYY(dateString: player.birthDate) ?? ""
             playerDetailModel.age = player.age
             playerDetailModel.birthCity = player.birthCity
             playerDetailModel.birthCountry = player.birthCountry

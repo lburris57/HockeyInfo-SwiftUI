@@ -13,18 +13,22 @@ struct RKWeekdayHeader : View
      
     var body: some View
     {
-        HStack(alignment: .center)
+        VStack
         {
-            ForEach(self.getWeekdayHeaders(calendar: self.rkManager.calendar), id: \.self)
+            HStack(alignment: .center)
             {
-                weekday in
-                
-                Text(weekday)
-                    .font(.system(size: 20))
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .foregroundColor(self.rkManager.colors.weekdayHeaderColor)
-            }
-        }.background(rkManager.colors.weekdayHeaderBackColor)
+                ForEach(self.getWeekdayHeaders(calendar: self.rkManager.calendar), id: \.self)
+                {
+                    weekday in
+                    
+                    Text(weekday)
+                        .font(.system(size: 20))
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .foregroundColor(self.rkManager.colors.weekdayHeaderColor)
+                }
+            }.background(rkManager.colors.weekdayHeaderBackColor)
+        }
+        .padding(.top, 10.0)
     }
     
     func getWeekdayHeaders(calendar: Calendar) -> [String]

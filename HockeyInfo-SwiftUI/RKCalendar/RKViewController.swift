@@ -17,20 +17,16 @@ struct RKViewController: View
     {
         Group
         {
-            RKWeekdayHeader(rkManager: self.rkManager)
+            //RKWeekdayHeader(rkManager: self.rkManager)
             
-            Divider()
+            //Divider()
             
-            List
+            ForEach(0..<1, id: \.self)
             {
-                ForEach(0..<numberOfMonths())
-                {
-                    index in
-                    
-                    RKMonth(isPresented: self.$isPresented, rkManager: self.rkManager, monthOffset: index)
-                }
+                index in
                 
-                Divider()
+                RKMonth(isPresented: self.$isPresented, rkManager: self.rkManager, monthOffset: index)
+                
             }
         }
     }

@@ -7,25 +7,88 @@
 //
 import SwiftUI
 
+struct CustomHeader: View
+{
+    let name: String
+    let color: Color
+
+    var body: some View
+    {
+        VStack
+        {
+            Spacer()
+            
+            HStack
+            {
+                Text(name)
+                Spacer()
+            }
+            
+            Spacer()
+        }.background(color).edgesIgnoringSafeArea(.all)
+    }
+}
+
 struct TeamListView : View
 {
     @EnvironmentObject var settings: UserSettings
     
-    var teamItemList = TeamItem.allTeamItems()
+    var atlanticDivisionTeamItems = TeamItem.atlanticDivisionTeamItems()
+    var metropolitanDivisionTeamItems = TeamItem.metropolitanDivisionTeamItems()
+    var centralDivisionTeamItems = TeamItem.centralDivisionTeamItems()
+    var pacificDivisionTeamItems = TeamItem.pacificDivisionTeamItems()
     
     var body: some View
     {
-        List(teamItemList)
+        VStack
         {
-            teamItem in NavigationLink(destination: TeamInformationView(teamItem: teamItem))
+            List()
             {
-                VStack
+                Section(header: Text("Atlantic Division").font(.headline).foregroundColor(.black))
                 {
-                    TeamRowView(teamItem: teamItem)
+                    ForEach(atlanticDivisionTeamItems)
+                    {
+                        teamItem in NavigationLink(destination: TeamInformationView(teamItem: teamItem))
+                        {
+                            TeamRowView(teamItem: teamItem)
+                        }
+                    }
                 }
-            }
-        }.navigationBarTitle(Text("Team Information List"))
-            .listStyle(GroupedListStyle())
+                
+                Section(header: Text("Metropolitan Division").font(.headline).foregroundColor(.black))
+                {
+                    ForEach(metropolitanDivisionTeamItems)
+                    {
+                        teamItem in NavigationLink(destination: TeamInformationView(teamItem: teamItem))
+                        {
+                            TeamRowView(teamItem: teamItem)
+                        }
+                    }
+                }
+                
+                Section(header: Text("Central Division").font(.headline).foregroundColor(.black))
+                {
+                    ForEach(centralDivisionTeamItems)
+                    {
+                        teamItem in NavigationLink(destination: TeamInformationView(teamItem: teamItem))
+                        {
+                            TeamRowView(teamItem: teamItem)
+                        }
+                    }
+                }
+                
+                Section(header: Text("Pacific Division").font(.headline).foregroundColor(.black))
+                {
+                    ForEach(pacificDivisionTeamItems)
+                    {
+                        teamItem in NavigationLink(destination: TeamInformationView(teamItem: teamItem))
+                        {
+                            TeamRowView(teamItem: teamItem)
+                        }
+                    }
+                }
+            }.navigationBarTitle(Text("Team Information List"), displayMode: .inline).listStyle(GroupedListStyle())
+        }
     }
 }
 

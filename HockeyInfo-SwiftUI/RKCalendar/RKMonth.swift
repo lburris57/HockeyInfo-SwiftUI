@@ -30,10 +30,32 @@ struct RKMonth: View
     {
         VStack(alignment: HorizontalAlignment.center, spacing: 10)
         {
-            Text(getMonthHeader()).foregroundColor(self.rkManager.colors.monthHeaderColor)
+            HStack()
+            {
+                Button(action: {print("Previous button was tapped")})
+                {
+                    Text("Previous")
+                }
+                
+                Spacer()
+                
+                Text(getMonthHeader()).foregroundColor(self.rkManager.colors.monthHeaderColor)
+                
+                
+                
+                Spacer()
+                
+                Button(action: {print("Next button was tapped")})
+                {
+                    Text("Next")
+                }
+            }
+            .padding(.horizontal, 15.0)
             
             VStack(alignment: .leading, spacing: 5)
             {
+                RKWeekdayHeader(rkManager: self.rkManager)
+                
                 ForEach(monthsArray, id:  \.self)
                 {
                     row in
@@ -68,6 +90,7 @@ struct RKMonth: View
                     }
                 }
             }.frame(minWidth: 0, maxWidth: .infinity)
+            .padding(.horizontal, 10.0)
         }.background(rkManager.colors.monthBackColor)
     }
 

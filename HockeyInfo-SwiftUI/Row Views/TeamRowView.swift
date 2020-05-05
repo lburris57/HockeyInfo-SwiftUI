@@ -68,6 +68,61 @@ extension TeamItem
             TeamItem(teamIconName: "WPJ", teamName: "Winnipeg Jets", division: "Central")
         ]
     }
+    
+    static func atlanticDivisionTeamItems() -> [TeamItem]
+    {
+        return [
+            TeamItem(teamIconName: "BOS", teamName: "Boston Bruins", division: "Atlantic"),
+            TeamItem(teamIconName: "BUF", teamName: "Buffalo Sabres", division: "Atlantic"),
+            TeamItem(teamIconName: "DET", teamName: "Detroit Red Wings", division: "Atlantic"),
+            TeamItem(teamIconName: "FLO", teamName: "Florida Panthers", division: "Atlantic"),
+            TeamItem(teamIconName: "MTL", teamName: "Montreal Canadiens", division: "Atlantic"),
+            TeamItem(teamIconName: "OTT", teamName: "Ottawa Senators", division: "Atlantic"),
+            TeamItem(teamIconName: "TBL", teamName: "Tampa Bay Lightning", division: "Atlantic"),
+            TeamItem(teamIconName: "TOR", teamName: "Toronto Maple Leafs", division: "Atlantic")
+        ]
+    }
+    
+    static func metropolitanDivisionTeamItems() -> [TeamItem]
+    {
+        return [
+            TeamItem(teamIconName: "CAR", teamName: "Carolina Hurricanes", division: "Metropolitan"),
+            TeamItem(teamIconName: "CBJ", teamName: "Columbus Blue Jackets", division: "Metropolitan"),
+            TeamItem(teamIconName: "NJD", teamName: "New Jersey Devils", division: "Metropolitan"),
+            TeamItem(teamIconName: "NYI", teamName: "New York Islanders", division: "Metropolitan"),
+            TeamItem(teamIconName: "NYR", teamName: "New York Rangers", division: "Metropolitan"),
+            TeamItem(teamIconName: "PHI", teamName: "Philadelphia Flyers", division: "Metropolitan"),
+            TeamItem(teamIconName: "PIT", teamName: "Pittsburgh Penguins", division: "Metropolitan"),
+            TeamItem(teamIconName: "WSH", teamName: "Washington Capitals", division: "Metropolitan")
+        ]
+    }
+    
+    static func centralDivisionTeamItems() -> [TeamItem]
+    {
+        return [
+            TeamItem(teamIconName: "CHI", teamName: "Chicago Blackhawks", division: "Central"),
+            TeamItem(teamIconName: "COL", teamName: "Colorado Avalanche", division: "Central"),
+            TeamItem(teamIconName: "DAL", teamName: "Dallas Stars", division: "Central"),
+            TeamItem(teamIconName: "MIN", teamName: "Minnesota Wild", division: "Central"),
+            TeamItem(teamIconName: "NSH", teamName: "Nashville Predators", division: "Central"),
+            TeamItem(teamIconName: "STL", teamName: "St. Louis Blues", division: "Central"),
+            TeamItem(teamIconName: "WPJ", teamName: "Winnipeg Jets", division: "Central")
+        ]
+    }
+    
+    static func pacificDivisionTeamItems() -> [TeamItem]
+    {
+        return [
+            TeamItem(teamIconName: "ANA", teamName: "Anaheim Ducks", division: "Pacific"),
+            TeamItem(teamIconName: "ARI", teamName: "Arizona Coytotes", division: "Pacific"),
+            TeamItem(teamIconName: "CGY", teamName: "Calgary Flames", division: "Pacific"),
+            TeamItem(teamIconName: "EDM", teamName: "Edmonton Oilers", division: "Pacific"),
+            TeamItem(teamIconName: "LAK", teamName: "Los Angeles Kings", division: "Pacific"),
+            TeamItem(teamIconName: "SJS", teamName: "San Jose Sharks", division: "Pacific"),
+            TeamItem(teamIconName: "VAN", teamName: "Vancouver Canucks", division: "Pacific"),
+            TeamItem(teamIconName: "VGK", teamName: "Vegas Golden Knights", division: "Pacific")
+        ]
+    }
 }
 
 

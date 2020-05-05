@@ -37,19 +37,9 @@ struct SeasonScheduleView : View
                     RKViewController(isPresented: self.$isPresented, rkManager: rkManager)
                 }
                 
+                Divider()
                 
-                
-//                Divider()
-//
-//                Form
-//                    {
-//                        DatePicker("Please select a date:", selection: $selectedDate, in: range, displayedComponents: .date)
-//
-//                }
-                
-                //Divider()
-                
-                Spacer(minLength: 125)
+                //Spacer(minLength: 50)
                 
                 if(self.rkManager.selectedDate != nil)
                 {

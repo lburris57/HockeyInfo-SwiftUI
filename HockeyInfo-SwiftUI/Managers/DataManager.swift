@@ -65,7 +65,7 @@ class DataManager
         {
             //  Retrieve from the network
             
-            //networkManager.retrieveFullSeasonSchedule(completion: <#([NHLSchedule]) -> ()#>)
+            //networkManager.retrieveFullSeasonSchedule(completion: ([NHLSchedule]) -> ())
         }
         
         return nhlSchedules

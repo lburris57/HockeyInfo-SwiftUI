@@ -18,6 +18,22 @@ class NetworkManager
     
     let dataExchangeHelper = DataExchangeHelper()
     
+    /*
+     On load...
+     -----------
+     - Load/update full season schedule
+     
+     - Load Teams
+        - Link schedules to teams
+        - Load and link team standings
+        - Load and link team statistics
+        - Load and link players
+        - Load players
+            - Load and link player statistics
+            - Load and link player injuries to players and teams
+     
+     */
+    
     // MARK: Retrieve methods
     
     //  Retrieve full season schedule for all 31 teams
@@ -43,7 +59,7 @@ class NetworkManager
             
             if err != nil
             {
-                fatalError(err!.localizedDescription)
+                fatalError(err!.localizedDescription + "\nfor " + self.urlHelper.retrieveFullSeasonURL())
             }
             else if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200
             {
@@ -71,7 +87,7 @@ class NetworkManager
             
             if err != nil
             {
-                fatalError(err!.localizedDescription)
+                fatalError(err!.localizedDescription + "\nfor " + self.urlHelper.retrieveStandingsURL())
             }
             else if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200
             {
@@ -97,7 +113,7 @@ class NetworkManager
             
             if err != nil
             {
-                fatalError(err!.localizedDescription)
+                fatalError(err!.localizedDescription + "\nfor " + self.urlHelper.retrieveRosterPlayersURL())
             }
             else if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200
             {

@@ -78,8 +78,14 @@ struct PlayerDetailView : View
                 
                 NavigationLink(destination: PlayerStatsView(playerDetail: playerDetail, playerStatistics: DBManager().retrievePlayerStatistics(playerDetail.playerId)))
                 {
-                    Text("Display Player Statistics").padding(.bottom, 20.0)
+                    Text("Display Player Statistics").padding()
                 }
+                   
+                    .background(Color.blue)
+                    .foregroundColor(Color.white)
+                    .clipShape(Capsule())
+                    .cornerRadius(20)
+                    .padding(.bottom, 20.0)
             }
         }
     }
