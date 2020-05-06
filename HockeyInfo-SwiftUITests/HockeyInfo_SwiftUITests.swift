@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import HockeyInfo_SwiftUI
+//@testable import HockeyInfo_SwiftUI
 
 class HockeyInfo_SwiftUITests: XCTestCase {
 

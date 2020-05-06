@@ -13,7 +13,7 @@ struct RKMonth: View
     
     @ObservedObject var rkManager: RKManager
     
-    let monthOffset: Int
+    @State var monthOffset: Int
     
     let calendarUnitYMD = Set<Calendar.Component>([.year, .month, .day])
     let daysPerWeek = 7
@@ -32,22 +32,34 @@ struct RKMonth: View
         {
             HStack()
             {
-                Button(action: {print("Previous button was tapped")})
+                Button(action: {self.monthOffset -= 1})
                 {
-                    Text("Previous")
+                    if monthOffset != 0
+                    {
+                        Text("Previous")
+                    }
+                    else
+                    {
+                        Text("            ")
+                    }
                 }
                 
                 Spacer()
                 
                 Text(getMonthHeader()).foregroundColor(self.rkManager.colors.monthHeaderColor)
                 
-                
-                
                 Spacer()
                 
-                Button(action: {print("Next button was tapped")})
+                Button(action: {self.monthOffset += 1})
                 {
-                    Text("Next")
+                    if monthOffset >= 0 && monthOffset < 8
+                    {
+                        Text("Next")
+                    }
+                    else
+                    {
+                        Text("        ")
+                    }
                 }
             }
             .padding(.horizontal, 15.0)

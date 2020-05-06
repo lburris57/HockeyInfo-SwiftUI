@@ -9,57 +9,18 @@ import Foundation
 
 class DataManager
 {
-    var tableModelString = constructTableModelString()
-    
     let networkManager = NetworkManager()
     let databaseManager = DBManager()
     
-    func seasonScheduleTableHasBeenLoaded() -> Bool
-    {
-        if let userDefaultTableInformationModel = UserDefaultsHelper.retrieveUserDefaultsTableInformationData(for: tableModelString)
-        {
-            if userDefaultTableInformationModel.isSeasonScheduleTableLoaded
-            {
-                return true
-            }
-        }
-        
-        return false
-    }
-    
-    func teamTableHasBeenLoaded() -> Bool
-    {
-        if let userDefaultTableInformationModel = UserDefaultsHelper.retrieveUserDefaultsTableInformationData(for: tableModelString)
-        {
-            if userDefaultTableInformationModel.isTeamTableLoaded
-            {
-                return true
-            }
-        }
-        
-        return false
-    }
-    
-    func playerTableHasBeenLoaded() -> Bool
-    {
-        if let userDefaultTableInformationModel = UserDefaultsHelper.retrieveUserDefaultsTableInformationData(for: tableModelString)
-        {
-            if userDefaultTableInformationModel.isPlayerTableLoaded
-            {
-                return true
-            }
-        }
-        
-        return false
-    }
+    let model = UserDefaultManager.decodeDataFromUserDefaults(for: constructSeasonString())
     
     func loadSeasonScheduleData() -> [NHLSchedule]
     {
         var nhlSchedules = [NHLSchedule]()
         
-        if seasonScheduleTableHasBeenLoaded()
+        if model.isSeasonScheduleTableLoaded
         {
-            //  Retrieve from the database
+            nhlSchedules = databaseManager.retrieveFullSeasonSchedule()
         }
         else
         {
@@ -71,13 +32,13 @@ class DataManager
         return nhlSchedules
     }
     
-    static func constructTableModelString() -> String
+    static func constructSeasonString() -> String
     {
         let userSettings = UserSettings()
         
         let season = userSettings.season
         let isPlayoffs = userSettings.isPlayoffs
         
-        return "tableModel" + season + (isPlayoffs ? "P" : "")
+        return season + (isPlayoffs ? "-Playoffs" : "")
     }
 }

@@ -31,33 +31,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
         print("User settings season is: \(userSettings.season)")
         print("User settings season type is: \(userSettings.seasonType)")
         
-        if let userDefaultTableInformationModel20082009 = UserDefaultsHelper.retrieveUserDefaultsTableInformationData(for: "tableModel2008-2009")
-        {
-            print("Season for tableModel2008-2009 is \(userDefaultTableInformationModel20082009.season)")
-            print("Playoffs for tableModel2008-2009 is \(userDefaultTableInformationModel20082009.isPlayoffs)")
-        }
-        else
-        {
-            UserDefaultsHelper.loadUserDefaultsTableInformationData()
-        }
+//        if let userDefaultTableInformationModel20082009 = UserDefaultsHelper.retrieveUserDefaultsTableInformationData(for: "tableModel2008-2009")
+//        {
+//            print("Season for tableModel2008-2009 is \(userDefaultTableInformationModel20082009.season)")
+//            print("Playoffs for tableModel2008-2009 is \(userDefaultTableInformationModel20082009.isPlayoffs)")
+//        }
+//        else
+//        {
+//            UserDefaultsHelper.loadUserDefaultsTableInformationData()
+//        }
         
         userDefaults.set(TimeAndDateUtils.isValidSetting(currentSeason, true), forKey: Constants.IS_PLAYOFF_SETTING_VALID)
         
         print("Value of IS_PLAYOFF_SETTING_VALID is \(userDefaults.bool(forKey: Constants.IS_PLAYOFF_SETTING_VALID))")
         print("Value of current season is \(currentSeason)")
         
-        let seasonSettingsArray = TimeAndDateUtils.getSeasonSettingsArray()
-        let playoffSeasonSettingsArray = TimeAndDateUtils.getPlayoffSeasonSettingsArray()
-        
-        for season in seasonSettingsArray
-        {
-            print("Season is " + season)
-        }
-        
-        for season in playoffSeasonSettingsArray
-        {
-            print("Playoff season is " + season)
-        }
+//        let seasonSettingsArray = TimeAndDateUtils.getSeasonSettingsArray()
+//        let playoffSeasonSettingsArray = TimeAndDateUtils.getPlayoffSeasonSettingsArray()
+//        
+//        for season in seasonSettingsArray
+//        {
+//            print("Season is " + season)
+//        }
+//        
+//        for season in playoffSeasonSettingsArray
+//        {
+//            print("Playoff season is " + season)
+//        }
         
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.

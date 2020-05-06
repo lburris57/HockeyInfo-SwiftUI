@@ -17,10 +17,6 @@ struct RKViewController: View
     {
         Group
         {
-            //RKWeekdayHeader(rkManager: self.rkManager)
-            
-            //Divider()
-            
             ForEach(0..<1, id: \.self)
             {
                 index in
