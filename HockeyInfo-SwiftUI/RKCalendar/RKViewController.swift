@@ -22,7 +22,6 @@ struct RKViewController: View
                 index in
                 
                 RKMonth(isPresented: self.$isPresented, rkManager: self.rkManager, monthOffset: index)
-                
             }
         }
     }

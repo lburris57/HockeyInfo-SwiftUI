@@ -182,7 +182,7 @@ class DBManager
             for playerInfo in rosterPlayers.playerInfoList
             {
                 //  Filter out players with no team id or jersey number
-                if playerInfo.currentTeamInfo?.id == nil &&  playerInfo.player.jerseyNumber == nil
+                if playerInfo.currentTeamInfo?.id == nil || playerInfo.player.jerseyNumber == nil
                 {
                     continue
                 }
@@ -1142,10 +1142,10 @@ class DBManager
         //  Get all the teams
         let teamResults = realm.objects(NHLTeam.self).filter("season =='\(season)' AND seasonType =='\(seasonType)'")
         
-        if(teamResults[0].schedules.count > 0)
-        {
-            return
-        }
+//        if(teamResults[0].schedules.count > 0)
+//        {
+//            return
+//        }
         
         //  Spin through the teams and retrieve the schedules based on the team abbreviation
         for team in teamResults

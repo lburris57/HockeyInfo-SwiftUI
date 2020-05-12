@@ -40,7 +40,7 @@ struct RKMonth: View
                     }
                     else
                     {
-                        Text("            ")
+                        Text("")
                     }
                 }
                 
@@ -58,7 +58,7 @@ struct RKMonth: View
                     }
                     else
                     {
-                        Text("        ")
+                        Text("")
                     }
                 }
             }

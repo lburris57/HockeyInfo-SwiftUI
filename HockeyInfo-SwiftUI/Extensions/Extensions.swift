@@ -105,7 +105,7 @@ extension Date
     {
         let formatter = DateFormatter()
         formatter.locale = .current
-        formatter.dateFormat = "EEEE, MMM dd, yyyy"
+        formatter.dateFormat = "EEEE, MMM d, yyyy"
         return formatter.string(from: self)
     }
 }
