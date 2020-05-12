@@ -23,6 +23,7 @@
 		769E00D32373A2F800500134 /* ScoresRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E00D22373A2F800500134 /* ScoresRow.swift */; };
 		769E00D52373A41D00500134 /* ScoresViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769E00D42373A41D00500134 /* ScoresViewModel.swift */; };
 		76C0DC1924623992009FCE6E /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DC1824623992009FCE6E /* UserDefaultManager.swift */; };
+		76C0DC1C246A625B009FCE6E /* NeumorphicButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0DC1B246A625B009FCE6E /* NeumorphicButtonStyle.swift */; };
 		76C17959236D931C0019FCAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C17958236D931C0019FCAF /* AppDelegate.swift */; };
 		76C1795B236D931C0019FCAF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C1795A236D931C0019FCAF /* SceneDelegate.swift */; };
 		76C1795D236D931C0019FCAF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C1795C236D931C0019FCAF /* ContentView.swift */; };
@@ -195,6 +196,7 @@
 		769E00D22373A2F800500134 /* ScoresRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresRow.swift; sourceTree = "<group>"; };
 		769E00D42373A41D00500134 /* ScoresViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresViewModel.swift; sourceTree = "<group>"; };
 		76C0DC1824623992009FCE6E /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
+		76C0DC1B246A625B009FCE6E /* NeumorphicButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeumorphicButtonStyle.swift; sourceTree = "<group>"; };
 		76C17955236D931C0019FCAF /* HockeyInfo-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HockeyInfo-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		76C17958236D931C0019FCAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76C1795A236D931C0019FCAF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -397,6 +399,14 @@
 			path = RKCalendar;
 			sourceTree = "<group>";
 		};
+		76C0DC1A246A623A009FCE6E /* Button Styles */ = {
+			isa = PBXGroup;
+			children = (
+				76C0DC1B246A625B009FCE6E /* NeumorphicButtonStyle.swift */,
+			);
+			path = "Button Styles";
+			sourceTree = "<group>";
+		};
 		76C1794C236D931C0019FCAF = {
 			isa = PBXGroup;
 			children = (
@@ -422,6 +432,7 @@
 		76C17957236D931C0019FCAF /* HockeyInfo-SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				76C0DC1A246A623A009FCE6E /* Button Styles */,
 				7681F4D9239499FB00CE1465 /* UserDefaultModels */,
 				769E00BF236FE22600500134 /* RKCalendar */,
 				76C17958236D931C0019FCAF /* AppDelegate.swift */,
@@ -960,6 +971,7 @@
 				76C17A0C236D95520019FCAF /* DatabaseErrorEnum.swift in Sources */,
 				76C179EB236D951F0019FCAF /* TeamRosterView.swift in Sources */,
 				76C17A62236D956C0019FCAF /* MainMenuCategory.swift in Sources */,
+				76C0DC1C246A625B009FCE6E /* NeumorphicButtonStyle.swift in Sources */,
 				76C179E6236D951F0019FCAF /* MapView.swift in Sources */,
 				76C17A77236D956C0019FCAF /* PlayerInjuryInfo.swift in Sources */,
 				76C17A7E236D956C0019FCAF /* OverallRankData.swift in Sources */,

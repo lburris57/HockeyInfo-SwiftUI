@@ -80,29 +80,12 @@ struct PlayerDetailView : View
                     
                     NavigationLink(destination: PlayerStatsView(playerDetail: playerDetail, playerStatistics: DBManager().retrievePlayerStatistics(playerDetail.playerId)))
                     {
-                        Text("Display Player Statistics").padding(10)
-                    }
-                       
-                        .background(Color.blue)
-                        .foregroundColor(Color.white)
-                        .clipShape(Capsule())
-                        .cornerRadius(20)
-                        .padding()
+                        Text("Display Player Statistics").padding(10).foregroundColor(.white)
+                    }.buttonStyle(NeumorphicButtonStyle())
                 }
+                
+                Spacer()
             }
         }
     }
 }
-
-//#if DEBUG
-//struct PlayerDetailView_Previews : PreviewProvider
-//{
-//    static var previews: some View
-//    {
-//        Group
-//        {
-//            PlayerDetailView(name: "Alex Ovechkin").previewDevice("iPhone 8+").environmentObject(UserSettings())
-//        }
-//    }
-//}
-//#endif
