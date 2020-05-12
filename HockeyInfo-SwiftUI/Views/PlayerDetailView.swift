@@ -31,7 +31,7 @@ struct PlayerDetailView : View
                             // Success
                         }
                         .resizable()
-                        .frame(width: 225, height: 225, alignment: .center)
+                        .frame(width: 200, height: 200, alignment: .center)
                         .scaledToFit()
                         .clipShape(Circle()).background(Circle().foregroundColor(.white))
                         .overlay(Circle().stroke(Color.white, lineWidth: 4))
@@ -41,7 +41,7 @@ struct PlayerDetailView : View
                 {
                     Image("photo-not-available")
                     .resizable()
-                    .frame(width: 225, height: 225, alignment: .center)
+                    .frame(width: 200, height: 200, alignment: .center)
                     .scaledToFit()
                     .clipShape(Circle()).background(Circle().foregroundColor(.white))
                     .overlay(Circle().stroke(Color.white, lineWidth: 4))
@@ -50,7 +50,7 @@ struct PlayerDetailView : View
                 
                 //  Player Name
                 Text("\(playerDetail.fullName)")
-                    .font(.system(size:50))
+                    .font(.system(size:30))
                     .fontWeight(.bold)
                     .padding(.horizontal)
                     .minimumScaleFactor(0.50)
@@ -67,21 +67,24 @@ struct PlayerDetailView : View
                 //  Player Information
                 VStack(alignment: .leading)
                 {
-                    Text("Birth Date: " + "\(playerDetail.birthDate)")
-                    Text("Age: " + "\(playerDetail.age)")
-                    Text("Birth City: " + "\(playerDetail.birthCity)")
-                    Text("Birth Country: " + "\(playerDetail.birthCountry)")
-                    Text("Height: " + "\(playerDetail.height)")
-                    Text("Weight: " + "\(playerDetail.weight)")
-                    Text("Status: Available")
-                    Text("Shoots: " + "\(playerDetail.shoots)")
+                    Group
+                    {
+                        Text("Birth Date: " + "\(playerDetail.birthDate)")
+                        Text("Age: " + "\(playerDetail.age)")
+                        Text("Birth City: " + "\(playerDetail.birthCity)")
+                        Text("Birth Country: " + "\(playerDetail.birthCountry)")
+                        Text("Height: " + "\(playerDetail.height)")
+                        Text("Weight: " + "\(playerDetail.weight)")
+                        Text("Status: Available")
+                        Text("Shoots: " + "\(playerDetail.shoots)")
+                    }.padding(2)
                     
                     Spacer()
                     
                     NavigationLink(destination: PlayerStatsView(playerDetail: playerDetail, playerStatistics: DBManager().retrievePlayerStatistics(playerDetail.playerId)))
                     {
                         Text("Display Player Statistics").padding(10).foregroundColor(.white)
-                    }.buttonStyle(NeumorphicButtonStyle())
+                        }.buttonStyle(NeumorphicButtonStyle()).padding(5)
                 }
                 
                 Spacer()

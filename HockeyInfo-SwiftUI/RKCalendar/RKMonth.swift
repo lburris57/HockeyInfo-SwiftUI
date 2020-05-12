@@ -32,7 +32,7 @@ struct RKMonth: View
         {
             HStack()
             {
-                Button(action: {self.monthOffset -= 1})
+                Button(action: {self.monthOffset -= 1; self.rkManager.selectedDate = nil; self.rkManager.scheduledGameModelList.removeAll()})
                 {
                     if monthOffset != 0
                     {
@@ -50,7 +50,7 @@ struct RKMonth: View
                 
                 Spacer()
                 
-                Button(action: {self.monthOffset += 1})
+                Button(action: {self.monthOffset += 1; self.rkManager.selectedDate = nil; self.rkManager.scheduledGameModelList.removeAll()})
                 {
                     if monthOffset >= 0 && monthOffset < 8
                     {
