@@ -12,31 +12,47 @@ import SwiftUI
 final class RosterPlayersViewModel: ObservableObject, Identifiable
 {
     @Published var playerNames = [String]()
+    @Published var players = [NHLPlayer]()
     
-    var rosterPlayers = RosterPlayers()
-    
-    init()
+    func fetchPlayers()
     {
-        fetchRosterPlayers()
+//        var userDefaultsModel = UserDefaultManager.decodeDataFromUserDefaults(for: UserDefaultsHelper.constructSeasonString())
+//
+//        if userDefaultsModel.isPlayerTableLoaded
+//        {
+            print("Fetching the roster players from the database...")
+            
+            self.players = DBManager().retrieveAllPlayers()
+            
+            self.loadPlayerNameArray()
+//        }
+//        else
+//        {
+//            print("Fetching the roster players from the sports web service using the following URL:\n\(URLHelper().retrieveRosterPlayersURL())")
+//
+//            NetworkManager().retrieveRosterList
+//            {
+//                self.players = $0
+//
+//                self.loadPlayerNameArray()
+//
+//                userDefaultsModel.isPlayerTableLoaded = true
+//
+//                UserDefaultManager.encodeDataToUserDefaults(for: UserDefaultsHelper.constructSeasonString(), userDefaultsModel)
+//            }
+//        }
     }
     
-    private func fetchRosterPlayers()
+    func loadPlayerNameArray()
     {
         var playerNameArray = [String]()
         
-        NetworkManager().retrieveRosters
+        for player in self.players
         {
-            for playerInfo in $0.playerInfoList
-            {
-                playerNameArray.append(playerInfo.player.firstName + " " + playerInfo.player.lastName)
-            }
-            
-            self.rosterPlayers = $0
-            
-            //  Remove any duplicate names
-            self.playerNames = Set(playerNameArray.map { $0 }).sorted()
-            
-            NetworkManager().loadPlayerStats()
+            playerNameArray.append(player.firstName + " " + player.lastName)
         }
+        
+        //  Remove any duplicate names
+        self.playerNames = Set(playerNameArray.map { $0 }).sorted()
     }
 }

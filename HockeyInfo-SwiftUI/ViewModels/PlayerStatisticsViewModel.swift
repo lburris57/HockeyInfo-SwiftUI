@@ -12,6 +12,7 @@ import SwiftUI
 final class PlayerStatisticsViewModel: ObservableObject
 {
     @Published var playerStats = PlayerStats()
+    @Published var playerStatsDictionary = [Int: PlayerStatistics]()
     
     init()
     {
@@ -20,9 +21,9 @@ final class PlayerStatisticsViewModel: ObservableObject
     
     private func fetchPlayerStats()
     {
-        NetworkManager().retrievePlayerStats
+        NetworkManager().retrievePlayerStatisticsDictionary
         {
-            self.playerStats = $0
+            self.playerStatsDictionary = $0
         }
     }
 }

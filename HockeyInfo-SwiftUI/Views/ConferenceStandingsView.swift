@@ -15,7 +15,10 @@ struct ConferenceStandingsView : View
     
     var body: some View
     {
-        List
+        print("Size of team standings list is: \(model.teamStandingsList.count)")
+        print("Size of Eastern Conference list is: \(model.easternConferenceList.count)")
+        
+        return List
         {
             VStack(alignment: .leading)
             {
@@ -25,10 +28,10 @@ struct ConferenceStandingsView : View
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal)
                 
-                ForEach(model.westernConferenceList)
+                ForEach(model.easternConferenceList, id: \.self)
                 {
-                    teamStandingsData in
-                    Text("\(teamStandingsData.teamInformation.city) \(teamStandingsData.teamInformation.name) has \(teamStandingsData.teamStats.standingsInfo.points) points")
+                    teamStandings in
+                    Text("\(TeamManager.getFullTeamName(teamStandings.abbreviation)) has \(teamStandings.points) points")
                         .font(.caption)
                         .fontWeight(.regular)
                         .multilineTextAlignment(.leading)
@@ -42,10 +45,10 @@ struct ConferenceStandingsView : View
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal)
                 
-                ForEach(model.westernConferenceList)
+                ForEach(model.westernConferenceList, id: \.self)
                 {
-                    teamStandingsData in
-                    Text("\(teamStandingsData.teamInformation.city) \(teamStandingsData.teamInformation.name) has \(teamStandingsData.teamStats.standingsInfo.points) points")
+                    teamStandings in
+                    Text("\(TeamManager.getFullTeamName(teamStandings.abbreviation)) has \(teamStandings.points) points")
                         .font(.caption)
                         .fontWeight(.regular)
                         .multilineTextAlignment(.leading)
@@ -53,7 +56,7 @@ struct ConferenceStandingsView : View
                         .padding(.horizontal, 5.0)
                 }
             }
-        }
+        }.onAppear(perform: model.fetchStandings)
     }
 }
 

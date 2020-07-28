@@ -87,52 +87,112 @@ class DataExchangeHelper
         
         for playerStatsTotal in playerStatsTotalList
         {
-            let playerStatistics = PlayerStatistics()
-            
-            playerStatistics.id = (playerStatsTotal.player.id)
-            playerStatistics.dateCreated = TimeAndDateUtils.getCurrentDateAsString()
-            playerStatistics.gamesPlayed = playerStatsTotal.playerStats.gamesPlayed
-            playerStatistics.goals = playerStatsTotal.playerStats.scoringData.goals
-            playerStatistics.assists = playerStatsTotal.playerStats.scoringData.assists
-            playerStatistics.points = playerStatsTotal.playerStats.scoringData.points
-            playerStatistics.hatTricks = playerStatsTotal.playerStats.scoringData.hatTricks
-            playerStatistics.powerplayGoals = playerStatsTotal.playerStats.scoringData.powerplayGoals
-            playerStatistics.powerplayAssists = playerStatsTotal.playerStats.scoringData.powerplayAssists
-            playerStatistics.powerplayPoints = playerStatsTotal.playerStats.scoringData.powerplayPoints
-            playerStatistics.shortHandedGoals = playerStatsTotal.playerStats.scoringData.shorthandedGoals
-            playerStatistics.shortHandedAssists = playerStatsTotal.playerStats.scoringData.shorthandedAssists
-            playerStatistics.shortHandedPoints = playerStatsTotal.playerStats.scoringData.shorthandedPoints
-            playerStatistics.gameWinningGoals = playerStatsTotal.playerStats.scoringData.gameWinningGoals
-            playerStatistics.gameTyingGoals = playerStatsTotal.playerStats.scoringData.gameTyingGoals
-            playerStatistics.plusMinus = playerStatsTotal.playerStats.skatingData?.plusMinus ?? 0
-            playerStatistics.shots = playerStatsTotal.playerStats.skatingData?.shots ?? 0
-            playerStatistics.shotPercentage = playerStatsTotal.playerStats.skatingData?.shotPercentage ?? 0.0
-            playerStatistics.blockedShots = playerStatsTotal.playerStats.skatingData?.blockedShots ?? 0
-            playerStatistics.hits = playerStatsTotal.playerStats.skatingData?.hits ?? 0
-            playerStatistics.faceoffs = playerStatsTotal.playerStats.skatingData?.faceoffs ?? 0
-            playerStatistics.faceoffWins = playerStatsTotal.playerStats.skatingData?.faceoffWins ?? 0
-            playerStatistics.faceoffLosses = playerStatsTotal.playerStats.skatingData?.faceoffLosses ?? 0
-            playerStatistics.faceoffPercent = playerStatsTotal.playerStats.skatingData?.faceoffPercent ?? 0.0
-            playerStatistics.penalties = playerStatsTotal.playerStats.penaltyData.penalties
-            playerStatistics.penaltyMinutes = playerStatsTotal.playerStats.penaltyData.penaltyMinutes
-            playerStatistics.wins = playerStatsTotal.playerStats.goaltendingData?.wins ?? 0
-            playerStatistics.losses = playerStatsTotal.playerStats.goaltendingData?.losses ?? 0
-            playerStatistics.overtimeWins = playerStatsTotal.playerStats.goaltendingData?.overtimeWins ?? 0
-            playerStatistics.overtimeLosses = playerStatsTotal.playerStats.goaltendingData?.overtimeLosses ?? 0
-            playerStatistics.goalsAgainst = playerStatsTotal.playerStats.goaltendingData?.goalsAgainst ?? 0
-            playerStatistics.shotsAgainst = playerStatsTotal.playerStats.goaltendingData?.shotsAgainst ?? 0
-            playerStatistics.saves = playerStatsTotal.playerStats.goaltendingData?.saves ?? 0
-            playerStatistics.goalsAgainstAverage = playerStatsTotal.playerStats.goaltendingData?.goalsAgainstAverage ?? 0.0
-            playerStatistics.savePercentage = playerStatsTotal.playerStats.goaltendingData?.savePercentage ?? 0.0
-            playerStatistics.shutouts = playerStatsTotal.playerStats.goaltendingData?.shutouts ?? 0
-            playerStatistics.gamesStarted = playerStatsTotal.playerStats.goaltendingData?.gamesStarted ?? 0
-            playerStatistics.creditForGame = playerStatsTotal.playerStats.goaltendingData?.creditForGame ?? 0
-            playerStatistics.minutesPlayed = playerStatsTotal.playerStats.goaltendingData?.minutesPlayed ?? 0
-            
-            playerStatisticsList.append(playerStatistics)
+            if playerStatsTotal.playerStats != nil && playerStatsTotal.player != nil
+            {
+                let playerStatistics = PlayerStatistics()
+                
+                playerStatistics.id = playerStatsTotal.player?.id ?? 0
+                playerStatistics.dateCreated = TimeAndDateUtils.getCurrentDateAsString()
+                playerStatistics.gamesPlayed = playerStatsTotal.playerStats?.gamesPlayed ?? 0
+                playerStatistics.goals = playerStatsTotal.playerStats?.scoringData.goals ?? 0
+                playerStatistics.assists = playerStatsTotal.playerStats?.scoringData.assists ?? 0
+                playerStatistics.points = playerStatsTotal.playerStats?.scoringData.points ?? 0
+                playerStatistics.hatTricks = playerStatsTotal.playerStats?.scoringData.hatTricks ?? 0
+                playerStatistics.powerplayGoals = playerStatsTotal.playerStats?.scoringData.powerplayGoals ?? 0
+                playerStatistics.powerplayAssists = playerStatsTotal.playerStats?.scoringData.powerplayAssists ?? 0
+                playerStatistics.powerplayPoints = playerStatsTotal.playerStats?.scoringData.powerplayPoints ?? 0
+                playerStatistics.shortHandedGoals = playerStatsTotal.playerStats?.scoringData.shorthandedGoals ?? 0
+                playerStatistics.shortHandedAssists = playerStatsTotal.playerStats?.scoringData.shorthandedAssists ?? 0
+                playerStatistics.shortHandedPoints = playerStatsTotal.playerStats?.scoringData.shorthandedPoints ?? 0
+                playerStatistics.gameWinningGoals = playerStatsTotal.playerStats?.scoringData.gameWinningGoals ?? 0
+                playerStatistics.gameTyingGoals = playerStatsTotal.playerStats?.scoringData.gameTyingGoals ?? 0
+                playerStatistics.plusMinus = playerStatsTotal.playerStats?.skatingData?.plusMinus ?? 0
+                playerStatistics.shots = playerStatsTotal.playerStats?.skatingData?.shots ?? 0
+                playerStatistics.shotPercentage = playerStatsTotal.playerStats?.skatingData?.shotPercentage ?? 0.0
+                playerStatistics.blockedShots = playerStatsTotal.playerStats?.skatingData?.blockedShots ?? 0
+                playerStatistics.hits = playerStatsTotal.playerStats?.skatingData?.hits ?? 0
+                playerStatistics.faceoffs = playerStatsTotal.playerStats?.skatingData?.faceoffs ?? 0
+                playerStatistics.faceoffWins = playerStatsTotal.playerStats?.skatingData?.faceoffWins ?? 0
+                playerStatistics.faceoffLosses = playerStatsTotal.playerStats?.skatingData?.faceoffLosses ?? 0
+                playerStatistics.faceoffPercent = playerStatsTotal.playerStats?.skatingData?.faceoffPercent ?? 0.0
+                playerStatistics.penalties = playerStatsTotal.playerStats?.penaltyData.penalties ?? 0
+                playerStatistics.penaltyMinutes = playerStatsTotal.playerStats?.penaltyData.penaltyMinutes ?? 0
+                playerStatistics.wins = playerStatsTotal.playerStats?.goaltendingData?.wins ?? 0
+                playerStatistics.losses = playerStatsTotal.playerStats?.goaltendingData?.losses ?? 0
+                playerStatistics.overtimeWins = playerStatsTotal.playerStats?.goaltendingData?.overtimeWins ?? 0
+                playerStatistics.overtimeLosses = playerStatsTotal.playerStats?.goaltendingData?.overtimeLosses ?? 0
+                playerStatistics.goalsAgainst = playerStatsTotal.playerStats?.goaltendingData?.goalsAgainst ?? 0
+                playerStatistics.shotsAgainst = playerStatsTotal.playerStats?.goaltendingData?.shotsAgainst ?? 0
+                playerStatistics.saves = playerStatsTotal.playerStats?.goaltendingData?.saves ?? 0
+                playerStatistics.goalsAgainstAverage = playerStatsTotal.playerStats?.goaltendingData?.goalsAgainstAverage ?? 0.0
+                playerStatistics.savePercentage = playerStatsTotal.playerStats?.goaltendingData?.savePercentage ?? 0.0
+                playerStatistics.shutouts = playerStatsTotal.playerStats?.goaltendingData?.shutouts ?? 0
+                playerStatistics.gamesStarted = playerStatsTotal.playerStats?.goaltendingData?.gamesStarted ?? 0
+                playerStatistics.creditForGame = playerStatsTotal.playerStats?.goaltendingData?.creditForGame ?? 0
+                playerStatistics.minutesPlayed = playerStatsTotal.playerStats?.goaltendingData?.minutesPlayed ?? 0
+                
+                playerStatisticsList.append(playerStatistics)
+            }
         }
         
         return playerStatisticsList
+    }
+    
+    func convertPlayerStatsToPlayerStatisticsDictionary(_ playerStatsTotalList: [PlayerStatsTotal]) -> [Int : PlayerStatistics]
+    {
+        var playerStatisticsDictionary = [Int : PlayerStatistics]()
+        
+        for playerStatsTotal in playerStatsTotalList
+        {
+            if playerStatsTotal.playerStats != nil && playerStatsTotal.player != nil
+            {
+                let playerStatistics = PlayerStatistics()
+                
+                playerStatistics.id = playerStatsTotal.player?.id ?? 0
+                playerStatistics.dateCreated = TimeAndDateUtils.getCurrentDateAsString()
+                playerStatistics.gamesPlayed = playerStatsTotal.playerStats?.gamesPlayed ?? 0
+                playerStatistics.goals = playerStatsTotal.playerStats?.scoringData.goals ?? 0
+                playerStatistics.assists = playerStatsTotal.playerStats?.scoringData.assists ?? 0
+                playerStatistics.points = playerStatsTotal.playerStats?.scoringData.points ?? 0
+                playerStatistics.hatTricks = playerStatsTotal.playerStats?.scoringData.hatTricks ?? 0
+                playerStatistics.powerplayGoals = playerStatsTotal.playerStats?.scoringData.powerplayGoals ?? 0
+                playerStatistics.powerplayAssists = playerStatsTotal.playerStats?.scoringData.powerplayAssists ?? 0
+                playerStatistics.powerplayPoints = playerStatsTotal.playerStats?.scoringData.powerplayPoints ?? 0
+                playerStatistics.shortHandedGoals = playerStatsTotal.playerStats?.scoringData.shorthandedGoals ?? 0
+                playerStatistics.shortHandedAssists = playerStatsTotal.playerStats?.scoringData.shorthandedAssists ?? 0
+                playerStatistics.shortHandedPoints = playerStatsTotal.playerStats?.scoringData.shorthandedPoints ?? 0
+                playerStatistics.gameWinningGoals = playerStatsTotal.playerStats?.scoringData.gameWinningGoals ?? 0
+                playerStatistics.gameTyingGoals = playerStatsTotal.playerStats?.scoringData.gameTyingGoals ?? 0
+                playerStatistics.plusMinus = playerStatsTotal.playerStats?.skatingData?.plusMinus ?? 0
+                playerStatistics.shots = playerStatsTotal.playerStats?.skatingData?.shots ?? 0
+                playerStatistics.shotPercentage = playerStatsTotal.playerStats?.skatingData?.shotPercentage ?? 0.0
+                playerStatistics.blockedShots = playerStatsTotal.playerStats?.skatingData?.blockedShots ?? 0
+                playerStatistics.hits = playerStatsTotal.playerStats?.skatingData?.hits ?? 0
+                playerStatistics.faceoffs = playerStatsTotal.playerStats?.skatingData?.faceoffs ?? 0
+                playerStatistics.faceoffWins = playerStatsTotal.playerStats?.skatingData?.faceoffWins ?? 0
+                playerStatistics.faceoffLosses = playerStatsTotal.playerStats?.skatingData?.faceoffLosses ?? 0
+                playerStatistics.faceoffPercent = playerStatsTotal.playerStats?.skatingData?.faceoffPercent ?? 0.0
+                playerStatistics.penalties = playerStatsTotal.playerStats?.penaltyData.penalties ?? 0
+                playerStatistics.penaltyMinutes = playerStatsTotal.playerStats?.penaltyData.penaltyMinutes ?? 0
+                playerStatistics.wins = playerStatsTotal.playerStats?.goaltendingData?.wins ?? 0
+                playerStatistics.losses = playerStatsTotal.playerStats?.goaltendingData?.losses ?? 0
+                playerStatistics.overtimeWins = playerStatsTotal.playerStats?.goaltendingData?.overtimeWins ?? 0
+                playerStatistics.overtimeLosses = playerStatsTotal.playerStats?.goaltendingData?.overtimeLosses ?? 0
+                playerStatistics.goalsAgainst = playerStatsTotal.playerStats?.goaltendingData?.goalsAgainst ?? 0
+                playerStatistics.shotsAgainst = playerStatsTotal.playerStats?.goaltendingData?.shotsAgainst ?? 0
+                playerStatistics.saves = playerStatsTotal.playerStats?.goaltendingData?.saves ?? 0
+                playerStatistics.goalsAgainstAverage = playerStatsTotal.playerStats?.goaltendingData?.goalsAgainstAverage ?? 0.0
+                playerStatistics.savePercentage = playerStatsTotal.playerStats?.goaltendingData?.savePercentage ?? 0.0
+                playerStatistics.shutouts = playerStatsTotal.playerStats?.goaltendingData?.shutouts ?? 0
+                playerStatistics.gamesStarted = playerStatsTotal.playerStats?.goaltendingData?.gamesStarted ?? 0
+                playerStatistics.creditForGame = playerStatsTotal.playerStats?.goaltendingData?.creditForGame ?? 0
+                playerStatistics.minutesPlayed = playerStatsTotal.playerStats?.goaltendingData?.minutesPlayed ?? 0
+                
+                playerStatisticsDictionary[playerStatistics.id] = playerStatistics
+            }
+        }
+        
+        return playerStatisticsDictionary
     }
     
     func convertPlayerInjuriesToNHLPlayerInjuryList(_ playerInjuries: PlayerInjuries) -> [NHLPlayerInjury]

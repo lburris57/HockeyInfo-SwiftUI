@@ -20,9 +20,12 @@ final class PlayerInjuriesViewModel: ObservableObject
     
     private func fetchPlayerInjuries()
     {
-        NetworkManager().retrievePlayerInjuries
-        {
-            self.playerInjuries = $0
-        }
+//        NetworkManager().retrievePlayerInjuries
+//        {
+//            //self.playerInjuries = $0
+//
+//        }
+        
+        print("Ignoring player injuries...")
     }
 }

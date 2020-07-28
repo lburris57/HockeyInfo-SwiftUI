@@ -36,3 +36,17 @@ struct NeumorphicButtonStyle: ButtonStyle
             })
     }
 }
+
+struct NeumorphicButtonStyle_Previews: PreviewProvider
+{
+    static var previews: some View
+    {
+        VStack()
+        {
+            Button("    Display Player Statistics    ")
+            {
+                
+            }.buttonStyle(NeumorphicButtonStyle()).foregroundColor(.white).padding()
+        }//.background(UIColor.lightBlack)
+    }
+}

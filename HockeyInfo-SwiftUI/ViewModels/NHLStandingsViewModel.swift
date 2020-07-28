@@ -11,48 +11,63 @@ import SwiftUI
 
 final class NHLStandingsViewModel: ObservableObject
 {
-    var atlanticDivisionList = [TeamStandingsData]()
-    var metroDivisionList = [TeamStandingsData]()
-    var centralDivisionList = [TeamStandingsData]()
-    var pacificDivisionList = [TeamStandingsData]()
-    var easternConferenceList = [TeamStandingsData]()
-    var westernConferenceList = [TeamStandingsData]()
-    var leagueList = [TeamStandingsData]()
+    @Published var atlanticDivisionList = [TeamStandings]()
+    @Published var metroDivisionList = [TeamStandings]()
+    @Published var centralDivisionList = [TeamStandings]()
+    @Published var pacificDivisionList = [TeamStandings]()
+    @Published var easternConferenceList = [TeamStandings]()
+    @Published var westernConferenceList = [TeamStandings]()
+    @Published var leagueList = [TeamStandings]()
     
-    @Published var standings: NHLStandings?
+    var teamStandingsList = [TeamStandings]()
     
-    init()
+    func fetchStandings()
     {
-        fetchStandings()
-    }
-    
-    private func fetchStandings()
-    {
-        NetworkManager().retrieveStandings
-        {
-            //  Load the arrays with the appropriate data
-            self.atlanticDivisionList = $0.teamList.filter({$0.divisionRankInfo.divisionName == DivisionEnum.Atlantic.rawValue})
-            self.metroDivisionList = $0.teamList.filter({$0.divisionRankInfo.divisionName == DivisionEnum.Metropolitan.rawValue})
-            self.centralDivisionList = $0.teamList.filter({$0.divisionRankInfo.divisionName == DivisionEnum.Central.rawValue})
-            self.pacificDivisionList = $0.teamList.filter({$0.divisionRankInfo.divisionName == DivisionEnum.Pacific.rawValue})
-            
-            self.easternConferenceList = $0.teamList.filter({$0.conferenceRankInfo.conferenceName == ConferenceEnum.Eastern.rawValue})
-            self.westernConferenceList = $0.teamList.filter({$0.conferenceRankInfo.conferenceName == ConferenceEnum.Western.rawValue})
-            
-            self.leagueList = $0.teamList
-            
-            //  Sort the arrays
-            self.atlanticDivisionList.sort {$0.divisionRankInfo.rank < $1.divisionRankInfo.rank}
-            self.metroDivisionList.sort {$0.divisionRankInfo.rank < $1.divisionRankInfo.rank}
-            self.centralDivisionList.sort {$0.divisionRankInfo.rank < $1.divisionRankInfo.rank}
-            self.pacificDivisionList.sort {$0.divisionRankInfo.rank < $1.divisionRankInfo.rank}
-            
-            self.easternConferenceList.sort {$0.conferenceRankInfo.rank < $1.conferenceRankInfo.rank}
-            self.westernConferenceList.sort {$0.conferenceRankInfo.rank < $1.conferenceRankInfo.rank}
-            
-            self.leagueList.sort {$0.overallRankInfo.rank < $1.overallRankInfo.rank}
-            
-            self.standings = $0
+        teamStandingsList = DBManager().retrieveTeamStandings()
+        
+        //  Load the arrays with the appropriate data
+        atlanticDivisionList = teamStandingsList.filter({$0.division == DivisionEnum.Atlantic.rawValue})
+        metroDivisionList = teamStandingsList.filter({$0.division == DivisionEnum.Metropolitan.rawValue})
+        centralDivisionList = teamStandingsList.filter({$0.division == DivisionEnum.Central.rawValue})
+        pacificDivisionList = teamStandingsList.filter({$0.division == DivisionEnum.Pacific.rawValue})
+        
+        easternConferenceList = teamStandingsList.filter({$0.conference == ConferenceEnum.Eastern.rawValue})
+        westernConferenceList = teamStandingsList.filter({$0.conference == ConferenceEnum.Western.rawValue})
+        
+        leagueList = teamStandingsList
+        
+        //  Sort the arrays
+        atlanticDivisionList.sort {$0.divisionRank < $1.divisionRank}
+        metroDivisionList.sort {$0.divisionRank < $1.divisionRank}
+        centralDivisionList.sort {$0.divisionRank < $1.divisionRank}
+        pacificDivisionList.sort {$0.divisionRank < $1.divisionRank}
+        
+        easternConferenceList.sort {$0.conferenceRank < $1.conferenceRank}
+        westernConferenceList.sort {$0.conferenceRank < $1.conferenceRank}
+        
+        leagueList.sort {$0.points > $1.points}
+        
+//        var userDefaultsModel = UserDefaultManager.decodeDataFromUserDefaults(for: UserDefaultsHelper.constructSeasonString())
+//
+//        if userDefaultsModel.isTeamStandingsLoaded
+//        {
+//            teamStandingsList = DBManager().retrieveTeamStandings()
+//
+//            loadArrays()
+//        }
+//        else
+//        {
+//            teamStandingsList = NetworkManager().retrieveStandings()
+//
+//            loadArrays()
+//            {
+//                self.teamStandingsList = $0
+//
+//                self.loadArrays()
+//
+//                userDefaultsModel.isTeamStandingsLoaded = true
+//
+//                UserDefaultManager.encodeDataToUserDefaults(for: UserDefaultsHelper.constructSeasonString(), userDefaultsModel)
+//            }
         }
     }
-}

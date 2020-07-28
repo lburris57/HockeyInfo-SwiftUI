@@ -12,6 +12,10 @@ struct PlayerDetailView : View
 {
     var playerDetail: PlayerDetailModel
     
+    @State private var showingSheet = false
+    
+    //@ObservedObject var model = PlayerStatisticsViewModel()
+    
     var body: some View
     {
         ScrollView
@@ -81,10 +85,19 @@ struct PlayerDetailView : View
                     
                     Spacer()
                     
-                    NavigationLink(destination: PlayerStatsView(playerDetail: playerDetail, playerStatistics: DBManager().retrievePlayerStatistics(playerDetail.playerId)))
+//                    NavigationLink(destination: PlayerStatsView(playerDetail: playerDetail, playerStatistics: DBManager().retrievePlayerStatistics(playerDetail.playerId)))
+//                    {
+//                        Text("Display Player Statistics").padding(10).foregroundColor(.white)
+//                    }.buttonStyle(NeumorphicButtonStyle()).padding(5)
+                    
+                    Button("    Display Player Statistics    ")
                     {
-                        Text("Display Player Statistics").padding(10).foregroundColor(.white)
-                        }.buttonStyle(NeumorphicButtonStyle()).padding(5)
+                        self.showingSheet.toggle()
+                    }.buttonStyle(NeumorphicButtonStyle()).padding(5)
+                    .sheet(isPresented: $showingSheet)
+                    {
+                        PlayerStatsView(playerDetail: self.playerDetail, playerStatistics: DBManager().retrievePlayerStatistics(self.playerDetail.playerId))
+                    }.foregroundColor(.white).padding()
                 }
                 
                 Spacer()

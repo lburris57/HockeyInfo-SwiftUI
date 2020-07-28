@@ -13,28 +13,25 @@ final class SeasonScheduleViewModel: ObservableObject
 {
     @Published var nhlScheduleList = [NHLSchedule]()
     
-    var userDefaultsModel: UserDefaultTableInformationModel
-    
-    init()
+    func fetchSeasonSchedule()
     {
-        userDefaultsModel = UserDefaultManager.decodeDataFromUserDefaults(for: UserDefaultsHelper.constructSeasonString())
+        print("Fetching the entire season schedule...")
+        
+        var userDefaultsModel = UserDefaultManager.decodeDataFromUserDefaults(for: UserDefaultsHelper.constructSeasonString())
         
         let startTime = Date().timeIntervalSince1970
         
-        fetchSeasonSchedule()
+        nhlScheduleList = DBManager().retrieveFullSeasonSchedule()
         
-        print("Total elapsed time to retrieve full season schedule model is: \((Date().timeIntervalSince1970 - startTime).rounded()) seconds.")
-    }
-    
-    private func fetchSeasonSchedule()
-    {
-        NetworkManager().retrieveFullSeasonSchedule
-        {
-            self.nhlScheduleList = $0
-        }
+//        NetworkManager().retrieveFullSeasonSchedule
+//        {
+//            self.nhlScheduleList = $0
+//        }
         
         userDefaultsModel.isSeasonScheduleTableLoaded = true
         
         print("\(userDefaultsModel)")
+        
+        print("Total elapsed time to retrieve full season schedule model is: \((Date().timeIntervalSince1970 - startTime).rounded()) seconds.")
     }
 }

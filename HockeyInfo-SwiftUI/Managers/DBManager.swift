@@ -24,15 +24,12 @@ class DBManager
     {
         print("Season is: \(season)")
         print("Season type is: \(seasonType)")
-            
-        //saveMainMenuCategories()
-        //saveTeams()
     }
     
     //  Returns an a list of populated NHLTeam objects
     func createTeamArray() -> [NHLTeam]
     {
-        print("\n\nIn DBManager.createTeamArray method...\n\n")
+        print("\nIn DBManager.createTeamArray method...")
         
         let teamAbbreviations = Constants.TEAM_ABBREVIATION_ARRAY
         
@@ -63,7 +60,7 @@ class DBManager
     // MARK: Save methods
     func saveMainMenuCategories()
     {
-        print("\n\nIn DBManager.saveMainMenuCategories method...\n\n")
+        print("\nIn DBManager.saveMainMenuCategories method...")
         
         let categories = Constants.CATEGORY_ARRAY
         
@@ -107,7 +104,7 @@ class DBManager
     
     func saveTeams()
     {
-        print("\n\nIn DBManager.saveTeams method...\n\n")
+        print("\nIn DBManager.saveTeams method...")
         
         let teamArray = createTeamArray()
         
@@ -125,7 +122,7 @@ class DBManager
             print("Error saving teams to the database: \(error.localizedDescription)")
         }
         
-        print("\n\nTeams were successfully saved to the database...\n\n")
+        print("\nTeams were successfully saved to the database...")
         
         userDefaults.set("Y", forKey: Constants.TEAM_TABLE)
         
@@ -134,7 +131,7 @@ class DBManager
     
     func saveFullSeasonScheduleGameData(_ scheduledGames: [NHLSchedule])
     {
-        print("\n\nIn DBManager.saveFullSeasonScheduleGameData method...\n\n")
+        print("\nIn DBManager.saveFullSeasonScheduleGameData method...")
         
         let startTime = Date().timeIntervalSince1970
         
@@ -160,16 +157,16 @@ class DBManager
             
             self.userDefaults.set("Y", forKey: Constants.SCHEDULE_TABLE)
             
-            print("\n\nFull season schedule was successfully saved to the database...\n\n")
+            print("\nFull season schedule was successfully saved to the database...")
             
-            print("\n\nTotal elapsed time to save full season schedule is: \((Date().timeIntervalSince1970 - startTime).rounded()) seconds.\n\n")
+            print("\nTotal elapsed time to save full season schedule is: \((Date().timeIntervalSince1970 - startTime).rounded()) seconds.")
             print(Realm.Configuration.defaultConfiguration.fileURL!)
         }
     }
     
     func saveRosters(_ rosterPlayers: RosterPlayers)
     {
-        print("\n\nIn DBManager.saveRosters method...\n\n")
+        print("\nIn DBManager.saveRosters method...")
         
         let startTime = Date().timeIntervalSince1970
         
@@ -182,7 +179,7 @@ class DBManager
             for playerInfo in rosterPlayers.playerInfoList
             {
                 //  Filter out players with no team id or jersey number
-                if playerInfo.currentTeamInfo?.id == nil || playerInfo.player.jerseyNumber == nil
+                if playerInfo.currentTeamInfo?.id == nil || playerInfo.player.jerseyNumber == nil || playerInfo.player.officialImageSource == nil
                 {
                     continue
                 }
@@ -224,22 +221,23 @@ class DBManager
             {
                 print("Error saving roster players to the database: \(error.localizedDescription)")
             }
+            
             self.linkPlayersToTeams()
             self.linkSchedulesToTeams()
             self.linkStatisticsAndInjuriesToPlayers()
             
             self.userDefaults.set("Y", forKey: Constants.PLAYER_TABLE)
             
-            print("\n\nRosters were successfully saved to the database...\n\n")
+            print("\nRosters were successfully saved to the database...")
             
-            print("\n\nTotal elapsed time to save roster players is: \((Date().timeIntervalSince1970 - startTime).rounded()) seconds.\n\n")
+            print("\nTotal elapsed time to save roster players is: \((Date().timeIntervalSince1970 - startTime).rounded()) seconds.")
             print(Realm.Configuration.defaultConfiguration.fileURL!)
         }
     }
     
     func savePlayerStats(_ playerStats: PlayerStats)
     {
-        print("\n\nIn DBManager.savePlayerStats method...\n\n")
+        print("\nIn DBManager.savePlayerStats method...")
         
         let startTime = Date().timeIntervalSince1970
 
@@ -265,67 +263,73 @@ class DBManager
                 {
                     for playerStatsTotal in playerStats.playerStatsTotals
                     {
-                        let playerStatistics = PlayerStatistics()
-                        let playerId = playerStatsTotal.player.id
-                        let nhlPlayer = playerDictionary[playerId]
-
-                        playerStatistics.id = playerId
-                        playerStatistics.dateCreated = TimeAndDateUtils.getCurrentDateAsString()
-                        playerStatistics.gamesPlayed = playerStatsTotal.playerStats.gamesPlayed
-                        playerStatistics.goals = playerStatsTotal.playerStats.scoringData.goals
-                        playerStatistics.assists = playerStatsTotal.playerStats.scoringData.assists
-                        playerStatistics.points = playerStatsTotal.playerStats.scoringData.points
-                        playerStatistics.hatTricks = playerStatsTotal.playerStats.scoringData.hatTricks
-                        playerStatistics.powerplayGoals = playerStatsTotal.playerStats.scoringData.powerplayGoals
-                        playerStatistics.powerplayAssists = playerStatsTotal.playerStats.scoringData.powerplayAssists
-                        playerStatistics.powerplayPoints = playerStatsTotal.playerStats.scoringData.powerplayPoints
-                        playerStatistics.shortHandedGoals = playerStatsTotal.playerStats.scoringData.shorthandedGoals
-                        playerStatistics.shortHandedAssists = playerStatsTotal.playerStats.scoringData.shorthandedAssists
-                        playerStatistics.shortHandedPoints = playerStatsTotal.playerStats.scoringData.shorthandedPoints
-                        playerStatistics.gameWinningGoals = playerStatsTotal.playerStats.scoringData.gameWinningGoals
-                        playerStatistics.gameTyingGoals = playerStatsTotal.playerStats.scoringData.gameTyingGoals
-                        playerStatistics.plusMinus = playerStatsTotal.playerStats.skatingData?.plusMinus ?? 0
-                        playerStatistics.shots = playerStatsTotal.playerStats.skatingData?.shots ?? 0
-                        playerStatistics.shotPercentage = playerStatsTotal.playerStats.skatingData?.shotPercentage ?? 0.0
-                        playerStatistics.blockedShots = playerStatsTotal.playerStats.skatingData?.blockedShots ?? 0
-                        playerStatistics.hits = playerStatsTotal.playerStats.skatingData?.hits ?? 0
-                        playerStatistics.faceoffs = playerStatsTotal.playerStats.skatingData?.faceoffs ?? 0
-                        playerStatistics.faceoffWins = playerStatsTotal.playerStats.skatingData?.faceoffWins ?? 0
-                        playerStatistics.faceoffLosses = playerStatsTotal.playerStats.skatingData?.faceoffLosses ?? 0
-                        playerStatistics.faceoffPercent = playerStatsTotal.playerStats.skatingData?.faceoffPercent ?? 0.0
-                        playerStatistics.penalties = playerStatsTotal.playerStats.penaltyData.penalties
-                        playerStatistics.penaltyMinutes = playerStatsTotal.playerStats.penaltyData.penaltyMinutes
-                        playerStatistics.wins = playerStatsTotal.playerStats.goaltendingData?.wins ?? 0
-                        playerStatistics.losses = playerStatsTotal.playerStats.goaltendingData?.losses ?? 0
-                        playerStatistics.overtimeWins = playerStatsTotal.playerStats.goaltendingData?.overtimeWins ?? 0
-                        playerStatistics.overtimeLosses = playerStatsTotal.playerStats.goaltendingData?.overtimeLosses ?? 0
-                        playerStatistics.goalsAgainst = playerStatsTotal.playerStats.goaltendingData?.goalsAgainst ?? 0
-                        playerStatistics.shotsAgainst = playerStatsTotal.playerStats.goaltendingData?.shotsAgainst ?? 0
-                        playerStatistics.saves = playerStatsTotal.playerStats.goaltendingData?.saves ?? 0
-                        playerStatistics.goalsAgainstAverage = playerStatsTotal.playerStats.goaltendingData?.goalsAgainstAverage ?? 0.0
-                        playerStatistics.savePercentage = playerStatsTotal.playerStats.goaltendingData?.savePercentage ?? 0.0
-                        playerStatistics.shutouts = playerStatsTotal.playerStats.goaltendingData?.shutouts ?? 0
-                        playerStatistics.gamesStarted = playerStatsTotal.playerStats.goaltendingData?.gamesStarted ?? 0
-                        playerStatistics.creditForGame = playerStatsTotal.playerStats.goaltendingData?.creditForGame ?? 0
-                        playerStatistics.minutesPlayed = playerStatsTotal.playerStats.goaltendingData?.minutesPlayed ?? 0
-                        playerStatistics.season = self.season
-                        playerStatistics.seasonType = self.seasonType
-
-                        realm.create(PlayerStatistics.self, value: playerStatistics, update: .modified)
-
-                        //  Get the playerStatistics reference from the database
-                        if let realmPlayerStatistics = realm.object(ofType: PlayerStatistics.self, forPrimaryKey: playerId)
+                        if playerStatsTotal.playerStats != nil && playerStatsTotal.player != nil
                         {
-                            nhlPlayer?.playerStatisticsList.append(realmPlayerStatistics)
+                            let playerStatistics = PlayerStatistics()
+                            let playerId = playerStatsTotal.player?.id
+                            let nhlPlayer = playerDictionary[playerId ?? 0]
+
+                            playerStatistics.id = playerId ?? 0
+                            playerStatistics.dateCreated = TimeAndDateUtils.getCurrentDateAsString()
+                            playerStatistics.gamesPlayed = playerStatsTotal.playerStats?.gamesPlayed ?? 0
+                            playerStatistics.goals = playerStatsTotal.playerStats?.scoringData.goals ?? 0
+                            playerStatistics.assists = playerStatsTotal.playerStats?.scoringData.assists ?? 0
+                            playerStatistics.points = playerStatsTotal.playerStats?.scoringData.points ?? 0
+                            playerStatistics.hatTricks = playerStatsTotal.playerStats?.scoringData.hatTricks ?? 0
+                            playerStatistics.powerplayGoals = playerStatsTotal.playerStats?.scoringData.powerplayGoals ?? 0
+                            playerStatistics.powerplayAssists = playerStatsTotal.playerStats?.scoringData.powerplayAssists ?? 0
+                            playerStatistics.powerplayPoints = playerStatsTotal.playerStats?.scoringData.powerplayPoints ?? 0
+                            playerStatistics.shortHandedGoals = playerStatsTotal.playerStats?.scoringData.shorthandedGoals ?? 0
+                            playerStatistics.shortHandedAssists = playerStatsTotal.playerStats?.scoringData.shorthandedAssists ?? 0
+                            playerStatistics.shortHandedPoints = playerStatsTotal.playerStats?.scoringData.shorthandedPoints ?? 0
+                            playerStatistics.gameWinningGoals = playerStatsTotal.playerStats?.scoringData.gameWinningGoals ?? 0
+                            playerStatistics.gameTyingGoals = playerStatsTotal.playerStats?.scoringData.gameTyingGoals ?? 0
+                            playerStatistics.plusMinus = playerStatsTotal.playerStats?.skatingData?.plusMinus ?? 0
+                            playerStatistics.shots = playerStatsTotal.playerStats?.skatingData?.shots ?? 0
+                            playerStatistics.shotPercentage = playerStatsTotal.playerStats?.skatingData?.shotPercentage ?? 0.0
+                            playerStatistics.blockedShots = playerStatsTotal.playerStats?.skatingData?.blockedShots ?? 0
+                            playerStatistics.hits = playerStatsTotal.playerStats?.skatingData?.hits ?? 0
+                            playerStatistics.faceoffs = playerStatsTotal.playerStats?.skatingData?.faceoffs ?? 0
+                            playerStatistics.faceoffWins = playerStatsTotal.playerStats?.skatingData?.faceoffWins ?? 0
+                            playerStatistics.faceoffLosses = playerStatsTotal.playerStats?.skatingData?.faceoffLosses ?? 0
+                            playerStatistics.faceoffPercent = playerStatsTotal.playerStats?.skatingData?.faceoffPercent ?? 0.0
+                            playerStatistics.penalties = playerStatsTotal.playerStats?.penaltyData.penalties ?? 0
+                            playerStatistics.penaltyMinutes = playerStatsTotal.playerStats?.penaltyData.penaltyMinutes ?? 0
+                            playerStatistics.wins = playerStatsTotal.playerStats?.goaltendingData?.wins ?? 0
+                            playerStatistics.losses = playerStatsTotal.playerStats?.goaltendingData?.losses ?? 0
+                            playerStatistics.overtimeWins = playerStatsTotal.playerStats?.goaltendingData?.overtimeWins ?? 0
+                            playerStatistics.overtimeLosses = playerStatsTotal.playerStats?.goaltendingData?.overtimeLosses ?? 0
+                            playerStatistics.goalsAgainst = playerStatsTotal.playerStats?.goaltendingData?.goalsAgainst ?? 0
+                            playerStatistics.shotsAgainst = playerStatsTotal.playerStats?.goaltendingData?.shotsAgainst ?? 0
+                            playerStatistics.saves = playerStatsTotal.playerStats?.goaltendingData?.saves ?? 0
+                            playerStatistics.goalsAgainstAverage = playerStatsTotal.playerStats?.goaltendingData?.goalsAgainstAverage ?? 0.0
+                            playerStatistics.savePercentage = playerStatsTotal.playerStats?.goaltendingData?.savePercentage ?? 0.0
+                            playerStatistics.shutouts = playerStatsTotal.playerStats?.goaltendingData?.shutouts ?? 0
+                            playerStatistics.gamesStarted = playerStatsTotal.playerStats?.goaltendingData?.gamesStarted ?? 0
+                            playerStatistics.creditForGame = playerStatsTotal.playerStats?.goaltendingData?.creditForGame ?? 0
+                            playerStatistics.minutesPlayed = playerStatsTotal.playerStats?.goaltendingData?.minutesPlayed ?? 0
+                            playerStatistics.season = self.season
+                            playerStatistics.seasonType = self.seasonType
+
+                            realm.create(PlayerStatistics.self, value: playerStatistics, update: .modified)
+
+                            //  Get the playerStatistics reference from the database
+                            if let realmPlayerStatistics = realm.object(ofType: PlayerStatistics.self, forPrimaryKey: playerId)
+                            {
+                                nhlPlayer?.playerStatisticsList.removeAll()
+                                nhlPlayer?.playerStatisticsList.append(realmPlayerStatistics)
+                            }
                         }
                     }
                 }
                 
+                //self.linkStatisticsAndInjuriesToPlayers()
+                
                 self.userDefaults.set("Y", forKey: Constants.PLAYER_STATISTICS_TABLE)
                 
-                print("\n\nPlayer stats were successfully saved to the database...\n\n")
+                print("\nPlayer stats were successfully saved to the database...")
                 
-                print("\n\nTotal elapsed time to save player stats is: \((Date().timeIntervalSince1970 - startTime).rounded()) seconds.\n\n")
+                print("\nTotal elapsed time to save player stats is: \((Date().timeIntervalSince1970 - startTime).rounded()) seconds.")
                 print(Realm.Configuration.defaultConfiguration.fileURL!)
             }
             else
@@ -337,7 +341,7 @@ class DBManager
     
     func saveStandings(_ nhlStandings: NHLStandings)
     {
-        print("\n\nIn DBManager.saveStandings method...\n\n")
+        print("\nIn DBManager.saveStandings method...")
         
         let startTime = Date().timeIntervalSince1970
         
@@ -435,16 +439,16 @@ class DBManager
             
             self.userDefaults.set("Y", forKey: Constants.TEAM_STANDINGS_TABLE)
             
-            print("\n\nTeam standings were successfully saved to the database...\n\n")
+            print("\nTeam standings were successfully saved to the database...")
             
-            print("\n\nTotal elapsed time to save team standings data is: \((Date().timeIntervalSince1970 - startTime).rounded()) seconds.\n\n")
+            print("\nTotal elapsed time to save team standings data is: \((Date().timeIntervalSince1970 - startTime).rounded()) seconds.")
             print(Realm.Configuration.defaultConfiguration.fileURL!)
         }
     }
     
     func savePlayerInjuries(_ playerInjuries: PlayerInjuries)
     {
-        print("\n\nIn DBManager.savePlayerInjuries method...\n\n")
+        print("\nIn DBManager.savePlayerInjuries method...")
         
         let startTime = Date().timeIntervalSince1970
         
@@ -514,11 +518,11 @@ class DBManager
                     self.linkPlayerInjuriesToTeams()
                 }
                 
-                print("\n\n\(count) player injuries were successfully saved to the database...\n\n")
+                print("\n\(count) player injuries were successfully saved to the database...")
                 
                 self.userDefaults.set("Y", forKey: Constants.PLAYER_INJURY_TABLE)
                 
-                print("\n\nTotal elapsed time to save player injury data is: \((Date().timeIntervalSince1970 - startTime).rounded()) seconds.\n\n")
+                print("\nTotal elapsed time to save player injury data is: \((Date().timeIntervalSince1970 - startTime).rounded()) seconds.")
                 print(Realm.Configuration.defaultConfiguration.fileURL!)
             }
             else
@@ -530,7 +534,7 @@ class DBManager
     
     func saveGameLog(_ gameLog: GameLog)
     {
-        print("\n\nIn DBManager.saveGameLog method...\n\n")
+        print("\nIn DBManager.saveGameLog method...")
         
         let startTime = Date().timeIntervalSince1970
         
@@ -651,16 +655,16 @@ class DBManager
             
             self.userDefaults.set("Y", forKey: Constants.GAME_LOG_TABLE)
             
-            print("\n\nGame logs were successfully saved to the database...\n\n")
+            print("\nGame logs were successfully saved to the database...")
             
-            print("\n\nTotal elapsed time to save game log data is: \((Date().timeIntervalSince1970 - startTime).rounded()) seconds.\n\n")
+            print("\nTotal elapsed time to save game log data is: \((Date().timeIntervalSince1970 - startTime).rounded()) seconds.")
             print(Realm.Configuration.defaultConfiguration.fileURL!)
         }
     }
     
     func saveScoringSummary(_ scoringSummary: ScoringSummary)
     {
-        print("\n\nIn DBManager.saveScoringSummary method...\n\n")
+        print("\nIn DBManager.saveScoringSummary method...")
         
         let startTime = Date().timeIntervalSince1970
         
@@ -744,16 +748,16 @@ class DBManager
             
             self.userDefaults.set("Y", forKey: Constants.SCORING_SUMMARY_TABLE)
             
-            print("\n\nScoriing summary was successfully saved to the database...\n\n")
+            print("\nScoriing summary was successfully saved to the database...")
             
-            print("\n\nTotal elapsed time to save scoring summary for gameId \(scoringSummary.game.id) is: \((Date().timeIntervalSince1970 - startTime).rounded()) seconds.\n\n")
+            print("\nTotal elapsed time to save scoring summary for gameId \(scoringSummary.game.id) is: \((Date().timeIntervalSince1970 - startTime).rounded()) seconds.")
             print(Realm.Configuration.defaultConfiguration.fileURL!)
         }
     }
     
     func saveScheduledGameData(_ seasonSchedule: SeasonSchedule)
     {
-        print("\n\nIn DBManager.saveScheduledGameData method...\n\n")
+        print("\nIn DBManager.saveScheduledGameData method...")
         
         let startTime = Date().timeIntervalSince1970
         
@@ -809,9 +813,9 @@ class DBManager
             
             self.userDefaults.set("Y", forKey: Constants.SCHEDULE_TABLE)
             
-            print("\n\nScheduled game data was successfully saved to the database...\n\n")
+            print("\nScheduled game data was successfully saved to the database...")
             
-            print("\n\nTotal elapsed time to save scheduled games data is: \((Date().timeIntervalSince1970 - startTime).rounded()) seconds.\n\n")
+            print("\nTotal elapsed time to save scheduled games data is: \((Date().timeIntervalSince1970 - startTime).rounded()) seconds.")
             print(Realm.Configuration.defaultConfiguration.fileURL!)
         }
     }
@@ -821,7 +825,7 @@ class DBManager
     //  Returns a populated list of NHLSchedule objects
     func retrieveFullSeasonSchedule() -> [NHLSchedule]
     {
-        print("\n\nIn DBManager.retrieveFullSeasonSchedule method...\n\n")
+        print("\nIn DBManager.retrieveFullSeasonSchedule method...")
         
         var scheduleResult: Results<NHLSchedule>?
         
@@ -839,7 +843,7 @@ class DBManager
             print("Error retrieving roster: \(error.localizedDescription)")
         }
         
-        print("\n\nSuccessfully retrieved \(scheduleResult?.count ?? 0) full season schedule records from the database...\n\n")
+        print("\nSuccessfully retrieved \(scheduleResult?.count ?? 0) full season schedule records from the database...")
         
         return scheduleResult?.toArray(type: NHLSchedule.self) ?? [NHLSchedule]()
     }
@@ -847,7 +851,7 @@ class DBManager
     //  Returns a populated list of all players for the season/type settings
     func retrieveAllPlayers() -> [NHLPlayer]
     {
-        print("\n\nIn DBManager.retrieveAllPlayers method...\n\n")
+        print("\nIn DBManager.retrieveAllPlayers method...")
         
         var rosterResult: Results<NHLPlayer>?
         
@@ -859,13 +863,15 @@ class DBManager
             {
                 rosterResult = realm.objects(NHLPlayer.self).filter("season =='\(season)' AND seasonType =='\(seasonType)'")
             }
+            
+            //linkPlayersToTeams()
         }
         catch
         {
             print("Error retrieving roster: \(error.localizedDescription)")
         }
         
-        print("\n\nSuccessfully retrieved \(rosterResult?.count ?? 0) NHL player records from the database...\n\n")
+        print("\nSuccessfully retrieved \(rosterResult?.count ?? 0) NHL player records from the database...")
         
         return rosterResult?.toArray(type: NHLPlayer.self) ?? [NHLPlayer]()
     }
@@ -873,7 +879,7 @@ class DBManager
     //  Returns a populated list of all teams for the season/type settings
     func retrieveAllTeams() -> [NHLTeam]
     {
-        print("\n\nIn DBManager.retrieveAllTeams method...\n\n")
+        print("\nIn DBManager.retrieveAllTeams method...")
         
         var teamResult: Results<NHLTeam>?
         
@@ -891,15 +897,41 @@ class DBManager
             print("Error retrieving teams: \(error.localizedDescription)")
         }
         
-        print("\n\nSuccessfully retrieved \(teamResult?.count ?? 0) team records from the database...\n\n")
+        print("\nSuccessfully retrieved \(teamResult?.count ?? 0) team records from the database...")
         
         return teamResult?.toArray(type: NHLTeam.self) ?? [NHLTeam]()
+    }
+    
+    //  Returns a populated list of the team standings for the season/type settings
+    func retrieveTeamStandings() -> [TeamStandings]
+    {
+        print("\nIn DBManager.retrieveTeamStandings method...")
+        
+        var teamStandingsResult: Results<TeamStandings>?
+        
+        do
+        {
+            let realm = try! Realm()
+            
+            try realm.write
+            {
+                teamStandingsResult = realm.objects(TeamStandings.self).filter("season =='\(season)' AND seasonType =='\(seasonType)'")
+            }
+        }
+        catch
+        {
+            print("Error retrieving team standings list: \(error.localizedDescription)")
+        }
+        
+        print("\nSuccessfully retrieved \(teamStandingsResult?.count ?? 0) team standings records from the database...")
+        
+        return teamStandingsResult?.toArray(type: TeamStandings.self) ?? [TeamStandings]()
     }
     
     // MARK: Link methods
     func linkStatisticsAndInjuriesToPlayers()
     {
-        print("\n\nIn DBManager.linkStatisticsAndInjuriesToPlayers method...\n\n")
+        print("\nIn DBManager.linkStatisticsAndInjuriesToPlayers method...")
         
         let realm = try! Realm()
         
@@ -907,13 +939,13 @@ class DBManager
         
         let injuryResultsList = realm.objects(NHLPlayerInjury.self).filter("season =='\(season)' AND seasonType =='\(seasonType)'")
         
-        print("\n\nSize of statisticsResultsList in DBManager.linkStatisticsAndInjuriesToPlayers method is \(statisticsResultsList.count)...\n\n")
+        print("\nSize of statisticsResultsList in DBManager.linkStatisticsAndInjuriesToPlayers method is \(statisticsResultsList.count)...")
         
-        print("\n\nSize of injuryResultsList in DBManager.linkStatisticsAndInjuriesToPlayers method is \(injuryResultsList.count)...\n\n")
+        print("\nSize of injuryResultsList in DBManager.linkStatisticsAndInjuriesToPlayers method is \(injuryResultsList.count)...")
         
         if(statisticsResultsList.count == 0)
         {
-            print("\n\nStatistics and injuries were NOT linked to players because statistics list is empty...\n\n")
+            print("\nStatistics and injuries were NOT linked to players because statistics list is empty...")
             
             return
         }
@@ -921,7 +953,7 @@ class DBManager
         //  Get all the players
         let playerResults = realm.objects(NHLPlayer.self).filter("season =='\(season)' AND seasonType =='\(seasonType)'")
         
-        print("\n\nSize of list of players to link in DBManager.linkStatisticsAndInjuriesToPlayers method is \(playerResults.count)...\n\n")
+        print("\nSize of list of players to link in DBManager.linkStatisticsAndInjuriesToPlayers method is \(playerResults.count)...")
         
         //  Spin through the player and retrieve the statistics based on the player id
         for player in playerResults
@@ -935,8 +967,11 @@ class DBManager
                     
                     for statistics in statisticsResults
                     {
-                        //  Set the statistics in the parent player
-                        player.playerStatisticsList.append(statistics)
+                        if player.playerStatisticsList.count == 0
+                        {
+                            //  Set the statistics in the parent player
+                            player.playerStatisticsList.append(statistics)
+                        }
                     }
                     
                     //  Get all injuries for that particular player
@@ -958,12 +993,12 @@ class DBManager
             }
         }
         
-        print("\n\nSuccessfully linked statistics and injuries to players...\n\n")
+        print("\nSuccessfully linked statistics and injuries to players...")
     }
     
     func linkPlayersToTeams()
     {
-        print("\n\nIn DBManager.linkPlayersToTeams method...\n\n")
+        print("\nIn DBManager.linkPlayersToTeams method...")
         
         let realm = try! Realm()
         
@@ -1001,22 +1036,19 @@ class DBManager
             }
         }
         
-        print("\n\nSuccessfully linked players to teams...\n\n")
+        print("\nSuccessfully linked players to teams...")
     }
     
     func linkStandingsToTeams()
     {
-        print("\n\nIn DBManager.linkStandingsToTeams method...\n\n")
+        print("\nIn DBManager.linkStandingsToTeams method...")
         
         let realm = try! Realm()
         
         //  Get all the teams
         let teamResults = realm.objects(NHLTeam.self).filter("season =='\(season)' AND seasonType =='\(seasonType)'")
         
-        if(teamResults[0].standings.count > 0)
-        {
-            return
-        }
+        print("Size of team standings for \(teamResults[0].city) is: \(teamResults[0].standings.count)")
         
         //  Spin through the teams and retrieve the standings based on the team abbreviation
         for team in teamResults
@@ -1027,6 +1059,8 @@ class DBManager
                 {
                     //  Get all standings for that particular team
                     let standingsResults = realm.objects(TeamStandings.self).filter("abbreviation =='\(team.abbreviation)' AND season =='\(season)' AND seasonType =='\(seasonType)'")
+                    
+                    team.standings.removeAll()
                     
                     for standings in standingsResults
                     {
@@ -1044,12 +1078,12 @@ class DBManager
             }
         }
         
-        print("\n\nSuccessfully linked standings to teams...\n\n")
+        print("\nSuccessfully linked standings to teams...")
     }
     
     func linkStatisticsToTeams()
     {
-        print("\n\nIn DBManager.linkStatisticsToTeams method...\n\n")
+        print("\nIn DBManager.linkStatisticsToTeams method...")
         
         let realm = try! Realm()
         
@@ -1087,12 +1121,12 @@ class DBManager
             }
         }
         
-        print("\n\nSuccessfully linked statistics to teams...\n\n")
+        print("\nSuccessfully linked statistics to teams...")
     }
     
     func linkPlayerInjuriesToTeams()
     {
-        print("\n\nIn DBManager.linkPlayerInjuriesToTeams method...\n\n")
+        print("\nIn DBManager.linkPlayerInjuriesToTeams method...")
         
         let realm = try! Realm()
         
@@ -1130,22 +1164,17 @@ class DBManager
             }
         }
         
-        print("\n\nSuccessfully linked player injuries to teams...\n\n")
+        print("\nSuccessfully linked player injuries to teams...")
     }
     
     func linkSchedulesToTeams()
     {
-        print("\n\nIn DBManager.linkSchedulesToTeams method...\n\n")
+        print("\nIn DBManager.linkSchedulesToTeams method...")
         
         let realm = try! Realm()
         
         //  Get all the teams
         let teamResults = realm.objects(NHLTeam.self).filter("season =='\(season)' AND seasonType =='\(seasonType)'")
-        
-//        if(teamResults[0].schedules.count > 0)
-//        {
-//            return
-//        }
         
         //  Spin through the teams and retrieve the schedules based on the team abbreviation
         for team in teamResults
@@ -1156,6 +1185,8 @@ class DBManager
                 {
                     //  Get all schedules for that particular team
                     let scheduleResults = realm.objects(NHLSchedule.self).filter("homeTeam =='\(team.abbreviation)' OR " + "awayTeam =='\(team.abbreviation)' AND season =='\(season)' AND seasonType =='\(seasonType)'")
+                    
+                    team.schedules.removeAll()
                     
                     for schedule in scheduleResults
                     {
@@ -1173,22 +1204,17 @@ class DBManager
             }
         }
         
-        print("\n\nSuccessfully linked schedules to teams...\n\n")
+        print("\nSuccessfully linked schedules to teams...")
     }
     
     func linkGameLogsToTeams()
     {
-        print("\n\nIn DBManager.linkGameLogsToTeams method...\n\n")
+        print("\nIn DBManager.linkGameLogsToTeams method...")
         
         let realm = try! Realm()
         
         //  Get all the teams
         let teamResults = realm.objects(NHLTeam.self).filter("season =='\(season)' AND seasonType =='\(seasonType)'")
-        
-        if(teamResults[0].gameLogs.count > 0)
-        {
-            return
-        }
         
         //  Spin through the teams and retrieve the schedules based on the team abbreviation
         for team in teamResults
@@ -1216,13 +1242,13 @@ class DBManager
             }
         }
         
-        print("\n\nSuccessfully linked game logs to teams...\n\n")
+        print("\nSuccessfully linked game logs to teams...")
     }
     
     // MARK: Load/Reload methods
     func loadTeamRecords() -> [String:String]
     {
-        print("\n\nIn DBManager.loadTeamRecords method...\n\n")
+        print("\nIn DBManager.loadTeamRecords method...")
         
         let realm = try! Realm()
         
@@ -1252,7 +1278,7 @@ class DBManager
     
     func tablesRequireReload() -> Bool
     {
-        print("\n\nIn DBManager.tablesRequireReload method...\n\n")
+        print("\nIn DBManager.tablesRequireReload method...")
         
         let realm = try! Realm()
         
@@ -1272,7 +1298,7 @@ class DBManager
     
     func fullScheduleRequiresLoad() -> Bool
     {
-        print("\n\nIn DBManager.fullScheduleRequiresLoad method...\n\n")
+        print("\nIn DBManager.fullScheduleRequiresLoad method...")
         
         let realm = try! Realm()
         
@@ -1281,10 +1307,32 @@ class DBManager
         return seasonScheduleResult != nil ? false : true
     }
     
+    func playersRequiresLoad() -> Bool
+    {
+        print("\nIn DBManager.playersRequiresLoad method...")
+        
+        let realm = try! Realm()
+        
+        let playerResult = realm.objects(NHLPlayer.self).filter("season =='\(season)' AND seasonType =='\(seasonType)'").first
+        
+        return playerResult != nil ? false : true
+    }
+    
+    func playerStatisticsRequiresLoad() -> Bool
+    {
+        print("\nIn DBManager.playerStatisticsRequiresLoad method...")
+        
+        let realm = try! Realm()
+        
+        let playerStatisticsResult = realm.objects(PlayerStatistics.self).filter("season =='\(season)' AND seasonType =='\(seasonType)'").first
+        
+        return playerStatisticsResult != nil ? false : true
+    }
+    
     // MARK: Delete methods
     func deleteTeamLinks()
     {
-        print("\n\nIn DBManager.deleteTeamLinks method...\n\n")
+        print("\nIn DBManager.deleteTeamLinks method...")
         
         let realm = try! Realm()
         
@@ -1315,7 +1363,7 @@ class DBManager
     
     func deleteScoringSummaryData()
     {
-        print("\n\nIn DBManager.deleteScoringSummaryData method...\n\n")
+        print("\nIn DBManager.deleteScoringSummaryData method...")
         
         let realm = try! Realm()
         
@@ -1338,7 +1386,7 @@ class DBManager
     
     func deletePlayerStatisticsData()
     {
-        print("\n\nIn DBManager.deletePlayerStatisticsData method...\n\n")
+        print("\nIn DBManager.deletePlayerStatisticsData method...")
         
         let realm = try! Realm()
         
@@ -1362,7 +1410,7 @@ class DBManager
     //  Returns the latest date played in the schedule table in String format
     func getLatestDatePlayed() -> String
     {
-        print("\n\nIn DBManager.getLatestDatePlayed method...\n\n")
+        print("\nIn DBManager.getLatestDatePlayed method...")
         
         let realm = try! Realm()
         
@@ -1375,7 +1423,7 @@ class DBManager
     //  Returns the latest date in the game log table in String format
     func getLatestGameLogDate() -> String
     {
-        print("\n\nIn DBManager.getLatestGameLogDate method...\n\n")
+        print("\nIn DBManager.getLatestGameLogDate method...")
         
         let realm = try! Realm()
         
@@ -1388,7 +1436,7 @@ class DBManager
     // MARK: Retrieve NHL player by name
     func retrievePlayerDetail(_ name: String) -> PlayerDetailModel
     {
-        print("\n\nIn DBManager.retrievePlayerDetail method...\n\n")
+        print("\nIn DBManager.retrievePlayerDetail method...")
         
         let realm = try! Realm()
 
@@ -1426,7 +1474,7 @@ class DBManager
     // MARK: Retrieve NHL player statistics by id
     func retrievePlayerStatistics(_ id: Int) -> PlayerStatisticsModel
     {
-        print("\n\nIn DBManager.retrievePlayerStatistics method...\n\n")
+        print("\nIn DBManager.retrievePlayerStatistics method...")
         
         let realm = try! Realm()
 
@@ -1489,7 +1537,7 @@ class DBManager
     // MARK: Retrieve schedule information for date
     func retrieveScheduledGamesForDate(_ selectedDate: String) -> [ScheduledGameModel]
     {
-        print("\n\nIn DBManager.retrieveScheduledGamesForDate method...\n\n")
+        print("\nIn DBManager.retrieveScheduledGamesForDate method...")
         
         let realm = try! Realm()
         
@@ -1504,11 +1552,11 @@ class DBManager
             let scheduledGameModel = ScheduledGameModel()
             
             print("Start time is: \(nhlSchedule.time)")
-            print("Venue is: \(TeamManager.getVenueNameByTeam(nhlSchedule.parentTeam.first?.abbreviation ?? ""))")
+            print("Venue is: \(TeamManager.getVenueNameByTeam(nhlSchedule.homeTeam))")
             print("Game info is: \(TeamManager.getFullTeamName(nhlSchedule.awayTeam) + " @ " + TeamManager.getFullTeamName(nhlSchedule.homeTeam))")
             
             scheduledGameModel.startTime = nhlSchedule.time
-            scheduledGameModel.venue = TeamManager.getVenueNameByTeam(nhlSchedule.parentTeam.first?.abbreviation ?? "")
+            scheduledGameModel.venue = TeamManager.getVenueNameByTeam(nhlSchedule.homeTeam)
             scheduledGameModel.gameInfo = TeamManager.getFullTeamName(nhlSchedule.awayTeam) + " @ " + TeamManager.getFullTeamName(nhlSchedule.homeTeam)
             
             scheduledGameList.append(scheduledGameModel)
@@ -1520,7 +1568,7 @@ class DBManager
     // MARK: Retrieve scoring and goalie leaders
     func retrieveCategoryLeaders(_ category: String) -> [PlayerLeaderModel]
     {
-        print("\n\nIn DBManager.retrieveCategoryLeaders method...\n\n")
+        print("\nIn DBManager.retrieveCategoryLeaders method...")
         
         let realm = try! Realm()
 
@@ -1562,7 +1610,7 @@ class DBManager
     
     func retrieveGoalieCategoryLeaders(_ category: String, _ ascending: Bool) -> [PlayerLeaderModel]
     {
-        print("\n\nIn DBManager.retrieveGoalieCategoryLeaders method...\n\n")
+        print("\nIn DBManager.retrieveGoalieCategoryLeaders method...")
         
         let realm = try! Realm()
         
@@ -1615,7 +1663,7 @@ class DBManager
     // MARK: Set initial table loaded values in UserDefaults
     func setInitialUserDefaultTableLoadedValues()
     {
-        print("\n\nIn DBManager.setInitialUserDefaultTableLoadedValues method...\n\n")
+        print("\nIn DBManager.setInitialUserDefaultTableLoadedValues method...")
         
         userDefaults.set("N", forKey: Constants.MENU_CATEGORY_TABLE)
         userDefaults.set("N", forKey: Constants.GAME_LOG_TABLE)

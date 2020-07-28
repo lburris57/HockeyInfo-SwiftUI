@@ -11,7 +11,7 @@ import SwiftUI
 struct CurrentTeamData: Codable, Hashable, Identifiable
 {
     var id = 0
-    var abbreviation = ""
+    var abbreviation = Constants.EMPTY_STRING
 }
 
 private enum CodingKeys : String, CodingKey

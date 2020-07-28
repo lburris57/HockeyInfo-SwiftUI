@@ -11,8 +11,8 @@ import SwiftUI
 struct PlayerStatsTotal: Codable, Hashable, Identifiable
 {
     var id = UUID()
-    var player = PlayerStatId()
-    var playerStats = PlayerStatData()
+    var player: PlayerStatId?
+    var playerStats: PlayerStatData?
     
     private enum CodingKeys : String, CodingKey
     {

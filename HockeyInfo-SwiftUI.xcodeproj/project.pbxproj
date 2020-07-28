@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		49F03B65F29FF5C12C7CA687 /* Pods_HockeyInfo_SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 652855A8413EAAD1DE73E9DA /* Pods_HockeyInfo_SwiftUI.framework */; };
+		76706A7F24779481004184C2 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76706A7E24779481004184C2 /* ProgressBar.swift */; };
 		7681F4DB23949A4800CE1465 /* UserDefaultTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7681F4DA23949A4800CE1465 /* UserDefaultTableModel.swift */; };
 		7681F4DD2394DA6F00CE1465 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7681F4DC2394DA6F00CE1465 /* DataManager.swift */; };
 		768ACDD623989A2E001520E5 /* TeamInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768ACDD523989A2E001520E5 /* TeamInformationViewModel.swift */; };
@@ -181,6 +182,7 @@
 /* Begin PBXFileReference section */
 		21ADDDC78C591D1ADE9091C2 /* Pods-HockeyInfo-SwiftUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HockeyInfo-SwiftUI.release.xcconfig"; path = "Target Support Files/Pods-HockeyInfo-SwiftUI/Pods-HockeyInfo-SwiftUI.release.xcconfig"; sourceTree = "<group>"; };
 		652855A8413EAAD1DE73E9DA /* Pods_HockeyInfo_SwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HockeyInfo_SwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		76706A7E24779481004184C2 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		7681F4DA23949A4800CE1465 /* UserDefaultTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultTableModel.swift; sourceTree = "<group>"; };
 		7681F4DC2394DA6F00CE1465 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		768ACDD523989A2E001520E5 /* TeamInformationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamInformationViewModel.swift; sourceTree = "<group>"; };
@@ -651,6 +653,7 @@
 			isa = PBXGroup;
 			children = (
 				76C17A1B236D956B0019FCAF /* TYProgressBar.swift */,
+				76706A7E24779481004184C2 /* ProgressBar.swift */,
 			);
 			path = "Progress Bar";
 			sourceTree = "<group>";
@@ -848,7 +851,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1120;
-				LastUpgradeCheck = 1120;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Larry Burris";
 				TargetAttributes = {
 					76C17954236D931C0019FCAF = {
@@ -1097,6 +1100,7 @@
 				76C17A95236D956C0019FCAF /* ConversionUtils.swift in Sources */,
 				76C179EE236D951F0019FCAF /* PlayerInjuriesView.swift in Sources */,
 				76C17A6D236D956C0019FCAF /* RosterPlayers.swift in Sources */,
+				76706A7F24779481004184C2 /* ProgressBar.swift in Sources */,
 				76C17A91236D956C0019FCAF /* GameLog.swift in Sources */,
 				76C1799E236D946A0019FCAF /* LeaderRow.swift in Sources */,
 				76C179AD236D94830019FCAF /* PlayerLeadersViewModel.swift in Sources */,
@@ -1165,6 +1169,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1225,6 +1230,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1258,6 +1264,7 @@
 			baseConfigurationReference = EFAD923B82531450C61B9C1D /* Pods-HockeyInfo-SwiftUI.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"HockeyInfo-SwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = C37927XKUL;
@@ -1279,6 +1286,7 @@
 			baseConfigurationReference = 21ADDDC78C591D1ADE9091C2 /* Pods-HockeyInfo-SwiftUI.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"HockeyInfo-SwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = C37927XKUL;

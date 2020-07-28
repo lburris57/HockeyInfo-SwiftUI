@@ -94,15 +94,48 @@ struct DivisionStandingsView : View
         {
             VStack
             {
-                StandingsHeaderRow(headerName: "Atlantic Division")
+                StandingsHeaderRow(headerName: "Atlantic Division").background(Color.black)
                 
-                ForEach(model.atlanticDivisionList)
+                ForEach(model.atlanticDivisionList, id: \.self)
                 {
-                    teamStandingsData in
-                    StandingsRow(teamStandingsData: teamStandingsData)
+                    teamStandings in
+                    StandingsRow(teamStandings: teamStandings)
                 }
             }
-        }
+            
+            VStack
+            {
+                StandingsHeaderRow(headerName: "Metro Division").background(Color.black)
+                
+                ForEach(model.metroDivisionList, id: \.self)
+                {
+                    teamStandings in
+                    StandingsRow(teamStandings: teamStandings)
+                }
+            }
+            
+            VStack
+            {
+                StandingsHeaderRow(headerName: "Central Division").background(Color.black)
+                
+                ForEach(model.centralDivisionList, id: \.self)
+                {
+                    teamStandings in
+                    StandingsRow(teamStandings: teamStandings)
+                }
+            }
+            
+            VStack
+            {
+                StandingsHeaderRow(headerName: "Pacific Division").background(Color.black)
+                
+                ForEach(model.pacificDivisionList, id: \.self)
+                {
+                    teamStandings in
+                    StandingsRow(teamStandings: teamStandings)
+                }
+            }
+        }.onAppear(perform: model.fetchStandings)
     }
 }
 

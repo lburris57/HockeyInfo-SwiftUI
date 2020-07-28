@@ -29,7 +29,7 @@ class RKManager : ObservableObject
         self.maximumDate = maximumDate
         self.selectedDates = selectedDates
         self.mode = mode
-        self.scheduledGameModelList = DBManager().retrieveScheduledGamesForDate(Date().getTextFromDate())
+        //self.scheduledGameModelList = DBManager().retrieveScheduledGamesForDate(Date().getTextFromDate())
     }
     
     func selectedDatesContains(date: Date) -> Bool

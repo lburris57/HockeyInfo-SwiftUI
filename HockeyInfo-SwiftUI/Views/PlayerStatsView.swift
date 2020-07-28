@@ -12,13 +12,30 @@ struct PlayerStatsView : View
 {
     var playerDetail: PlayerDetailModel
     var playerStatistics: PlayerStatisticsModel
+    //@ObservedObject var model = PlayerStatisticsViewModel()
+    
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View
     {
         VStack
         {
-            //  Team image
-            Image("\(playerDetail.teamAbbreviation)").resizable().frame(height: 200).minimumScaleFactor(0.25)
+            ZStack
+            {
+                //  Team image
+                Image("\(playerDetail.teamAbbreviation)").resizable().frame(height: 200).minimumScaleFactor(0.25)
+                HStack
+                {
+                    Spacer()
+                    Button(action:
+                    {
+                        self.presentationMode.wrappedValue.dismiss()
+                    })
+                    {
+                        Image(systemName: "clear.fill").foregroundColor(.red)
+                    }.offset(x: 0, y: -50).padding(15)
+                }
+            }
             
             Spacer()
             

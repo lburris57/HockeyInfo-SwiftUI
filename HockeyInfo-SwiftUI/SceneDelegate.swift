@@ -24,40 +24,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions)
     {
-        //let seasonSchedules = dataManager.loadSeasonScheduleData()
+        //print("\n\nIn scene delegate......\n\n")
         
-        print("\n\nIn scene delegate......\n\n")
+        NetworkManager().retrieveStandings()
         
-        print("User settings season is: \(userSettings.season)")
-        print("User settings season type is: \(userSettings.seasonType)")
+        NetworkManager().retrieveRosterList()
         
-//        if let userDefaultTableInformationModel20082009 = UserDefaultsHelper.retrieveUserDefaultsTableInformationData(for: "tableModel2008-2009")
-//        {
-//            print("Season for tableModel2008-2009 is \(userDefaultTableInformationModel20082009.season)")
-//            print("Playoffs for tableModel2008-2009 is \(userDefaultTableInformationModel20082009.isPlayoffs)")
-//        }
-//        else
-//        {
-//            UserDefaultsHelper.loadUserDefaultsTableInformationData()
-//        }
+        NetworkManager().retrieveFullSeasonSchedule()
+        
+        //databaseManager.linkPlayersToTeams()
         
         userDefaults.set(TimeAndDateUtils.isValidSetting(currentSeason, true), forKey: Constants.IS_PLAYOFF_SETTING_VALID)
         
-        print("Value of IS_PLAYOFF_SETTING_VALID is \(userDefaults.bool(forKey: Constants.IS_PLAYOFF_SETTING_VALID))")
-        print("Value of current season is \(currentSeason)")
-        
-//        let seasonSettingsArray = TimeAndDateUtils.getSeasonSettingsArray()
-//        let playoffSeasonSettingsArray = TimeAndDateUtils.getPlayoffSeasonSettingsArray()
-//        
-//        for season in seasonSettingsArray
-//        {
-//            print("Season is " + season)
-//        }
-//        
-//        for season in playoffSeasonSettingsArray
-//        {
-//            print("Playoff season is " + season)
-//        }
+        //print("Value of IS_PLAYOFF_SETTING_VALID is \(userDefaults.bool(forKey: Constants.IS_PLAYOFF_SETTING_VALID))")
+        //print("Value of current season is \(currentSeason)")
         
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.

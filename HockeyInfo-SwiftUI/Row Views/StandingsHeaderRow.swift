@@ -14,8 +14,8 @@ struct StandingsHeaderRow : View
     
     var body: some View
     {
-        Text("Atlantic Division       GP        W        L        OTL        PTS")
-                .font(.custom("Monospaced", size: 15)).multilineTextAlignment(.leading).background(Color.purple).foregroundColor(Color.white)
+        Text("\(headerName)       GP        W        L        OTL        PTS")
+                .font(.custom("Monospaced", size: 15)).multilineTextAlignment(.leading).background(Color.black).foregroundColor(Color.white)
     }
 }
 

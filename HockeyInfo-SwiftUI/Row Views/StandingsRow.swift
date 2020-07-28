@@ -9,21 +9,18 @@ import SwiftUI
 
 struct StandingsRow : View
 {
-    var teamStandingsData: TeamStandingsData
+    var teamStandings: TeamStandings
     
     var body: some View
     {
-        Text("\(teamStandingsData.teamInformation.city)            \(teamStandingsData.teamStats.gamesPlayed)        \(teamStandingsData.teamStats.standingsInfo.wins)       \(teamStandingsData.teamStats.standingsInfo.losses)          \(teamStandingsData.teamStats.standingsInfo.overtimeLosses)           \(teamStandingsData.teamStats.standingsInfo.points)")
-            .font(.custom("Monospaced", size: 15)).multilineTextAlignment(.leading).padding(.top)
+        HStack
+        {
+            Text("\(TeamManager.getFullTeamName(teamStandings.abbreviation))").font(.custom("Monospaced", size: 11)).bold().padding(.top)
+            
+            Spacer()
+            
+            Text(" \(teamStandings.gamesPlayed)        \(teamStandings.wins)       \(teamStandings.losses)            \(teamStandings.overtimeLosses)           \(teamStandings.points)")
+                .font(.custom("Monospaced", size: 15)).padding(.top)
+        }
     }
 }
-
-//#if DEBUG
-//struct StandingsRow_Previews : PreviewProvider
-//{
-//    static var previews: some View
-//    {
-//        StandingsRow()
-//    }
-//}
-//#endif

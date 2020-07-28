@@ -25,10 +25,10 @@ struct LeagueStandingsView : View
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal)
                 
-                ForEach(model.leagueList)
+                ForEach(model.leagueList, id: \.self)
                 {
-                    teamStandingsData in
-                    Text("\(teamStandingsData.teamInformation.city) \(teamStandingsData.teamInformation.name) has \(teamStandingsData.teamStats.standingsInfo.points) points")
+                    teamStandings in
+                    Text("\(TeamManager.getFullTeamName(teamStandings.abbreviation)) has \(teamStandings.points) points")
                         .font(.caption)
                         .fontWeight(.regular)
                         .multilineTextAlignment(.leading)
@@ -36,7 +36,7 @@ struct LeagueStandingsView : View
                         .padding(.horizontal, 5.0)
                 }
             }
-        }
+        }.onAppear(perform: model.fetchStandings)
     }
 }
 

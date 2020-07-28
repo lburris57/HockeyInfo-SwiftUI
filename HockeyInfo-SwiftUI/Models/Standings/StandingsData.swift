@@ -25,4 +25,35 @@ struct StandingsData: Codable, Hashable, Identifiable
         case overtimeLosses = "overtimeLosses"
         case points = "points"
     }
+    
+    func winsString() -> String
+    {
+        return wins < 10 ? " \(wins)" : "\(wins)"
+    }
+    
+    func lossesString() -> String
+    {
+        return losses < 10 ? " \(losses)" : "\(losses)"
+    }
+    
+    func overtimeLossesString() -> String
+    {
+        return overtimeLosses < 10 ? " \(overtimeLosses)" : "\(overtimeLosses)"
+    }
+    
+    func pointsString() -> String
+    {
+        if points < 10
+        {
+            return "  \(points)"
+        }
+        else if points > 10 && points < 100
+        {
+            return " \(points)"
+        }
+        else
+        {
+            return "\(points)"
+        }
+    }
 }

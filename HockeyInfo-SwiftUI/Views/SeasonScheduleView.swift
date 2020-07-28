@@ -79,7 +79,7 @@ struct SeasonScheduleView : View
                 
                 Spacer()
             }
-        }.navigationBarTitle(Text("\(settings.season) Season Schedule"))
+        }.navigationBarTitle(Text("\(settings.season) Season Schedule")).onAppear(perform: model.fetchSeasonSchedule)
     }
 }
 

@@ -37,9 +37,10 @@ class NetworkManager
     // MARK: Retrieve methods
     
     //  Retrieve full season schedule for all 31 teams
-    func retrieveFullSeasonSchedule(completion: @escaping ([NHLSchedule]) -> ())
+    //func retrieveFullSeasonSchedule(completion: @escaping ([NHLSchedule]) -> ())
+    func retrieveFullSeasonSchedule()
     {
-        print("\n\nIn NetworkManager.retrieveFullSeasonSchedule method...\n\n")
+        print("\nIn NetworkManager.retrieveFullSeasonSchedule method...")
         
         if(!databaseManager.fullScheduleRequiresLoad())
         {
@@ -69,17 +70,20 @@ class NetworkManager
                 
                 self.databaseManager.saveFullSeasonScheduleGameData(scheduledGames)
                 
-                DispatchQueue.main.async
-                {
-                    completion(scheduledGames)
-                }
+//                DispatchQueue.main.async
+//                {
+//                    print("\nCalling completionhandler in NetworkManager.retrieveFullSeasonSchedule method...")
+//                    
+//                    completion(scheduledGames)
+//                }
             }
         }.resume()
     }
     
-    func retrieveStandings(completion: @escaping (NHLStandings) -> ())
+    //func retrieveStandings(completion: @escaping ([TeamStandings]) -> ())
+    func retrieveStandings()
     {
-        print("\n\nIn NetworkManager.retrieveStandings method...\n\n")
+        print("\nIn NetworkManager.retrieveStandings method...")
         
         session.dataTask(with: createRequest(urlHelper.retrieveStandingsURL()))
         {
@@ -95,17 +99,27 @@ class NetworkManager
                 
                 self.databaseManager.saveStandings(nhlStandings)
                 
-                DispatchQueue.main.async
-                {
-                    completion(nhlStandings)
-                }
+//                DispatchQueue.main.async
+//                {
+//                    print("\nCalling completionhandler in NetworkManager.retrieveStandings method...")
+//
+//                    completion(self.dataExchangeHelper.convertNHLStandingsToTeamStandingsList(nhlStandings))
+//                }
             }
         }.resume()
     }
     
-    func retrieveRosters(completion: @escaping (RosterPlayers) -> ())
+    //func retrieveRosterList(completion: @escaping ([NHLPlayer]) -> ())
+    func retrieveRosterList()
     {
-        print("\n\nIn NetworkManager.retrieveRosters method...\n\n")
+        print("\nIn NetworkManager.retrieveRosters method...")
+        
+        if(!databaseManager.playersRequiresLoad())
+        {
+            print("Players have already been saved to the database...")
+            
+            return
+        }
         
         session.dataTask(with: createRequest(urlHelper.retrieveRosterPlayersURL()))// https://api.mysportsfeeds.com/v2.1/pull/nhl/players.json?rosterstatus=assigned-to-roster&season=2018-2019-regular
         {
@@ -121,17 +135,29 @@ class NetworkManager
                 
                 self.databaseManager.saveRosters(rosterPlayers)
                 
-                DispatchQueue.main.async
-                {
-                    completion(rosterPlayers)
-                }
+//                DispatchQueue.main.async
+//                {
+//                    print("\nCalling completionhandler in NetworkManager.retrieveRosters method...")
+//
+//                    completion(self.dataExchangeHelper.convertRosterPlayersToNHLPlayerList(rosterPlayers))
+//                }
             }
         }.resume()
     }
     
-    func retrievePlayerStats(completion: @escaping (PlayerStats) -> ())
+    func retrievePlayerStatisticsDictionary(completion: @escaping ([Int: PlayerStatistics]) -> ())
     {
-        print("\n\nIn NetworkManager.retrievePlayerStats method...\n\n")
+        print("\nIn NetworkManager.retrievePlayerStatisticsDictionary method...\n\nUsing URL: \(urlHelper.retrievePlayerStatsURL())")
+        
+        if(!databaseManager.playerStatisticsRequiresLoad())
+        {
+            print("Player statistics have already been saved to the database...")
+            
+            return
+        }
+        
+        var playerStatisticsDictionary = [Int: PlayerStatistics]()
+        var playerStats = PlayerStats()
         
         session.dataTask(with: createRequest(urlHelper.retrievePlayerStatsURL()))
         {
@@ -143,13 +169,26 @@ class NetworkManager
             }
             else if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200
             {
-                let playerStats = try! JSONDecoder().decode(PlayerStats.self, from: data)
+                print("\nData is: \(data)")
                 
-                self.databaseManager.savePlayerStats(playerStats)
+                do
+                {
+                    playerStats = try JSONDecoder().decode(PlayerStats.self, from: data)
+                    
+                    playerStatisticsDictionary = self.dataExchangeHelper.convertPlayerStatsToPlayerStatisticsDictionary(playerStats.playerStatsTotals)
+                    
+                    self.databaseManager.savePlayerStats(playerStats)
+                }
+                catch
+                {
+                    print(error.localizedDescription)
+                }
                 
                 DispatchQueue.main.async
                 {
-                    completion(playerStats)
+                    print("\nCalling completionhandler in NetworkManager.retrievePlayerStatisticsDictionary method...")
+
+                    completion(playerStatisticsDictionary)
                 }
             }
         }.resume()
@@ -157,7 +196,7 @@ class NetworkManager
     
     func retrievePlayerInjuries(completion: @escaping (PlayerInjuries) -> ())
     {
-        print("\n\nIn NetworkManager.retrievePlayerInjuries method...\n\n")
+        print("\nIn NetworkManager.retrievePlayerInjuries method...")
         
         session.dataTask(with: createRequest(urlHelper.retrievePlayerInjuriesURL()))
         {
@@ -175,8 +214,14 @@ class NetworkManager
                     
                     DispatchQueue.main.async
                     {
+                        print("\nCalling completionhandler in NetworkManager.retrievePlayerInjuries method...")
+                        
                         completion(playerInjuries)
                     }
+                }
+                else
+                {
+                    print("\nNo injuries found in NetworkManager.retrievePlayerInjuries method...")
                 }
             }
         }.resume()
@@ -184,7 +229,7 @@ class NetworkManager
     
     func retrieveScoringSummary(forGameId gameId: Int, completion: @escaping (ScoringSummary) -> ())
     {
-        print("\n\nIn NetworkManager.retrieveScoringSummary method...\n\n")
+        print("\nIn NetworkManager.retrieveScoringSummary method...")
         
         session.dataTask(with: createRequest(urlHelper.retrieveScoringSummaryURL(gameId)))
         {
@@ -202,6 +247,8 @@ class NetworkManager
                 
                 DispatchQueue.main.async
                 {
+                    print("\nCalling completionhandler in NetworkManager.retrieveScoringSummary method...")
+                    
                     completion(scoringSummary)
                 }
             }
@@ -210,7 +257,7 @@ class NetworkManager
     
     func retrieveGameLog(completion: @escaping (GameLog) -> ())
     {
-        print("\n\nIn NetworkManager.retrieveGameLog method...\n\n")
+        print("\nIn NetworkManager.retrieveGameLog method...")
         
         session.dataTask(with: createRequest(urlHelper.retrieveGameLogsURL()))
         {
@@ -228,6 +275,8 @@ class NetworkManager
                 
                 DispatchQueue.main.async
                 {
+                    print("\nCalling completionhandler in NetworkManager.retrieveGameLog method...")
+                    
                     completion(gameLog)
                 }
             }
@@ -237,7 +286,7 @@ class NetworkManager
     //  Retrieve a list of the games since the last database update
     func retrieveLatestGameScheduleInfo(completion: @escaping ([ScheduledGame]) -> ())
     {
-        print("\n\nIn NetworkManager.retrieveLatestGameScheduleInfo method...\n\n")
+        print("\nIn NetworkManager.retrieveLatestGameScheduleInfo method...")
         
         print("Last date played value is \(databaseManager.getLatestDatePlayed())")
 
@@ -266,6 +315,8 @@ class NetworkManager
                 
                 DispatchQueue.main.async
                 {
+                    print("\nCalling completionhandler in NetworkManager.retrieveLatestGameScheduleInfo method...")
+                    
                     completion(seasonSchedule.gameList)
                 }
             }
@@ -274,7 +325,7 @@ class NetworkManager
     
     func retrieveScheduleForDate(_ date :Date, completion: @escaping ([ScheduledGame]) -> ())
     {
-        print("\n\nIn NetworkManager.retrieveScheduleForDate method...\n\n")
+        print("\nIn NetworkManager.retrieveScheduleForDate method...")
         
         let shortDateFormatter = DateFormatter()
         
@@ -299,6 +350,8 @@ class NetworkManager
                 
                 DispatchQueue.main.async
                 {
+                    print("\nCalling completionhandler in NetworkManager.retrieveLatestGameScheduleInfo method using \(scheduleDate)...")
+                    
                     completion(seasonSchedule.gameList)
                 }
             }
@@ -307,7 +360,7 @@ class NetworkManager
     
     func loadPlayerStats()
     {
-        print("\n\nIn NetworkManager.loadPlayerStats method...\n\n")
+        print("\nIn NetworkManager.loadPlayerStats method...")
         
         session.dataTask(with: createRequest(urlHelper.retrievePlayerStatsURL()))
         {
@@ -319,6 +372,8 @@ class NetworkManager
             }
             else if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200
             {
+                print("\(data)")
+                
                 let playerStats = try? JSONDecoder().decode(PlayerStats.self, from: data)
                 
                 self.databaseManager.savePlayerStats(playerStats ?? PlayerStats())

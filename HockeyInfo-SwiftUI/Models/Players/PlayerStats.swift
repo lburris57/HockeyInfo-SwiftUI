@@ -11,7 +11,7 @@ import SwiftUI
 struct PlayerStats: Codable, Hashable, Identifiable
 {
     var id = UUID()
-    var lastUpdatedOn = ""
+    var lastUpdatedOn = Constants.EMPTY_STRING
     var playerStatsTotals = [PlayerStatsTotal]()
     
     private enum CodingKeys : String, CodingKey

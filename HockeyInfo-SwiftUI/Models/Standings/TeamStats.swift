@@ -25,4 +25,9 @@ struct TeamStats: Codable, Hashable, Identifiable
         case powerplayInfo = "powerplay"
         case miscellaneousInfo = "miscellaneous"
     }
+    
+    func gamesPlayedString() -> String
+    {
+        return gamesPlayed < 10 ? " \(gamesPlayed)" : "\(gamesPlayed)"
+    }
 }

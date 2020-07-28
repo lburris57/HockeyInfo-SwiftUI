@@ -30,12 +30,12 @@ class URLHelper
     
     func retrieveFullSeasonURL() -> String
     {
-        return "https://api.mysportsfeeds.com/v2.1/pull/nhl/\(seasonSettingURL)/games.json"
+        return "https://api.mysportsfeeds.com/v2.1/pull/nhl/\(seasonSettingURL)/games.json" //https://api.mysportsfeeds.com/v2.1/pull/nhl/2019-2020/games.json
     }
     
     func retrieveRosterPlayersURL() -> String
     {
-        return "https://api.mysportsfeeds.com/v2.1/pull/nhl/players.json?rosterstatus=assigned-to-roster&season=\(seasonSettingURL)"
+        return "https://api.mysportsfeeds.com/v2.1/pull/nhl/players.json?rosterstatus=assigned-to-roster&season=\(seasonSettingURL)" //https://api.mysportsfeeds.com/v2.1/pull/nhl/players.json?rosterstatus=assigned-to-roster&season=2019-2020
     }
     
     func retrieveStandingsURL() -> String
