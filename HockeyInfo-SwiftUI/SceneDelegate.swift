@@ -24,15 +24,41 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions)
     {
-        //print("\n\nIn scene delegate......\n\n")
+        print("\n\nIn scene delegate......\n\n")
         
-        NetworkManager().retrieveStandings()
+        if self.databaseManager.fullScheduleRequiresLoad()
+        {
+            NetworkManager().retrieveStandings()
+            
+            NetworkManager().retrieveRosterList()
+            
+            NetworkManager().retrieveFullSeasonSchedule()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0)
+            {
+                self.databaseManager.linkPlayersToTeams()
+                
+                NetworkManager().retrievePlayerStatisticsDictionary(){_ in }
+            }
+        }
         
-        NetworkManager().retrieveRosterList()
+        let playerLeaders = self.databaseManager.retrieveCategoryLeaders("goals")
         
-        NetworkManager().retrieveFullSeasonSchedule()
+        print("\nSize of player leaders list is \(playerLeaders.count) for goals category\n")
         
-        //databaseManager.linkPlayersToTeams()
+        for player in playerLeaders
+        {
+            print("\(player)\n")
+        }
+        
+        let goalieLeaders = self.databaseManager.retrieveGoalieCategoryLeaders("shutouts", false)
+        
+        print("\nSize of goalie leaders list is \(goalieLeaders.count) for shutouts category\n")
+        
+        for goalie in goalieLeaders
+        {
+            print("\(goalie)\n")
+        }
         
         userDefaults.set(TimeAndDateUtils.isValidSetting(currentSeason, true), forKey: Constants.IS_PLAYOFF_SETTING_VALID)
         

@@ -71,7 +71,7 @@ struct MainMenuView : View
                     HStack
                     {
                         Image("Hockey_IceSkate").resizable().frame(width: 20, height: 20).aspectRatio(contentMode: .fit)
-                        MainMenuRow(mainMenuItem: MainMenuItem(description: "Player Leaders"))
+                        MainMenuRow(mainMenuItem: MainMenuItem(description: "Skater Leaders"))
                     }
                 }
                 

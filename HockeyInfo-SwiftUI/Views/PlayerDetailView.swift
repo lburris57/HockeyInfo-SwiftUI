@@ -77,27 +77,35 @@ struct PlayerDetailView : View
                         Text("Age: " + "\(playerDetail.age)")
                         Text("Birth City: " + "\(playerDetail.birthCity)")
                         Text("Birth Country: " + "\(playerDetail.birthCountry)")
-                        Text("Height: " + "\(playerDetail.height)")
-                        Text("Weight: " + "\(playerDetail.weight)")
-                        Text("Status: Available")
-                        Text("Shoots: " + "\(playerDetail.shoots)")
+                        
+                        HStack
+                        {
+                            Text("Height: " + "\(playerDetail.height)")
+                            Text("Weight: " + "\(playerDetail.weight)")
+                        }
+                        
+                        HStack
+                        {
+                            Text("Status: Available")
+                            Text("Shoots: " + "\(playerDetail.shoots)")
+                        }
                     }.padding(2)
                     
                     Spacer()
                     
-//                    NavigationLink(destination: PlayerStatsView(playerDetail: playerDetail, playerStatistics: DBManager().retrievePlayerStatistics(playerDetail.playerId)))
-//                    {
-//                        Text("Display Player Statistics").padding(10).foregroundColor(.white)
-//                    }.buttonStyle(NeumorphicButtonStyle()).padding(5)
-                    
-                    Button("    Display Player Statistics    ")
+                    NavigationLink(destination: PlayerStatsView(playerDetail: playerDetail, playerStatistics: DBManager().retrievePlayerStatistics(playerDetail.playerId)))
                     {
-                        self.showingSheet.toggle()
+                        Text("Display Player Statistics").padding(10).foregroundColor(.white)
                     }.buttonStyle(NeumorphicButtonStyle()).padding(5)
-                    .sheet(isPresented: $showingSheet)
-                    {
-                        PlayerStatsView(playerDetail: self.playerDetail, playerStatistics: DBManager().retrievePlayerStatistics(self.playerDetail.playerId))
-                    }.foregroundColor(.white).padding()
+                    
+//                    Button("    Display Player Statistics    ")
+//                    {
+//                        self.showingSheet.toggle()
+//                    }.buttonStyle(NeumorphicButtonStyle()).padding(5)
+//                    .sheet(isPresented: $showingSheet)
+//                    {
+//                        PlayerStatsView(playerDetail: self.playerDetail, playerStatistics: DBManager().retrievePlayerStatistics(self.playerDetail.playerId))
+//                    }.foregroundColor(.white).padding()
                 }
                 
                 Spacer()

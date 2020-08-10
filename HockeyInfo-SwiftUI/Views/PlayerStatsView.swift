@@ -12,7 +12,7 @@ struct PlayerStatsView : View
 {
     var playerDetail: PlayerDetailModel
     var playerStatistics: PlayerStatisticsModel
-    //@ObservedObject var model = PlayerStatisticsViewModel()
+    @ObservedObject var model = PlayerStatisticsViewModel()
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -24,17 +24,17 @@ struct PlayerStatsView : View
             {
                 //  Team image
                 Image("\(playerDetail.teamAbbreviation)").resizable().frame(height: 200).minimumScaleFactor(0.25)
-                HStack
-                {
-                    Spacer()
-                    Button(action:
-                    {
-                        self.presentationMode.wrappedValue.dismiss()
-                    })
-                    {
-                        Image(systemName: "clear.fill").foregroundColor(.red)
-                    }.offset(x: 0, y: -50).padding(15)
-                }
+//                HStack
+//                {
+//                    Spacer()
+//                    Button(action:
+//                    {
+//                        self.presentationMode.wrappedValue.dismiss()
+//                    })
+//                    {
+//                        Image(systemName: "clear.fill").foregroundColor(.red)
+//                    }.offset(x: 0, y: -50).padding(15)
+//                }
             }
             
             Spacer()

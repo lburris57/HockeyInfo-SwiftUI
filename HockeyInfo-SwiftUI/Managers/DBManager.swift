@@ -325,7 +325,7 @@ class DBManager
                     }
                 }
                 
-                //self.linkStatisticsAndInjuriesToPlayers()
+                self.linkStatisticsAndInjuriesToPlayers()
                 
                 self.userDefaults.set("Y", forKey: Constants.PLAYER_STATISTICS_TABLE)
                 
@@ -436,8 +436,8 @@ class DBManager
                 print("Error saving team data to the database: \(error.localizedDescription)")
             }
             
-            //self.linkStandingsToTeams()
-            //self.linkStatisticsToTeams()
+            self.linkStandingsToTeams()
+            self.linkStatisticsToTeams()
             
             self.userDefaults.set("Y", forKey: Constants.TEAM_STANDINGS_TABLE)
             

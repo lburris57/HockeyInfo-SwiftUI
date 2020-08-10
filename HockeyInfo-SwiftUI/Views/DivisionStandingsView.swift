@@ -135,7 +135,7 @@ struct DivisionStandingsView : View
                     StandingsRow(teamStandings: teamStandings)
                 }
             }
-        }//.onAppear(perform: model.fetchStandings)
+        }.onAppear(perform: model.fetchStandings)
     }
 }
 

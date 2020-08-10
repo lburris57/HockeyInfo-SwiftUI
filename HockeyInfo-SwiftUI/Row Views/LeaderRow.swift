@@ -10,8 +10,8 @@ import SwiftUI
 struct LeaderRow : View
 {
     var player: NHLPlayer
-    var index: Int
-    var category: String
+    var index: Int = 1
+    var category: String = "goals"
     
     var body: some View
     {
@@ -60,7 +60,7 @@ struct LeaderRow : View
 //{
 //    static var previews: some View
 //    {
-//        LeaderRow()
+//        LeaderRow(player: DBManager().retrieveAllPlayers()[0], index: 0, category: "goals")
 //    }
 //}
 //#endif

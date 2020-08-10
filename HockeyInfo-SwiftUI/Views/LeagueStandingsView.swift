@@ -36,7 +36,7 @@ struct LeagueStandingsView : View
                         .padding(.horizontal, 5.0)
                 }
             }
-        }//.onAppear(perform: model.fetchStandings)
+        }.onAppear(perform: model.fetchStandings)
     }
 }
 
