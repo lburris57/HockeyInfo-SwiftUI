@@ -13,7 +13,7 @@ struct UserDefaultsHelper
     
     static func constructSeasonString() -> String
     {
-        let userSettings = UserSettings()
+        let userSettings = UserSettingsViewModel()
         
         let season = userSettings.season
         let isPlayoffs = userSettings.isPlayoffs

@@ -14,10 +14,10 @@ final class PlayerStatisticsViewModel: ObservableObject
     @Published var playerStats = PlayerStats()
     @Published var playerStatsDictionary = [Int: PlayerStatistics]()
     
-    init()
-    {
-        fetchPlayerStats()
-    }
+//    init()
+//    {
+//        fetchPlayerStats()
+//    }
     
     private func fetchPlayerStats()
     {

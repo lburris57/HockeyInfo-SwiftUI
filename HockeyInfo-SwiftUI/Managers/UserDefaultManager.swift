@@ -11,7 +11,7 @@ class UserDefaultManager
 {
     static let userDefaults = UserDefaults.standard
     
-    static let userSettings = UserSettings()
+    static let userSettings = UserSettingsViewModel()
     
     static func encodeDataToUserDefaults(for key: String, _ model: UserDefaultTableInformationModel)
     {
@@ -28,8 +28,7 @@ class UserDefaultManager
         let season = userSettings.season
         let isPlayoffs = userSettings.isPlayoffs
         
-        let model = UserDefaultTableInformationModel(season: season, isPlayoffs: isPlayoffs, isSeasonScheduleTableLoaded: false, isTeamTableLoaded: false, isTeamStandingsLoaded: false,
-                            isTeamStatisticsLoaded: false, isPlayerTableLoaded: false, isPlayerStatisticsLoaded: false, isPlayerInjuriesLoaded: false, lastUpdated: TimeAndDateUtils.getCurrentDateAsString())
+        let model = UserDefaultTableInformationModel(season: season, isPlayoffs: isPlayoffs, lastUpdated: TimeAndDateUtils.getCurrentDateAsString())
         
         if let savedData = userDefaults.object(forKey: key) as? Data
         {

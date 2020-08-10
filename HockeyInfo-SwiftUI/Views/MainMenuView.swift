@@ -11,7 +11,7 @@ import SwiftUI
 
 struct MainMenuView : View
 {
-    @EnvironmentObject var settings: UserSettings
+    @EnvironmentObject var settings: UserSettingsViewModel
     
     var body: some View
     {
@@ -66,23 +66,23 @@ struct MainMenuView : View
                     }
                 }
                 
-//                NavigationLink(destination: PlayerLeadersView())
-//                {
-//                    HStack
-//                    {
-//                        Image("settingsCategory").resizable().frame(width: 20, height: 20).aspectRatio(contentMode: .fit)
-//                        MainMenuRow(mainMenuItem: MainMenuItem(description: "Player Leaders"))
-//                    }
-//                }
+                NavigationLink(destination: PlayerLeadersView())
+                {
+                    HStack
+                    {
+                        Image("Hockey_IceSkate").resizable().frame(width: 20, height: 20).aspectRatio(contentMode: .fit)
+                        MainMenuRow(mainMenuItem: MainMenuItem(description: "Player Leaders"))
+                    }
+                }
                 
-//                NavigationLink(destination: GoalieLeadersView())
-//                {
-//                    HStack
-//                    {
-//                        Image("settingsCategory").resizable().frame(width: 20, height: 20).aspectRatio(contentMode: .fit)
-//                        MainMenuRow(mainMenuItem: MainMenuItem(description: "Goalie Leaders"))
-//                    }
-//                }
+                NavigationLink(destination: GoalieLeadersView())
+                {
+                    HStack
+                    {
+                        Image("ice-hockey-helmet-icon").resizable().frame(width: 20, height: 20).aspectRatio(contentMode: .fit)
+                        MainMenuRow(mainMenuItem: MainMenuItem(description: "Goalie Leaders"))
+                    }
+                }
                 
                 NavigationLink(destination: SettingsView())
                 {
@@ -103,7 +103,7 @@ struct MainMenuView_Previews : PreviewProvider
 {
     static var previews: some View
     {
-        MainMenuView().environmentObject(UserSettings())
+        MainMenuView().environmentObject(UserSettingsViewModel())
     }
 }
 #endif

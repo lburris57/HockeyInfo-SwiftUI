@@ -31,7 +31,7 @@ struct CustomHeader: View
 
 struct TeamListView : View
 {
-    @EnvironmentObject var settings: UserSettings
+    @EnvironmentObject var settings: UserSettingsViewModel
     
     var atlanticDivisionTeamItems = TeamItem.atlanticDivisionTeamItems()
     var metropolitanDivisionTeamItems = TeamItem.metropolitanDivisionTeamItems()
@@ -97,7 +97,7 @@ struct TeamListView_Previews : PreviewProvider
 {
     static var previews: some View
     {
-        TeamListView().environmentObject(UserSettings())
+        TeamListView().environmentObject(UserSettingsViewModel())
     }
 }
 #endif

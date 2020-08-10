@@ -28,7 +28,7 @@ final class SeasonScheduleViewModel: ObservableObject
 //            self.nhlScheduleList = $0
 //        }
         
-        userDefaultsModel.isSeasonScheduleTableLoaded = true
+        //userDefaultsModel.isSeasonScheduleTableLoaded = true
         
         print("\(userDefaultsModel)")
         

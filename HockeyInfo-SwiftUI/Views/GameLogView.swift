@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GameLogView : View
 {
-    @EnvironmentObject var settings: UserSettings
+    @EnvironmentObject var settings: UserSettingsViewModel
     
     var teamItem: TeamItem
     
@@ -45,7 +45,7 @@ struct GameLogView_Previews : PreviewProvider
 {
     static var previews: some View
     {
-        GameLogView(teamItem: TeamItem.allTeamItems()[5]).environmentObject(UserSettings())
+        GameLogView(teamItem: TeamItem.allTeamItems()[5]).environmentObject(UserSettingsViewModel())
     }
 }
 #endif

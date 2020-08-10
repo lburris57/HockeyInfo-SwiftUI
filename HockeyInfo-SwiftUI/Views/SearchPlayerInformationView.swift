@@ -11,7 +11,7 @@ import UIKit
 
 struct SearchPlayerInformationView : View
 {
-    @EnvironmentObject var settings: UserSettings
+    @EnvironmentObject var settings: UserSettingsViewModel
     
     @ObservedObject var model = RosterPlayersViewModel()
     
@@ -50,7 +50,7 @@ struct SearchPlayerInformationView_Previews : PreviewProvider
 {
     static var previews: some View
     {
-        SearchPlayerInformationView().environmentObject(UserSettings())
+        SearchPlayerInformationView().environmentObject(UserSettingsViewModel())
     }
 }
 #endif

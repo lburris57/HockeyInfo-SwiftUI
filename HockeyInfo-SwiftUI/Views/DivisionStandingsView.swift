@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DivisionStandingsView : View
 {
-    @EnvironmentObject var settings: UserSettings
+    @EnvironmentObject var settings: UserSettingsViewModel
     
     @ObservedObject var model = NHLStandingsViewModel()
     
@@ -135,7 +135,7 @@ struct DivisionStandingsView : View
                     StandingsRow(teamStandings: teamStandings)
                 }
             }
-        }.onAppear(perform: model.fetchStandings)
+        }//.onAppear(perform: model.fetchStandings)
     }
 }
 
@@ -144,7 +144,7 @@ struct DivisionStandingsView_Previews : PreviewProvider
 {
     static var previews: some View
     {
-        DivisionStandingsView().environmentObject(UserSettings())
+        DivisionStandingsView().environmentObject(UserSettingsViewModel())
     }
 }
 #endif

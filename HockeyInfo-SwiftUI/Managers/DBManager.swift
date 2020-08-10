@@ -11,8 +11,8 @@ import RealmSwift
 class DBManager
 {
     let today = Date()
-    let season = UserSettings().season
-    let seasonType = UserSettings().seasonType
+    let season = UserSettingsViewModel().season
+    let seasonType = UserSettingsViewModel().seasonType
     let userDefaults = UserDefaults.standard
     
     //  Need to update user defaults code
@@ -159,8 +159,10 @@ class DBManager
             
             print("\nFull season schedule was successfully saved to the database...")
             
+            print(Realm.Configuration.defaultConfiguration.fileURL!)
             print("\nTotal elapsed time to save full season schedule is: \((Date().timeIntervalSince1970 - startTime).rounded()) seconds.")
             print(Realm.Configuration.defaultConfiguration.fileURL!)
+            
         }
     }
     
@@ -434,8 +436,8 @@ class DBManager
                 print("Error saving team data to the database: \(error.localizedDescription)")
             }
             
-            self.linkStandingsToTeams()
-            self.linkStatisticsToTeams()
+            //self.linkStandingsToTeams()
+            //self.linkStatisticsToTeams()
             
             self.userDefaults.set("Y", forKey: Constants.TEAM_STANDINGS_TABLE)
             

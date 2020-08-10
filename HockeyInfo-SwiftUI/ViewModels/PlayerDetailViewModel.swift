@@ -13,10 +13,10 @@ class PlayerDetailViewModel: ObservableObject
     
     var name: String = Constants.EMPTY_STRING
     
-    init()
-    {
-        fetchPlayerDetail(name)
-    }
+//    init()
+//    {
+//        fetchPlayerDetail(name)
+//    }
     
     public func fetchPlayerDetail(_ name: String)
     {

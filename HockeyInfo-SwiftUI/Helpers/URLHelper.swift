@@ -9,7 +9,7 @@ import Foundation
 
 class URLHelper
 {
-    static let userSettings = UserSettings()
+    static let userSettings = UserSettingsViewModel()
     
     let season = userSettings.season
     let seasonType = userSettings.seasonType

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LeadersTabView : View
 {
-    @EnvironmentObject var settings: UserSettings
+    @EnvironmentObject var settings: UserSettingsViewModel
     
     var body: some View
     {

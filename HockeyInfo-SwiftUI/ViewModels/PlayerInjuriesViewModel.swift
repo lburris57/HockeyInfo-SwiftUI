@@ -13,10 +13,10 @@ final class PlayerInjuriesViewModel: ObservableObject
 {
     @Published var playerInjuries = PlayerInjuries()
     
-    init()
-    {
-        fetchPlayerInjuries()
-    }
+//    init()
+//    {
+//        fetchPlayerInjuries()
+//    }
     
     private func fetchPlayerInjuries()
     {

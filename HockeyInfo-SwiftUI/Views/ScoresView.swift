@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ScoresView : View
 {
-    @EnvironmentObject var settings: UserSettings
+    @EnvironmentObject var settings: UserSettingsViewModel
     
     var body: some View
     {
@@ -25,7 +25,11 @@ struct ScoresView_Previews : PreviewProvider
 {
     static var previews: some View
     {
-        ScoresView().environmentObject(UserSettings())
+        ZStack
+        {
+            Color.gray
+            ScoresView().environmentObject(UserSettingsViewModel()).foregroundColor(.white)
+        }.navigationBarTitle(Text("Scores"), displayMode: .inline)
     }
 }
 #endif

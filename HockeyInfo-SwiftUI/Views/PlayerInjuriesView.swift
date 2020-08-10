@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PlayerInjuriesView : View
 {
-    @EnvironmentObject var settings: UserSettings
+    @EnvironmentObject var settings: UserSettingsViewModel
     @ObservedObject var model = PlayerInjuriesViewModel()
     
     var teamItem: TeamItem
@@ -25,7 +25,7 @@ struct PlayerInjuriesView_Previews : PreviewProvider
 {
     static var previews: some View
     {
-        PlayerInjuriesView(teamItem: TeamItem.allTeamItems()[17]).environmentObject(UserSettings())
+        PlayerInjuriesView(teamItem: TeamItem.allTeamItems()[17]).environmentObject(UserSettingsViewModel())
     }
 }
 #endif

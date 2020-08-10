@@ -9,7 +9,7 @@ import SwiftUI
 
 struct StandingsTabView : View
 {
-    @EnvironmentObject var settings: UserSettings
+    @EnvironmentObject var settings: UserSettingsViewModel
     
     @ObservedObject var model = NHLStandingsViewModel()
     
@@ -32,7 +32,7 @@ struct StandingsTabView : View
                 Image("text-align-right-7")
                 Text("League")
             }
-        }.navigationBarTitle(Text("\(settings.season) Standings")).onAppear(perform: model.fetchStandings)
+        }.navigationBarTitle(Text("\(settings.season) Standings"))//.onAppear(perform: model.fetchStandings)
     }
 }
 
@@ -41,7 +41,7 @@ struct StandingsTabView_Previews : PreviewProvider
 {
     static var previews: some View
     {
-        StandingsTabView().environmentObject(UserSettings())
+        StandingsTabView().environmentObject(UserSettingsViewModel())
     }
 }
 #endif

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TeamInformationView : View
 {
-    @EnvironmentObject var settings: UserSettings
+    @EnvironmentObject var settings: UserSettingsViewModel
     
     var teamItem: TeamItem
     
@@ -51,7 +51,7 @@ struct TeamInformationView_Previews : PreviewProvider
 {
     static var previews: some View
     {
-        TeamInformationView(teamItem: TeamItem.allTeamItems()[26]).environmentObject(UserSettings())
+        TeamInformationView(teamItem: TeamItem.allTeamItems()[26]).environmentObject(UserSettingsViewModel())
     }
 }
 #endif

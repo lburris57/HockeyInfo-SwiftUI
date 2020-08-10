@@ -13,10 +13,10 @@ final class GameLogsViewModel: ObservableObject
 {
     @Published var gameLog = GameLog()
     
-    init()
-    {
-        fetchGameLog()
-    }
+//    init()
+//    {
+//        fetchGameLog()
+//    }
     
     private func fetchGameLog()
     {

@@ -1,15 +1,14 @@
 //
-//  UserSettings.swift
+//  UserSettingsViewModel.swift
 //  HockeyInfoSwiftUI
 //
 //  Created by Larry Burris on 7/13/19.
 //  Copyright © 2019 Larry Burris. All rights reserved.
 //
-import Foundation
 import SwiftUI
 import Combine
 
-final class UserSettings: ObservableObject
+final class UserSettingsViewModel: ObservableObject
 {
     let userDefaults = UserDefaults.standard
     

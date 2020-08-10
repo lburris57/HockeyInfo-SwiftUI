@@ -18,7 +18,7 @@ class DataManager
     {
         var nhlSchedules = [NHLSchedule]()
         
-        if model.isSeasonScheduleTableLoaded
+        if true //model.isSeasonScheduleTableLoaded
         {
             nhlSchedules = databaseManager.retrieveFullSeasonSchedule()
         }
@@ -34,7 +34,7 @@ class DataManager
     
     static func constructSeasonString() -> String
     {
-        let userSettings = UserSettings()
+        let userSettings = UserSettingsViewModel()
         
         let season = userSettings.season
         let isPlayoffs = userSettings.isPlayoffs

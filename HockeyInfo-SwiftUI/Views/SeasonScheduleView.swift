@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SeasonScheduleView : View
 {
-    @EnvironmentObject var settings: UserSettings
+    @EnvironmentObject var settings: UserSettingsViewModel
     
     @ObservedObject var model = SeasonScheduleViewModel()
     
@@ -88,7 +88,7 @@ struct SeasonScheduleView_Previews : PreviewProvider
 {
     static var previews: some View
     {
-        SeasonScheduleView().environmentObject(UserSettings())
+        SeasonScheduleView().environmentObject(UserSettingsViewModel())
     }
 }
 #endif

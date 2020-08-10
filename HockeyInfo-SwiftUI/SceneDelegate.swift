@@ -14,7 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
     
     let userDefaults = UserDefaults.standard
     
-    let userSettings = UserSettings()
+    let userSettings = UserSettingsViewModel()
     
     let databaseManager = DBManager()
     
@@ -47,7 +47,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
         if let windowScene = scene as? UIWindowScene
         {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: MainMenuView().environmentObject(UserSettings()))
+            window.rootViewController = UIHostingController(rootView: MainMenuView().environmentObject(UserSettingsViewModel()))
             self.window = window
             window.makeKeyAndVisible()
         }

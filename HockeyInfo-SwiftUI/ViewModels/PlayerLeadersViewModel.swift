@@ -5,7 +5,6 @@
 //  Created by Larry Burris on 7/16/19.
 //  Copyright © 2019 Larry Burris. All rights reserved.
 //
-import Foundation
 import Combine
 import SwiftUI
 
@@ -20,10 +19,10 @@ final class PlayerLeadersViewModel: ObservableObject
     @Published var goalsAgainstAverageLeaderList = [PlayerLeaderModel]()
     @Published var savePercentageLeaderList = [PlayerLeaderModel]()
     
-    init()
-    {
-        fetchLeaderInformation()
-    }
+//    init()
+//    {
+//        fetchLeaderInformation()
+//    }
     
     private func fetchLeaderInformation()
     {

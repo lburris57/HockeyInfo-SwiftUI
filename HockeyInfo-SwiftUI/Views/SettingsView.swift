@@ -14,7 +14,7 @@ struct SettingsView : View
     var seasons = TimeAndDateUtils.getSeasonSettingsArray()
     var playoffYears = TimeAndDateUtils.getPlayoffSeasonSettingsArray()
     
-    @EnvironmentObject var settings: UserSettings
+    @EnvironmentObject var settings: UserSettingsViewModel
     
     @State private var selectedSeason = 12
     @State private var selectedSeasonType = 0
@@ -73,7 +73,7 @@ struct SettingsView_Previews : PreviewProvider
 {
     static var previews: some View
     {
-        SettingsView().environmentObject(UserSettings())
+        SettingsView().environmentObject(UserSettingsViewModel())
     }
 }
 #endif

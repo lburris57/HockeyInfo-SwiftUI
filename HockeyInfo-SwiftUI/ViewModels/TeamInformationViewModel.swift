@@ -13,12 +13,12 @@ final class TeamInformationViewModel: ObservableObject
 {
     @Published var team = NHLTeam()
 
-    init()
-    {
-        fetchTeam()
-    }
+//    init()
+//    {
+//        fetchTeam()
+//    }
 
-    private func fetchTeam()
+    public func fetchTeam()
     {
 //        NetworkManager().retrieveTeam
 //        {

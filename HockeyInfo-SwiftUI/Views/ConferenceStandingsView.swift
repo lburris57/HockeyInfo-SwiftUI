@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ConferenceStandingsView : View
 {
-    @EnvironmentObject var settings: UserSettings
+    @EnvironmentObject var settings: UserSettingsViewModel
     
     @ObservedObject var model = NHLStandingsViewModel()
     
@@ -56,7 +56,7 @@ struct ConferenceStandingsView : View
                         .padding(.horizontal, 5.0)
                 }
             }
-        }.onAppear(perform: model.fetchStandings)
+        }//.onAppear(perform: model.fetchStandings)
     }
 }
 
@@ -65,7 +65,7 @@ struct ConferenceStandingsView_Previews : PreviewProvider
 {
     static var previews: some View
     {
-        ConferenceStandingsView().environmentObject(UserSettings())
+        ConferenceStandingsView().environmentObject(UserSettingsViewModel())
     }
 }
 #endif
