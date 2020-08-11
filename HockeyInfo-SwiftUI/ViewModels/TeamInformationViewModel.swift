@@ -12,17 +12,7 @@ import SwiftUI
 final class TeamInformationViewModel: ObservableObject
 {
     @Published var team = NHLTeam()
+    @Published var teamList = [NHLTeam]()
+    @Published var teamDictionary = [Int : NHLTeam]()
 
-//    init()
-//    {
-//        fetchTeam()
-//    }
-
-    public func fetchTeam()
-    {
-//        NetworkManager().retrieveTeam
-//        {
-//            self.team = $0
-//        }
-    }
 }

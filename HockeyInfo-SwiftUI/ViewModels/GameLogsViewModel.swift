@@ -13,11 +13,6 @@ final class GameLogsViewModel: ObservableObject
 {
     @Published var gameLog = GameLog()
     
-//    init()
-//    {
-//        fetchGameLog()
-//    }
-    
     private func fetchGameLog()
     {
         NetworkManager().retrieveGameLog

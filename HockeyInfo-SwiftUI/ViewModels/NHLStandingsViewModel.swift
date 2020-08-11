@@ -45,28 +45,5 @@ final class NHLStandingsViewModel: ObservableObject
         westernConferenceList.sort {$0.conferenceRank < $1.conferenceRank}
         
         leagueList.sort {$0.points > $1.points}
-        
-//        var userDefaultsModel = UserDefaultManager.decodeDataFromUserDefaults(for: UserDefaultsHelper.constructSeasonString())
-//
-//        if userDefaultsModel.isTeamStandingsLoaded
-//        {
-//            teamStandingsList = DBManager().retrieveTeamStandings()
-//
-//            loadArrays()
-//        }
-//        else
-//        {
-//            teamStandingsList = NetworkManager().retrieveStandings()
-//
-//            loadArrays()
-//            {
-//                self.teamStandingsList = $0
-//
-//                self.loadArrays()
-//
-//                userDefaultsModel.isTeamStandingsLoaded = true
-//
-//                UserDefaultManager.encodeDataToUserDefaults(for: UserDefaultsHelper.constructSeasonString(), userDefaultsModel)
-//            }
         }
     }

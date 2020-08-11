@@ -7,6 +7,7 @@
 //
 import UIKit
 import SwiftUI
+import RealmSwift
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate
 {
@@ -42,6 +43,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
             }
         }
         
+        //  Make team list an environmental object
+        let teamList = databaseManager.retrieveAllTeams()
+        
+        print("Size of team list is: \(teamList.count)")
+        
+        //print("\nValues for team 0:\n\(teamList[0])")
+        
+        //  Put the team list into a dictionary with the team id as the key
+        var teamDictionary = [Int : NHLTeam]()
+        
+        for team in teamList
+        {
+            teamDictionary[team.id] = team
+        }
+        
+        let teamInfoViewModel = TeamInformationViewModel()
+        
+        teamInfoViewModel.teamDictionary = teamDictionary
+        
         let playerLeaders = self.databaseManager.retrieveCategoryLeaders("goals")
         
         print("\nSize of player leaders list is \(playerLeaders.count) for goals category\n")
@@ -62,6 +82,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
         
         userDefaults.set(TimeAndDateUtils.isValidSetting(currentSeason, true), forKey: Constants.IS_PLAYOFF_SETTING_VALID)
         
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        
         //print("Value of IS_PLAYOFF_SETTING_VALID is \(userDefaults.bool(forKey: Constants.IS_PLAYOFF_SETTING_VALID))")
         //print("Value of current season is \(currentSeason)")
         
@@ -73,7 +95,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
         if let windowScene = scene as? UIWindowScene
         {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: MainMenuView().environmentObject(UserSettingsViewModel()))
+            window.rootViewController = UIHostingController(rootView: MainMenuView()
+                                                                .environmentObject(UserSettingsViewModel())
+                                                                .environmentObject(teamInfoViewModel))
             self.window = window
             window.makeKeyAndVisible()
         }

@@ -17,18 +17,11 @@ final class SeasonScheduleViewModel: ObservableObject
     {
         print("Fetching the entire season schedule...")
         
-        var userDefaultsModel = UserDefaultManager.decodeDataFromUserDefaults(for: UserDefaultsHelper.constructSeasonString())
+        let userDefaultsModel = UserDefaultManager.decodeDataFromUserDefaults(for: UserDefaultsHelper.constructSeasonString())
         
         let startTime = Date().timeIntervalSince1970
         
         nhlScheduleList = DBManager().retrieveFullSeasonSchedule()
-        
-//        NetworkManager().retrieveFullSeasonSchedule
-//        {
-//            self.nhlScheduleList = $0
-//        }
-        
-        //userDefaultsModel.isSeasonScheduleTableLoaded = true
         
         print("\(userDefaultsModel)")
         

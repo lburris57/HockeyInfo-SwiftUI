@@ -850,6 +850,32 @@ class DBManager
         return scheduleResult?.toArray(type: NHLSchedule.self) ?? [NHLSchedule]()
     }
     
+    //  Returns a populated list of NHLSchedule objects for a particular date
+    func retrieveNHLScheduleForDate(_ date : String) -> [NHLSchedule]
+    {
+        print("\nIn DBManager.retrieveNHLScheduleForDate method...")
+        
+        var scheduleResult: Results<NHLSchedule>?
+        
+        do
+        {
+            let realm = try! Realm()
+            
+            try realm.write
+            {
+                scheduleResult = realm.objects(NHLSchedule.self).filter("season =='\(season)' AND seasonType =='\(seasonType)' AND date =='\(date)'")
+            }
+        }
+        catch
+        {
+            print("Error retrieving roster: \(error.localizedDescription)")
+        }
+        
+        print("\nSuccessfully retrieved \(scheduleResult?.count ?? 0) NHL schedule records from the database for \(date)...")
+        
+        return scheduleResult?.toArray(type: NHLSchedule.self) ?? [NHLSchedule]()
+    }
+    
     //  Returns a populated list of all players for the season/type settings
     func retrieveAllPlayers() -> [NHLPlayer]
     {
@@ -867,6 +893,32 @@ class DBManager
             }
             
             //linkPlayersToTeams()
+        }
+        catch
+        {
+            print("Error retrieving roster: \(error.localizedDescription)")
+        }
+        
+        print("\nSuccessfully retrieved \(rosterResult?.count ?? 0) NHL player records from the database...")
+        
+        return rosterResult?.toArray(type: NHLPlayer.self) ?? [NHLPlayer]()
+    }
+    
+    //  Returns a populated list of team players for the season/type settings
+    func retrievePlayersByTeamId(_ teamId: Int) -> [NHLPlayer]
+    {
+        print("\nIn DBManager.retrievePlayersByTeamId method...")
+        
+        var rosterResult: Results<NHLPlayer>?
+        
+        do
+        {
+            let realm = try! Realm()
+            
+            try realm.write
+            {
+                rosterResult = realm.objects(NHLPlayer.self).filter("season =='\(season)' AND seasonType =='\(seasonType)' ' AND teamId =='\(teamId)'")
+            }
         }
         catch
         {

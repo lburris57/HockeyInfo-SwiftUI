@@ -14,11 +14,6 @@ final class PlayerStatisticsViewModel: ObservableObject
     @Published var playerStats = PlayerStats()
     @Published var playerStatsDictionary = [Int: PlayerStatistics]()
     
-//    init()
-//    {
-//        fetchPlayerStats()
-//    }
-    
     private func fetchPlayerStats()
     {
         NetworkManager().retrievePlayerStatisticsDictionary

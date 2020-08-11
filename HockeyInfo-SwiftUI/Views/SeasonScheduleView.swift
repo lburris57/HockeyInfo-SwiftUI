@@ -24,10 +24,6 @@ struct SeasonScheduleView : View
     
     var body: some View
     {
-//        let minDate = Date().addingTimeInterval(-TimeAndDateUtils().calculateMinCalendarValues())
-//        let maxDate = Date().addingTimeInterval(TimeAndDateUtils().calculateMaxCalendarValues())
-//        let range = minDate ... maxDate
-        
         return VStack
         {
             Group
@@ -39,16 +35,14 @@ struct SeasonScheduleView : View
                 
                 Divider()
                 
-                //Spacer(minLength: 50)
-                
-                if(self.rkManager.selectedDate != nil)
+                if self.rkManager.selectedDate != nil
                 {
                     Text("Schedule for \(self.rkManager.selectedDate.getTextFromDate())")
                 }
                 
                 List
                 {
-                    if(rkManager.scheduledGameModelList.count == 0)
+                    if rkManager.scheduledGameModelList.count == 0
                     {
                         Text("No Games Scheduled").font(.subheadline).padding(.leading, 100)
                     }

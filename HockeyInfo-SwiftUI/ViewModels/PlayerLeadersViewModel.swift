@@ -19,11 +19,6 @@ final class PlayerLeadersViewModel: ObservableObject
     @Published var goalsAgainstAverageLeaderList = [PlayerLeaderModel]()
     @Published var savePercentageLeaderList = [PlayerLeaderModel]()
     
-//    init()
-//    {
-//        fetchLeaderInformation()
-//    }
-    
     private func fetchLeaderInformation()
     {
         pointsLeaderList = DBManager().retrieveCategoryLeaders("points")

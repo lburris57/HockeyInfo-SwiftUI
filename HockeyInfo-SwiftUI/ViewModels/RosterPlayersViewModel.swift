@@ -15,31 +15,11 @@ final class RosterPlayersViewModel: ObservableObject, Identifiable
     
     func fetchPlayers()
     {
-//        var userDefaultsModel = UserDefaultManager.decodeDataFromUserDefaults(for: UserDefaultsHelper.constructSeasonString())
-//
-//        if userDefaultsModel.isPlayerTableLoaded
-//        {
-            print("Fetching the roster players from the database...")
+        print("Fetching the roster players from the database...")
             
-            self.players = DBManager().retrieveAllPlayers()
-            
-            self.loadPlayerNameArray()
-//        }
-//        else
-//        {
-//            print("Fetching the roster players from the sports web service using the following URL:\n\(URLHelper().retrieveRosterPlayersURL())")
-//
-//            NetworkManager().retrieveRosterList
-//            {
-//                self.players = $0
-//
-//                self.loadPlayerNameArray()
-//
-//                userDefaultsModel.isPlayerTableLoaded = true
-//
-//                UserDefaultManager.encodeDataToUserDefaults(for: UserDefaultsHelper.constructSeasonString(), userDefaultsModel)
-//            }
-//        }
+        self.players = DBManager().retrieveAllPlayers()
+        
+        self.loadPlayerNameArray()
     }
     
     func loadPlayerNameArray()

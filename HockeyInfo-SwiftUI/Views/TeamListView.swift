@@ -32,6 +32,7 @@ struct CustomHeader: View
 struct TeamListView : View
 {
     @EnvironmentObject var settings: UserSettingsViewModel
+    @EnvironmentObject var teamInfo: TeamInformationViewModel
     
     var atlanticDivisionTeamItems = TeamItem.atlanticDivisionTeamItems()
     var metropolitanDivisionTeamItems = TeamItem.metropolitanDivisionTeamItems()

@@ -12,6 +12,7 @@ import SwiftUI
 struct MainMenuView : View
 {
     @EnvironmentObject var settings: UserSettingsViewModel
+    @EnvironmentObject var teamInfo: TeamInformationViewModel
     
     var body: some View
     {

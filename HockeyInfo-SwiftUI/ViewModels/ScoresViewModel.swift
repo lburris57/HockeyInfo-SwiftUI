@@ -15,11 +15,8 @@ final class ScoresViewModel
     {
         let startTime = Date().timeIntervalSince1970
         
-//        NetworkManager().retrieveFullSeasonSchedule
-//        {
-//            self.nhlScheduleList = $0
-//        }
+        nhlScheduleList = DBManager().retrieveNHLScheduleForDate(date)
         
-        print("Total elapsed time to retrieve scores for \(date) is: \((Date().timeIntervalSince1970 - startTime).rounded()) seconds.")
+        print("Total elapsed time to retrieve NHL schedule scores for \(date) is: \((Date().timeIntervalSince1970 - startTime).rounded()) seconds.")
     }
 }

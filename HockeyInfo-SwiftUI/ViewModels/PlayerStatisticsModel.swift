@@ -7,7 +7,7 @@
 //
 import Foundation
 
-class PlayerStatisticsModel
+class PlayerStatisticsModel: Identifiable
 {
     var id = UUID()
     var playerId: Int = 0

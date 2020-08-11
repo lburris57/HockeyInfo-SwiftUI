@@ -13,19 +13,11 @@ final class PlayerInjuriesViewModel: ObservableObject
 {
     @Published var playerInjuries = PlayerInjuries()
     
-//    init()
-//    {
-//        fetchPlayerInjuries()
-//    }
-    
     private func fetchPlayerInjuries()
     {
-//        NetworkManager().retrievePlayerInjuries
-//        {
-//            //self.playerInjuries = $0
-//
-//        }
-        
-        print("Ignoring player injuries...")
+        NetworkManager().retrievePlayerInjuries
+        {
+            self.playerInjuries = $0
+        }
     }
 }

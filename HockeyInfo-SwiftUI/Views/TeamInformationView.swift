@@ -10,6 +10,7 @@ import SwiftUI
 struct TeamInformationView : View
 {
     @EnvironmentObject var settings: UserSettingsViewModel
+    @EnvironmentObject var teamInfo: TeamInformationViewModel
     
     var teamItem: TeamItem
     

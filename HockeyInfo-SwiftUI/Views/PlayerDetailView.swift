@@ -86,7 +86,7 @@ struct PlayerDetailView : View
                         
                         HStack
                         {
-                            Text("Status: Available")
+                            Text("Status: Available    ")
                             Text("Shoots: " + "\(playerDetail.shoots)")
                         }
                     }.padding(2)
@@ -104,7 +104,7 @@ struct PlayerDetailView : View
 //                    }.buttonStyle(NeumorphicButtonStyle()).padding(5)
 //                    .sheet(isPresented: $showingSheet)
 //                    {
-//                        PlayerStatsView(playerDetail: self.playerDetail, playerStatistics: DBManager().retrievePlayerStatistics(self.playerDetail.playerId))
+//                        PlayerStatsView(playerDetail: playerDetail, playerStatistics: DBManager().retrievePlayerStatistics(playerDetail.playerId))
 //                    }.foregroundColor(.white).padding()
                 }
                 
