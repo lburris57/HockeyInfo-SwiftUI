@@ -35,6 +35,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
             
             NetworkManager().retrieveFullSeasonSchedule()
             
+            //  Wait a few seconds for the data to be retrieved and link the tables
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.0)
             {
                 self.databaseManager.linkPlayersToTeams()
@@ -43,12 +44,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
             }
         }
         
-        //  Make team list an environmental object
         let teamList = databaseManager.retrieveAllTeams()
         
         print("Size of team list is: \(teamList.count)")
-        
-        //print("\nValues for team 0:\n\(teamList[0])")
         
         //  Put the team list into a dictionary with the team id as the key
         var teamDictionary = [Int : NHLTeam]()
@@ -58,10 +56,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
             teamDictionary[team.id] = team
         }
         
+        //  Create a teamInfoViewModel to be used as an environmental object so that all screens have access to it
         let teamInfoViewModel = TeamInformationViewModel()
         
         teamInfoViewModel.teamDictionary = teamDictionary
         
+        //  Verify that we can get player leader data for skaters/goalies
         let playerLeaders = self.databaseManager.retrieveCategoryLeaders("goals")
         
         print("\nSize of player leaders list is \(playerLeaders.count) for goals category\n")
@@ -80,8 +80,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
             print("\(goalie)\n")
         }
         
+        //  Set user default data in the cache
         userDefaults.set(TimeAndDateUtils.isValidSetting(currentSeason, true), forKey: Constants.IS_PLAYOFF_SETTING_VALID)
         
+        //  Print out the file url to the database to be used by Realm Studio
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         
         //print("Value of IS_PLAYOFF_SETTING_VALID is \(userDefaults.bool(forKey: Constants.IS_PLAYOFF_SETTING_VALID))")
