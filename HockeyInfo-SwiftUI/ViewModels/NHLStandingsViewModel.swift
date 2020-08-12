@@ -45,5 +45,5 @@ final class NHLStandingsViewModel: ObservableObject
         westernConferenceList.sort {$0.conferenceRank < $1.conferenceRank}
         
         leagueList.sort {$0.points > $1.points}
-        }
     }
+}

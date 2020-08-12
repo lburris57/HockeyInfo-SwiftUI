@@ -334,7 +334,7 @@
 		76C17A57236D956B0019FCAF /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		76C17A97236D959E0019FCAF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		76C17A99236D95E50019FCAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../HockeyInfoSwiftUI/HockeyInfoSwiftUI/Assets.xcassets; sourceTree = "<group>"; };
-		76C17A9B236D95F60019FCAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		76C17A9B236D95F60019FCAF /* Assets.xcassets1 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Assets.xcassets1; sourceTree = "<group>"; };
 		76C17A9E236D9E1F0019FCAF /* PlayerLeaderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerLeaderModel.swift; sourceTree = "<group>"; };
 		76C17AA0236DCF580019FCAF /* PlayerDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailViewModel.swift; sourceTree = "<group>"; };
 		76C17AA2236DD03D0019FCAF /* PlayerDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailModel.swift; sourceTree = "<group>"; };
@@ -437,8 +437,9 @@
 				769E00BF236FE22600500134 /* RKCalendar */,
 				76C17958236D931C0019FCAF /* AppDelegate.swift */,
 				76C17988236D93D40019FCAF /* Constants.swift */,
-				76C1795A236D931C0019FCAF /* SceneDelegate.swift */,
+				76C17A9B236D95F60019FCAF /* Assets.xcassets1 */,
 				76C17A99236D95E50019FCAF /* Assets.xcassets */,
+				76C1795A236D931C0019FCAF /* SceneDelegate.swift */,
 				76C179B6236D95140019FCAF /* Managers */,
 				76C17A09236D95520019FCAF /* Error Enums */,
 				76C179F9236D95430019FCAF /* Alerts */,
@@ -457,7 +458,6 @@
 				76C1795C236D931C0019FCAF /* ContentView.swift */,
 				76C17A97236D959E0019FCAF /* LaunchScreen.storyboard */,
 				76C17966236D931E0019FCAF /* Info.plist */,
-				76C17A9B236D95F60019FCAF /* Assets.xcassets */,
 				76C17960236D931E0019FCAF /* Preview Content */,
 			);
 			path = "HockeyInfo-SwiftUI";
