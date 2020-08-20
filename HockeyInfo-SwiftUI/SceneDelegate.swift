@@ -27,8 +27,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
     {
         print("\n\nIn scene delegate......\n\n")
         
-        if self.databaseManager.fullScheduleRequiresLoad()
-        {
+//        if self.databaseManager.fullScheduleRequiresLoad()
+//        {
             NetworkManager().retrieveStandings()
             
             NetworkManager().retrieveRosterList()
@@ -36,13 +36,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
             NetworkManager().retrieveFullSeasonSchedule()
             
             //  Wait a few seconds for the data to be retrieved and link the tables
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 8.0)
             {
                 self.databaseManager.linkPlayersToTeams()
                 
                 NetworkManager().retrievePlayerStatisticsDictionary(){_ in }
             }
-        }
+//        }
         
         let teamList = databaseManager.retrieveAllTeams()
         
@@ -62,23 +62,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
         teamInfoViewModel.teamDictionary = teamDictionary
         
         //  Verify that we can get player leader data for skaters/goalies
-        let playerLeaders = self.databaseManager.retrieveCategoryLeaders("goals")
+        //let playerLeaders = self.databaseManager.retrieveCategoryLeaders("goals")
         
-        print("\nSize of player leaders list is \(playerLeaders.count) for goals category\n")
+//        print("\nSize of player leaders list is \(playerLeaders.count) for goals category\n")
+//
+//        for player in playerLeaders
+//        {
+//            print("\(player)\n")
+//        }
         
-        for player in playerLeaders
-        {
-            print("\(player)\n")
-        }
+        //let goalieLeaders = self.databaseManager.retrieveGoalieCategoryLeaders("shutouts", false)
         
-        let goalieLeaders = self.databaseManager.retrieveGoalieCategoryLeaders("shutouts", false)
-        
-        print("\nSize of goalie leaders list is \(goalieLeaders.count) for shutouts category\n")
-        
-        for goalie in goalieLeaders
-        {
-            print("\(goalie)\n")
-        }
+//        print("\nSize of goalie leaders list is \(goalieLeaders.count) for shutouts category\n")
+//        
+//        for goalie in goalieLeaders
+//        {
+//            print("\(goalie)\n")
+//        }
         
         //  Set user default data in the cache
         userDefaults.set(TimeAndDateUtils.isValidSetting(currentSeason, true), forKey: Constants.IS_PLAYOFF_SETTING_VALID)
